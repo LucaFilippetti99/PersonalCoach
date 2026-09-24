@@ -72,6 +72,7 @@ coach/
         ├── defaults.js              ← valori di default per file non ancora creati
         ├── utils.js                 ← date, medie peso, progressi, 1RM…
         ├── hevy.js                  ← parser del CSV di Hevy → sessioni
+        ├── editor.js                ← logica dei pop-up di modifica (giorni di scheda, sessioni)
         ├── muscoli.js               ← esercizio → muscoli, serie per muscolo, livelli di colore
         ├── piano.js                 ← logica del piano pasti (ricettario, ingredienti mancanti…)
         ├── prompts.js               ← modelli della pagina "Chiedi a Claude"
@@ -81,6 +82,9 @@ coach/
         │   ├── WeightChart.jsx      ← grafico peso + media 7 gg + fascia obiettivo
         │   ├── TrendChart.jsx       ← grafico generico a una serie (progressi)
         │   ├── RestTimer.jsx        ← timer di recupero (+ sbloccaAudio per iPhone)
+        │   ├── EserciziMappa.jsx    ← elenco esercizi + mappa collegati, ChipMuscoli
+        │   ├── EditorGiorno.jsx     ← pop-up: modifica/crea un giorno della scheda
+        │   ├── EditorSessione.jsx   ← pop-up: modifica una sessione dello storico
         │   ├── MappaMuscoli.jsx     ← figura fronte/retro con i muscoli colorati
         │   ├── corpo.js             ← disegno SVG della figura (metà sinistra, specchiata)
         │   ├── useWidth.js          ← larghezza di un elemento per i grafici
@@ -191,11 +195,13 @@ Funzioni senza React, testabili anche con Node (`node -e "import('./src/utils.js
 
 `ctx` contiene tutti i dati caricati (`scheda, log, misure, imp, frigo, spesa`), così il prompt può includere dati veri (es. le ultime 3 sessioni di un esercizio). `righe(...)` compone il testo scartando i campi vuoti; `SEP` è una riga vuota voluta. **Per aggiungere un modello basta aggiungere un oggetto a `MODELLI`**: la UI si genera da sola.
 
+**`editor.js`**: logica pura dei pop-up (form ↔ dati salvati, controlli, spostamenti, rinomina giorni, ciclo dei muscoli personalizzati, salvataggio della sessione nel log senza doppioni).
+
 **`muscoli.js`**: mappa dei muscoli
 - `MUSCOLI`: i 18 gruppi disegnati (petto, spalle anteriori/laterali/posteriori, trapezi, schiena alta, dorsali, lombari, bicipiti, tricipiti, avambracci, addominali, obliqui, glutei, quadricipiti, femorali, adduttori, polpacci).
 - `muscoliEsercizio(nome, override)` → `{ primari, secondari, riconosciuto }`. Usa `REGOLE`, regex sui nomi Hevy in italiano: **vince la prima che corrisponde**, quindi le più specifiche stanno in alto ("leg curl" prima di "curl", "croci inverse" prima di "croci"). Stretching e riscaldamento sono riconosciuti ma senza muscoli; la corsa ha solo secondari (gambe).
 - `overrideMuscoli(scheda, imp)`: correzioni manuali da `impostazioni.muscoli_esercizi` e dal campo facoltativo `muscoli` di un esercizio in scheda.
-- `caricoMuscoli(esercizi, override)`: serie "pesate", 1 per i primari e 0,5 per i secondari; restituisce anche gli esercizi `sconosciuti`.
+- `caricoMuscoli(esercizi, override)`: serie "pesate", 1 per i primari e 0,5 per i secondari; restituisce anche `contributi` (per ogni muscolo gli esercizi che lo hanno lavorato, usati nell'elenco di Progressi) e gli esercizi `sconosciuti`. Il campo `muscoli` di un esercizio vale come override.
 - `livelli(carico, modo)`: colore 0-4. `relativo` (una sessione, un giorno) = in proporzione al muscolo più lavorato; `settimana` = soglie fisse 1 / 3 / 6 / 10 serie (`SOGLIE_SETTIMANA`), dove 10+ è il volume settimanale di riferimento.
 
 ### 4.4 Componenti: `components/`
@@ -205,6 +211,10 @@ Funzioni senza React, testabili anche con Node (`node -e "import('./src/utils.js
 - `TrendChart.jsx`: versione generica a una serie (`punti: [{ data, valore, dettaglio }]`), usata nei Progressi. Il passo dell'asse Y si sceglie tra valori "tondi" (1, 2, 2.5, 5…).
 - `RestTimer.jsx`: countdown in basso a partire da un timestamp di fine (resta preciso anche se il tab va in background), `+30 s` / `Salta`, vibrazione (Android) e beep a fine recupero. Su iPhone l'audio parte solo se il contesto audio è stato creato durante un tocco: per questo chi avvia il timer chiama prima `sbloccaAudio()`.
 - `MappaMuscoli.jsx`: `<MappaMuscoli carico={…} modo="relativo|settimana" elenco compatta />`. Disegna fronte e retro da `corpo.js` (metà sinistra + copia specchiata con `matrix(-1 0 0 1 200 0)`), colora ogni muscolo con le classi `lv0`…`lv4` (variabili `--m0`…`--m4` e `--corpo` in `:root` e nei due blocchi scuri). Toccando un muscolo si vedono nome e serie; con `elenco` mostra anche la classifica, `compatta` nasconde legenda e didascalia. Per ritoccare il disegno modifica le forme in `corpo.js` (coordinate in un riquadro 200 × 440).
+- `EserciziMappa.jsx`: elenco di esercizi con la mappa accanto (sticky). Toccando un esercizio la mappa mostra solo i suoi muscoli (`focus` = `livelliEsercizio`: principali pieni, secondari chiari) e le altre righe si attenuano; toccando un muscolo (sulla mappa o sui chip) restano evidenziati gli esercizi che lo allenano. Per togliere la selezione basta toccare un punto vuoto (o premere Esc): lo fa `useDeseleziona.js`, che ascolta i tocchi sul documento e ignora solo quelli sugli elementi selezionabili del componente; un tocco su un esercizio di un'altra card sposta lì la selezione. Lo stesso vale per l'elenco dei muscoli in Progressi. `ChipMuscoli` = i chip sotto ogni esercizio (pieni i principali, contornati quelli che aiutano). Usato in Scheda, Storico e Home.
+- `ui.jsx` → `Modal`: pop-up con portal su `body`, chiusura con Esc / X / tocco fuori, pulsanti in fondo sempre visibili; sul telefono si apre dal basso a tutto schermo. `onClose` è tenuto in un ref, così il focus non salta mentre scrivi.
+- `EditorGiorno.jsx`: nome del giorno, esercizi (nome con suggerimenti da scheda e storico, serie, reps, RIR, recupero in secondi con anteprima «2 min 30 s», note), ordine ↑↓, aggiungi/elimina, muscoli personalizzati (un tocco: principale → aiuta → nessuno, salvati nel campo `muscoli`). Se il giorno cambia nome (o viene eliminato) si aggiornano anche calendario e `hevy_giorni` (`rinominaGiornoImpostazioni`).
+- `EditorSessione.jsx`: data, titolo, durata, note, esercizi e serie (kg con virgola, reps, RIR); le serie a tempo/distanza importate da Hevy si conservano. Blocca il salvataggio se data + titolo coincidono con un'altra sessione (`salvaSessioneLog`).
 - `useWidth(min)`: callback ref + `ResizeObserver`. Il grafico si disegna solo dopo aver misurato lo spazio disponibile e si ricollega anche se all'inizio mostrava un messaggio (es. "servono almeno 2 pesate"). Nelle griglie servono colonne `minmax(0, 1fr)`, altrimenti un SVG largo allarga la colonna.
 - `useWakeLock(attivo)`: Screen Wake Lock API, tiene lo schermo acceso nella tab "A mano" (solo HTTPS/localhost, altrimenti non fa nulla).
 
@@ -224,6 +234,7 @@ Dettagli utili:
   - kg precompilati (`emptySets`): alla prima sessione della scheda (o se l'esercizio non è mai stato fatto) vale il carico della scheda (`kgDaScheda`), poi quello dell'ultima sessione. I suggerimenti grigi delle reps usano solo sessioni della scheda in corso.
   - **✓ serie fatta**: compila le reps (dalla volta scorsa o dal minimo del range), avvia il recupero; ritoccato di nuovo, riapre la serie. Con "max" mette il cursore nel campo.
   - Una sessione importata da Hevy con un altro titolo viene riconosciuta come la stessa del giorno di scheda (`stessoGiorno`), così modificarla non crea un doppione.
+- **Modifiche a mano**: in Scheda ogni giorno ha «Modifica» (pop-up `EditorGiorno`), c'è «Aggiungi un giorno» e «Modifica» su nome/inizio/settimane della scheda; nello Storico «Modifica» apre `EditorSessione`. Il form «A mano» resta per registrare la sessione in palestra.
 - **Mappa dei muscoli**: in Home (allenamento di oggi), in Scheda (ogni giorno), in "A mano" (esercizi della sessione), nello Storico (sessione aperta) e in cima a Progressi (`MuscoliPeriodo`: questa settimana / ultimi 7 giorni / media delle ultime 4 settimane, con elenco delle serie e degli esercizi non riconosciuti).
 - **Progressi**: con la scheda in corso, "fermo / in crescita" considera solo le sessioni da `scheda.inizio`. Su telefono il grafico sta sopra l'elenco degli esercizi.
 - **Spesa → Frigo**: spuntare un articolo lo toglie da `spesa.json` e lo aggiunge a `frigo.json`; "finito, rimetti in lista" fa il contrario.
@@ -324,6 +335,7 @@ npm run test:watch # test in modalità watch mentre modifichi il codice
 I test (Vitest) sono in `tests/` e coprono la logica pura:
 - `hevy.test.js`: parser CSV, date in italiano/inglese, conversione in sessioni (riscaldamento, failure/RPE, serie a tempo e distanza, alias, durata), merge idempotente;
 - `utils.test.js`: settimane ISO ed etichette leggibili, media peso, 1RM, formattazione delle serie, tipo di esercizio, stato di progressione (anche da inizio scheda), riconoscimento dei giorni di scheda, carico dalla scheda;
+- `editor.test.js`: pulizia dei form, controlli, rinomina giorni nel calendario, muscoli personalizzati, sessioni senza doppioni;
 - `muscoli.test.js`: muscoli di tutti gli esercizi della scheda e dei più usati nel log, override, serie pesate, livelli relativi e settimanali;
 - `api.test.js`: cache condivisa con un `fetch` finto: versione inviata, salvataggi in fila, conflitto 409 che non sovrascrive e ricarica;
 - `piano.test.js`: piano vuoto, giorni mancanti, ordinamento, ricettario, ingredienti mancanti / in frigo, pulizia del form;

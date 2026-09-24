@@ -99,3 +99,26 @@ describe('carico e livelli', () => {
     expect(caricoMuscoli([{ nome: 'X', serie: 2 }], o).carico).toEqual({ glutei: 2 })
   })
 })
+
+import { livelliEsercizio } from '../src/muscoli.js'
+
+describe('collegamento esercizi ↔ muscoli', () => {
+  it('contributi: quali esercizi lavorano ogni muscolo', () => {
+    const { contributi } = caricoMuscoli([
+      { nome: 'Panca Piana (Bilanciere)', serie: 3 },
+      { nome: 'Pushdown Tricipiti', serie: 2 },
+      { nome: 'Panca Piana (Bilanciere)', serie: 1 },
+    ])
+    expect(contributi.tricipiti).toEqual([
+      { nome: 'Pushdown Tricipiti', serie: 2, primario: true },
+      { nome: 'Panca Piana (Bilanciere)', serie: 2, primario: false },
+    ])
+    expect(contributi.petto).toEqual([{ nome: 'Panca Piana (Bilanciere)', serie: 4, primario: true }])
+  })
+  it('il campo muscoli di un esercizio in scheda vale come override', () => {
+    expect(caricoMuscoli([{ nome: 'Boh', serie: 2, muscoli: { primari: ['polpacci'] } }]).carico).toEqual({ polpacci: 2 })
+  })
+  it('livelliEsercizio: primari 4, secondari 2', () => {
+    expect(livelliEsercizio(muscoliEsercizio('Panca Piana (Bilanciere)'))).toEqual({ petto: 4, tricipiti: 2, deltoidi_ant: 2 })
+  })
+})

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { Card, Empty, ErrorBanner, Icon, PageHeader, Tabs, useFlash } from '../components/ui.jsx'
+import { Card, Empty, ErrorBanner, Icon, Modal, PageHeader, Tabs, useFlash } from '../components/ui.jsx'
 import RestTimer, { sbloccaAudio } from '../components/RestTimer.jsx'
 import { useWakeLock } from '../components/useWakeLock.js'
 import { useImpostazioni, useLog, useScheda } from '../hooks.js'
@@ -7,7 +7,11 @@ import { navigate } from '../nav.js'
 import { ChiediClaude } from './Claude.jsx'
 import TrendChart from '../components/TrendChart.jsx'
 import MappaMuscoli from '../components/MappaMuscoli.jsx'
-import { caricoMuscoli, overrideMuscoli } from '../muscoli.js'
+import EserciziMappa, { ChipMuscoli } from '../components/EserciziMappa.jsx'
+import EditorGiorno from '../components/EditorGiorno.jsx'
+import EditorSessione from '../components/EditorSessione.jsx'
+import { eliminaGiornoScheda, rinominaGiornoImpostazioni, salvaGiornoScheda, salvaSessioneLog } from '../editor.js'
+import { caricoMuscoli, muscoliEsercizio, overrideMuscoli } from '../muscoli.js'
 import { hevyToSessions, mergeLog, parseCsv } from '../hevy.js'
 import {
   TIPO_INFO,
@@ -348,6 +352,7 @@ function Registra({ params }) {
                 )}
               </div>
             </div>
+            <ChipMuscoli muscoli={muscoliEsercizio(e.nome, overrideMuscoli(scheda, imp)[e.nome] || e.target?.muscoli)} />
             {e.target?.note && <p className="note">{e.target.note}</p>}
             {last && (
               <p className="last">
@@ -478,6 +483,7 @@ function Storico() {
   const override = useMemo(() => overrideMuscoli(scheda, imp), [scheda, imp])
   const [aperta, setAperta] = useState(null)
   const [daEliminare, setDaEliminare] = useState(null)
+  const [inModifica, setInModifica] = useState(null)
   const [flash, doFlash] = useFlash()
   const log = (logRaw || []).filter((s) => !isExampleSession(s)).sort((a, b) => b.data.localeCompare(a.data))
 
@@ -485,6 +491,14 @@ function Storico() {
     await save(logRaw.filter((x) => !(x.data === s.data && x.giorno === s.giorno)))
     setDaEliminare(null)
     doFlash('Sessione eliminata')
+  }
+
+  async function salvaModifica(nuova, originale) {
+    const r = salvaSessioneLog(logRaw || [], originale, nuova)
+    if (r.errore) throw new Error(r.errore)
+    await save(r.log)
+    setAperta(`${nuova.data}|${nuova.giorno}`)
+    doFlash('Sessione aggiornata')
   }
 
   if (!logRaw) return <Empty>Carico…</Empty>
@@ -515,22 +529,18 @@ function Storico() {
               </button>
               {open && (
                 <div className="history-body">
-                  <div className="con-mappa">
-                  <table className="table">
-                    <tbody>
-                      {s.esercizi.map((e) => (
-                        <tr key={e.nome}>
-                          <td>{e.nome}</td>
-                          <td className="num">{formatSets(e.serie)}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                    <MappaMuscoli carico={caricoMuscoli(s.esercizi, override).carico} compatta />
-                  </div>
+                  <EserciziMappa
+                    override={override}
+                    esercizi={s.esercizi.map((e, i) => ({
+                      key: `${i}-${e.nome}`,
+                      nome: e.nome,
+                      serie: e.serie,
+                      dettaglio: formatSets(e.serie),
+                    }))}
+                  />
                   {s.note && <p className="note">{s.note}</p>}
                   <div className="row-gap">
-                    <button className="btn" onClick={() => navigate('allenamento', { data: s.data, giorno: s.giorno })}>
+                    <button className="btn" onClick={() => setInModifica(s)}>
                       <Icon name="edit" size={16} /> Modifica
                     </button>
                     {daEliminare === id ? (
@@ -554,6 +564,19 @@ function Storico() {
           )
         })}
       </div>
+      {inModifica && (
+        <EditorSessione
+          sessione={inModifica}
+          giorniScheda={(scheda?.giorni || []).map((g) => g.nome)}
+          nomiEsercizi={nomiEsercizi(scheda, logRaw)}
+          onSave={salvaModifica}
+          onDelete={async (x) => {
+            await elimina(x)
+            setAperta(null)
+          }}
+          onClose={() => setInModifica(null)}
+        />
+      )}
       {flash}
     </>
   )
@@ -561,55 +584,159 @@ function Storico() {
 
 /* ---------------- Scheda ---------------- */
 
+/** Tutti i nomi di esercizio conosciuti (scheda + storico), per i suggerimenti nei pop-up */
+function nomiEsercizi(scheda, log) {
+  const nomi = new Set()
+  for (const g of scheda?.giorni || []) for (const e of g.esercizi) nomi.add(e.nome)
+  for (const sess of log || []) for (const e of sess.esercizi) nomi.add(e.nome)
+  return [...nomi].sort((a, b) => a.localeCompare(b, 'it'))
+}
+
 function SchedaView() {
-  const { data: scheda } = useScheda()
-  const { data: imp } = useImpostazioni()
+  const { data: scheda, save: salvaScheda, error } = useScheda()
+  const { data: imp, save: salvaImp } = useImpostazioni()
+  const { data: logRaw } = useLog()
+  const [modifica, setModifica] = useState(null) // { giorno } — giorno null = nuovo
+  const [modificaInfo, setModificaInfo] = useState(false)
+  const [flash, doFlash] = useFlash()
   if (!scheda) return <Empty>Carico la scheda…</Empty>
   const override = overrideMuscoli(scheda, imp)
+
+  async function salvaGiorno(giorno, vecchioNome) {
+    await salvaScheda(salvaGiornoScheda(scheda, vecchioNome, giorno))
+    // Se il giorno cambia nome, calendario e collegamenti Hevy lo seguono
+    if (vecchioNome && vecchioNome !== giorno.nome) await salvaImp(rinominaGiornoImpostazioni(imp, vecchioNome, giorno.nome))
+    doFlash(vecchioNome ? 'Giorno aggiornato' : 'Giorno aggiunto')
+  }
+  async function eliminaGiorno(nome) {
+    await salvaScheda(eliminaGiornoScheda(scheda, nome))
+    await salvaImp(rinominaGiornoImpostazioni(imp, nome, null))
+    doFlash('Giorno eliminato')
+  }
+
   return (
     <>
-      <Card>
-        <h2 className="scheda-title">{scheda.nome}</h2>
+      <ErrorBanner error={error} />
+      <Card
+        action={
+          <button className="btn btn-ghost btn-sm" onClick={() => setModificaInfo(true)}>
+            <Icon name="edit" size={15} /> Modifica
+          </button>
+        }
+        title={scheda.nome}
+      >
         <p className="muted">
           Dal {formatDate(scheda.inizio, { day: 'numeric', month: 'long', year: 'numeric' })} · {scheda.settimane}{' '}
-          settimane. Per modificarla chiedi a Claude: aggiorna <code>schede/attuale.json</code>.
+          settimane. Tocca un esercizio per vedere i muscoli che lavora, o un muscolo per vedere quali esercizi lo
+          allenano.
         </p>
       </Card>
       {scheda.giorni.map((g) => (
-        <Card key={g.nome} title={g.nome}>
-          <div className="con-mappa">
-          <div className="table-wrap">
-            <table className="table">
-              <thead>
-                <tr>
-                  <th>Esercizio</th>
-                  <th className="num">Serie</th>
-                  <th className="num">Reps</th>
-                  <th className="num">RIR</th>
-                  <th className="num">Rec.</th>
-                </tr>
-              </thead>
-              <tbody>
-                {g.esercizi.map((e) => (
-                  <tr key={e.nome}>
-                    <td>
-                      {e.nome}
-                      {e.note && <div className="muted small">{e.note}</div>}
-                    </td>
-                    <td className="num">{e.serie}</td>
-                    <td className="num">{e.reps}</td>
-                    <td className="num">{e.rir ?? '—'}</td>
-                    <td className="num rec">{e.recupero_s ? formatRecupero(e.recupero_s) : '—'}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-            <MappaMuscoli carico={caricoMuscoli(g.esercizi, override).carico} compatta />
-          </div>
+        <Card
+          key={g.nome}
+          title={g.nome}
+          action={
+            <button className="btn btn-ghost btn-sm" onClick={() => setModifica({ giorno: g })} aria-label={`Modifica ${g.nome}`}>
+              <Icon name="edit" size={15} /> Modifica
+            </button>
+          }
+        >
+          <EserciziMappa
+            override={override}
+            esercizi={g.esercizi.map((e, i) => ({
+              key: `${i}-${e.nome}`,
+              nome: e.nome,
+              serie: e.serie,
+              muscoli: e.muscoli,
+              dettaglio: [
+                `${e.serie}×${e.reps}`,
+                e.rir != null ? `RIR ${e.rir}` : null,
+                e.recupero_s ? `recupero ${formatRecupero(e.recupero_s)}` : null,
+              ]
+                .filter(Boolean)
+                .join(' · '),
+              note: e.note,
+            }))}
+          />
         </Card>
       ))}
+      <button className="btn" onClick={() => setModifica({ giorno: null })}>
+        <Icon name="plus" size={16} /> Aggiungi un giorno
+      </button>
+
+      {modifica && (
+        <EditorGiorno
+          giorno={modifica.giorno}
+          altriNomi={scheda.giorni.map((g) => g.nome).filter((n) => n !== modifica.giorno?.nome)}
+          nomiEsercizi={nomiEsercizi(scheda, logRaw)}
+          override={override}
+          onSave={salvaGiorno}
+          onDelete={eliminaGiorno}
+          onClose={() => setModifica(null)}
+        />
+      )}
+      {modificaInfo && (
+        <EditorInfoScheda
+          scheda={scheda}
+          onSave={async (x) => {
+            await salvaScheda({ ...scheda, ...x })
+            doFlash('Scheda aggiornata')
+          }}
+          onClose={() => setModificaInfo(false)}
+        />
+      )}
+      {flash}
     </>
+  )
+}
+
+/** Pop-up per nome, inizio e durata della scheda */
+function EditorInfoScheda({ scheda, onSave, onClose }) {
+  const [f, setF] = useState({ nome: scheda.nome ?? '', inizio: scheda.inizio ?? '', settimane: String(scheda.settimane ?? '') })
+  const [errore, setErrore] = useState(null)
+  async function salva() {
+    if (!f.nome.trim()) return setErrore('Dai un nome alla scheda.')
+    const settimane = Number(f.settimane)
+    if (!(settimane >= 1)) return setErrore('Indica quante settimane dura (almeno 1).')
+    try {
+      await onSave({ nome: f.nome.trim(), inizio: f.inizio || null, settimane: Math.round(settimane) })
+      onClose()
+    } catch {
+      setErrore('Salvataggio non riuscito: riprova.')
+    }
+  }
+  return (
+    <Modal
+      titolo="Modifica la scheda"
+      onClose={onClose}
+      azioni={
+        <>
+          {errore && <p className="modal-errore">{errore}</p>}
+          <span className="grow" />
+          <button className="btn btn-ghost" onClick={onClose}>
+            Annulla
+          </button>
+          <button className="btn btn-primary" onClick={salva}>
+            <Icon name="check" size={16} /> Salva
+          </button>
+        </>
+      }
+    >
+      <label className="field">
+        <span>Nome</span>
+        <input value={f.nome} onChange={(e) => setF({ ...f, nome: e.target.value })} />
+      </label>
+      <div className="form-row">
+        <label className="field grow">
+          <span>Inizio</span>
+          <input type="date" value={f.inizio} onChange={(e) => setF({ ...f, inizio: e.target.value })} />
+        </label>
+        <label className="field grow">
+          <span>Settimane</span>
+          <input inputMode="numeric" value={f.settimane} onChange={(e) => setF({ ...f, settimane: e.target.value })} />
+        </label>
+      </div>
+    </Modal>
   )
 }
 
@@ -888,12 +1015,16 @@ function MuscoliPeriodo({ log, scheda }) {
   const dal =
     periodo === 'settimana' ? isoDate(startOfWeek()) : isoDate(addDays(new Date(), -(Number(periodo) - 1)))
   const sessioni = log.filter((s) => s.data >= dal && s.data <= oggi)
-  const { carico: totale, sconosciuti } = caricoMuscoli(
+  const { carico: totale, contributi: contribTot, sconosciuti } = caricoMuscoli(
     sessioni.flatMap((s) => s.esercizi),
     overrideMuscoli(scheda, imp),
   )
   // Sulle 4 settimane si mostra la media settimanale, così le soglie (10+ serie = volume pieno) restano valide
-  const carico = periodo === '28' ? Object.fromEntries(Object.entries(totale).map(([k, v]) => [k, v / 4])) : totale
+  const media = (v) => (periodo === '28' ? v / 4 : v)
+  const carico = Object.fromEntries(Object.entries(totale).map(([k, v]) => [k, media(v)]))
+  const contributi = Object.fromEntries(
+    Object.entries(contribTot).map(([k, l]) => [k, l.map((x) => ({ ...x, serie: media(x.serie) }))]),
+  )
 
   return (
     <Card
@@ -911,9 +1042,10 @@ function MuscoliPeriodo({ log, scheda }) {
       <p className="muted small">
         {sessioni.length} {sessioni.length === 1 ? 'sessione' : 'sessioni'}
         {periodo === '28' ? ' · valori medi a settimana' : ''}. Ogni serie conta 1 per i muscoli principali e ½ per
-        quelli che aiutano; 10-20 serie a settimana per muscolo è il volume che fa crescere.
+        quelli che aiutano; 10-20 serie a settimana per muscolo è il volume che fa crescere. Tocca un muscolo per vedere
+        da quali esercizi arrivano le serie.
       </p>
-      <MappaMuscoli carico={carico} modo="settimana" elenco />
+      <MappaMuscoli carico={carico} contributi={contributi} modo="settimana" elenco />
       {sconosciuti.length > 0 && (
         <p className="muted small">
           Non so ancora che muscoli lavorano: {sconosciuti.join(', ')}. Chiedi a Claude di aggiungerli in{' '}

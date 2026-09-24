@@ -1,6 +1,11 @@
 // Disegno della figura per la mappa dei muscoli (vista frontale e posteriore).
 // Coordinate in un riquadro 200 × 440. Ogni forma è la metà SINISTRA (x < 100):
 // la metà destra si ottiene specchiando attorno a x = 100.
+// Il disegno viene poi allargato del 10% e accorciato del 12% (PROPORZIONI) per un fisico
+// meno allungato: il riquadro finale è 200 × VIEWBOX_H.
+
+export const PROPORZIONI = 'translate(100 0) scale(1.1 0.88) translate(-100 0)'
+export const VIEWBOX_H = 388
 
 /** Sagoma del corpo (metà sinistra), fa da sfondo ai muscoli */
 export const SAGOMA =

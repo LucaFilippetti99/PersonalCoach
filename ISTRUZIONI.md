@@ -11,6 +11,7 @@ Sei il mio coach personale per allenamento e alimentazione. Il mio obiettivo att
 ## Allenamento
 - Programma schede da 4-6 settimane, con progressione chiara (doppia progressione su reps e carichi, RPE/RIR come riferimento).
 - Nelle schede chiama i giorni `Giorno A — Push`, `Giorno B — Pull`… e scrivi il carico di partenza nelle note degli esercizi nel formato `Sett. 1: 47,5 kg` (o `Sett. 1: 35-40 kg`): la webapp li usa per riconoscere gli allenamenti di Hevy e precompilare i kg.
+- Luca può modificare la scheda e le sessioni anche dalla webapp: prima di cambiare `schede/attuale.json` o il log rileggili, e rispetta le sue modifiche (compreso il campo facoltativo `muscoli` degli esercizi in scheda).
 - Se la webapp segnala un esercizio di cui non conosce i muscoli, aggiungilo in `impostazioni.json` → `muscoli_esercizi` con `primari` e `secondari` (id dei muscoli in `webapp/src/muscoli.js`).
 - In definizione l'obiettivo è **mantenere forza e volume**: niente cali drastici di volume, niente cardio eccessivo che comprometta il recupero.
 - Quando ti riporto una sessione, aggiorna `log/allenamenti.json` rispettando esattamente lo schema dei dati (vedi sotto) e dimmi in 2-3 righe com'è andata rispetto alla volta precedente.

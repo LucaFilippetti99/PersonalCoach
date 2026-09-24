@@ -2,8 +2,8 @@ import { useJson } from '../api.js'
 import { Card, Empty, Icon, Stat } from '../components/ui.jsx'
 import { useFrigo, useImpostazioni, useLog, useMisure, usePianiList, useScheda } from '../hooks.js'
 import { navigate } from '../nav.js'
-import MappaMuscoli from '../components/MappaMuscoli.jsx'
-import { caricoMuscoli, overrideMuscoli } from '../muscoli.js'
+import EserciziMappa from '../components/EserciziMappa.jsx'
+import { overrideMuscoli } from '../muscoli.js'
 import {
   GIORNI_SETTIMANA,
   addDays,
@@ -178,26 +178,20 @@ export default function Home() {
             </Empty>
           ) : giorno ? (
             <>
-              <div className="oggi-con-mappa">
-                <div>
-                  <h3 className="day-title">{giorno.nome}</h3>
-                <ul className="ex-list">
-                  {giorno.esercizi.map((e) => {
-                    const last = lastExercise(log, e.nome)
-                    return (
-                      <li key={e.nome}>
-                        <span className="ex-name">{e.nome}</span>
-                        <span className="ex-meta">
-                          {e.serie}×{e.reps}
-                          {last && <span className="muted"> · ultima {formatSets([topSet(last.esercizio)])}</span>}
-                        </span>
-                      </li>
-                    )
-                  })}
-                </ul>
-                </div>
-                <MappaMuscoli carico={caricoMuscoli(giorno.esercizi, overrideMuscoli(scheda, imp)).carico} compatta />
-              </div>
+              <h3 className="day-title">{giorno.nome}</h3>
+              <EserciziMappa
+                override={overrideMuscoli(scheda, imp)}
+                esercizi={giorno.esercizi.map((e, i) => {
+                  const last = lastExercise(log, e.nome)
+                  return {
+                    key: `${i}-${e.nome}`,
+                    nome: e.nome,
+                    serie: e.serie,
+                    muscoli: e.muscoli,
+                    dettaglio: `${e.serie}×${e.reps}${last ? ` · ultima ${formatSets([topSet(last.esercizio)])}` : ''}`,
+                  }
+                })}
+              />
             </>
           ) : (
             <Empty>

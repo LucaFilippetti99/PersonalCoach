@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useId, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { ricordaTab } from '../nav.js'
 
 const PATHS = {
@@ -21,6 +22,9 @@ const PATHS = {
   sun: 'M12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM12 2.5v2M12 19.5v2M4.6 4.6 6 6M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4',
   moon: 'M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z',
   auto: 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 3v18M12 7h4M12 11h6M12 15h5',
+  up: 'M6 15l6-6 6 6',
+  down: 'M6 9l6 6 6-6',
+  close: 'M6 6l12 12M18 6 6 18',
   gear: 'M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM19.4 13a7.5 7.5 0 0 0 0-2l2-1.5-2-3.4-2.3 1a7.5 7.5 0 0 0-1.8-1L15 3.7h-4l-.3 2.4a7.5 7.5 0 0 0-1.8 1l-2.3-1-2 3.4 2 1.5a7.5 7.5 0 0 0 0 2l-2 1.5 2 3.4 2.3-1a7.5 7.5 0 0 0 1.8 1l.3 2.4h4l.3-2.4a7.5 7.5 0 0 0 1.8-1l2.3 1 2-3.4z',
 }
 
@@ -128,4 +132,44 @@ export function useFlash() {
 export function ErrorBanner({ error }) {
   if (!error) return null
   return <div className="banner-error">Errore: {error}</div>
+}
+
+/**
+ * Finestra modale (pop-up). Sul telefono si apre dal basso a tutto schermo.
+ * Si chiude con Esc, con la X o toccando fuori; `azioni` sono i pulsanti in fondo (sempre visibili).
+ */
+export function Modal({ titolo, onClose, children, azioni, largo = false }) {
+  const id = useId()
+  const box = useRef(null)
+  // onClose in un ref: così l'effetto gira una volta sola (niente focus che salta a ogni tasto)
+  const chiudi = useRef(onClose)
+  chiudi.current = onClose
+  useEffect(() => {
+    const prima = document.activeElement
+    const overflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    box.current?.querySelector('input, select, textarea, button:not(.modal-x)')?.focus({ preventScroll: true })
+    const esc = (e) => e.key === 'Escape' && chiudi.current()
+    document.addEventListener('keydown', esc)
+    return () => {
+      document.body.style.overflow = overflow
+      document.removeEventListener('keydown', esc)
+      prima?.focus?.({ preventScroll: true })
+    }
+  }, [])
+  return createPortal(
+    <div className="modal-bg" onPointerDown={(e) => e.target === e.currentTarget && onClose()}>
+      <div ref={box} className={`modal ${largo ? 'modal-largo' : ''}`} role="dialog" aria-modal="true" aria-labelledby={id}>
+        <header className="modal-head">
+          <h2 id={id}>{titolo}</h2>
+          <button className="btn btn-icon modal-x" onClick={onClose} aria-label="Chiudi">
+            <Icon name="close" />
+          </button>
+        </header>
+        <div className="modal-body">{children}</div>
+        {azioni && <footer className="modal-foot">{azioni}</footer>}
+      </div>
+    </div>,
+    document.body,
+  )
 }

@@ -3,26 +3,27 @@
 
 /** I gruppi muscolari disegnati sulla figura, nell'ordine in cui compaiono negli elenchi */
 export const MUSCOLI = [
-  { id: 'petto', label: 'Petto' },
-  { id: 'deltoidi_ant', label: 'Spalle anteriori' },
-  { id: 'deltoidi_lat', label: 'Spalle laterali' },
-  { id: 'deltoidi_post', label: 'Spalle posteriori' },
-  { id: 'trapezi', label: 'Trapezi' },
-  { id: 'schiena_alta', label: 'Schiena alta' },
-  { id: 'dorsali', label: 'Dorsali' },
-  { id: 'lombari', label: 'Lombari' },
-  { id: 'bicipiti', label: 'Bicipiti' },
-  { id: 'tricipiti', label: 'Tricipiti' },
-  { id: 'avambracci', label: 'Avambracci' },
-  { id: 'addominali', label: 'Addominali' },
-  { id: 'obliqui', label: 'Obliqui' },
-  { id: 'glutei', label: 'Glutei' },
-  { id: 'quadricipiti', label: 'Quadricipiti' },
-  { id: 'femorali', label: 'Femorali' },
-  { id: 'adduttori', label: 'Adduttori' },
-  { id: 'polpacci', label: 'Polpacci' },
+  { id: 'petto', label: 'Petto', breve: 'Petto' },
+  { id: 'deltoidi_ant', label: 'Spalle anteriori', breve: 'Spalle ant.' },
+  { id: 'deltoidi_lat', label: 'Spalle laterali', breve: 'Spalle lat.' },
+  { id: 'deltoidi_post', label: 'Spalle posteriori', breve: 'Spalle post.' },
+  { id: 'trapezi', label: 'Trapezi', breve: 'Trapezi' },
+  { id: 'schiena_alta', label: 'Schiena alta', breve: 'Schiena alta' },
+  { id: 'dorsali', label: 'Dorsali', breve: 'Dorsali' },
+  { id: 'lombari', label: 'Lombari', breve: 'Lombari' },
+  { id: 'bicipiti', label: 'Bicipiti', breve: 'Bicipiti' },
+  { id: 'tricipiti', label: 'Tricipiti', breve: 'Tricipiti' },
+  { id: 'avambracci', label: 'Avambracci', breve: 'Avambracci' },
+  { id: 'addominali', label: 'Addominali', breve: 'Addominali' },
+  { id: 'obliqui', label: 'Obliqui', breve: 'Obliqui' },
+  { id: 'glutei', label: 'Glutei', breve: 'Glutei' },
+  { id: 'quadricipiti', label: 'Quadricipiti', breve: 'Quadricipiti' },
+  { id: 'femorali', label: 'Femorali', breve: 'Femorali' },
+  { id: 'adduttori', label: 'Adduttori', breve: 'Adduttori' },
+  { id: 'polpacci', label: 'Polpacci', breve: 'Polpacci' },
 ]
 export const LABEL = Object.fromEntries(MUSCOLI.map((m) => [m.id, m.label]))
+export const BREVE = Object.fromEntries(MUSCOLI.map((m) => [m.id, m.breve]))
 const IDS = new Set(MUSCOLI.map((m) => m.id))
 
 const r = (re, primari, secondari = []) => ({ re, primari, secondari })
@@ -128,20 +129,39 @@ export const PESO_SECONDARIO = 0.5
 
 /**
  * Serie "pesate" per muscolo: ogni serie conta 1 per i muscoli primari e 0,5 per i secondari.
- * `esercizi` = [{ nome, serie: numero | array }]. Restituisce { carico: { muscolo: serie }, sconosciuti: [nomi] }.
+ * `esercizi` = [{ nome, serie: numero | array }]. Restituisce
+ * { carico: { muscolo: serie }, contributi: { muscolo: [{ nome, serie, primario }] }, sconosciuti: [nomi] }.
+ * `contributi` dice quali esercizi hanno lavorato ogni muscolo (con le serie pesate di ciascuno).
  */
 export function caricoMuscoli(esercizi = [], override = {}) {
   const carico = {}
+  const contributi = {}
   const sconosciuti = new Set()
+  const aggiungi = (id, nome, serie, primario) => {
+    carico[id] = (carico[id] || 0) + serie
+    const lista = (contributi[id] ||= [])
+    const voce = lista.find((x) => x.nome === nome)
+    if (voce) voce.serie += serie
+    else lista.push({ nome, serie, primario })
+  }
   for (const e of esercizi) {
     const n = Array.isArray(e.serie) ? e.serie.length : Number(e.serie) || 0
     if (!n) continue
-    const m = muscoliEsercizio(e.nome, override[e.nome])
+    const m = muscoliEsercizio(e.nome, override[e.nome] || e.muscoli)
     if (!m.riconosciuto) sconosciuti.add(e.nome)
-    for (const id of m.primari) carico[id] = (carico[id] || 0) + n * PESO_PRIMARIO
-    for (const id of m.secondari) if (!m.primari.includes(id)) carico[id] = (carico[id] || 0) + n * PESO_SECONDARIO
+    for (const id of m.primari) aggiungi(id, e.nome, n * PESO_PRIMARIO, true)
+    for (const id of m.secondari) if (!m.primari.includes(id)) aggiungi(id, e.nome, n * PESO_SECONDARIO, false)
   }
-  return { carico, sconosciuti: [...sconosciuti] }
+  for (const lista of Object.values(contributi)) lista.sort((a, b) => b.serie - a.serie || b.primario - a.primario)
+  return { carico, contributi, sconosciuti: [...sconosciuti] }
+}
+
+/** Livelli per evidenziare un solo esercizio: principali pieni, secondari chiari */
+export function livelliEsercizio(m) {
+  const out = {}
+  for (const id of m.secondari) out[id] = 2
+  for (const id of m.primari) out[id] = 4
+  return out
 }
 
 /**
