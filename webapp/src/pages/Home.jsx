@@ -46,7 +46,9 @@ export default function Home() {
   const nomeOggi = weekdayName()
   const log = (logRaw || []).filter((s) => !isExampleSession(s))
 
-  const giornoNome = imp?.calendario?.[nomeOggi]
+  // Prima dell'inizio della scheda (pausa) non ci sono allenamenti previsti
+  const attiva = (d) => !scheda?.inizio || d >= scheda.inizio
+  const giornoNome = attiva(oggi) ? imp?.calendario?.[nomeOggi] : null
   const giorno = scheda?.giorni?.find((g) => g.nome === giornoNome)
   const sessioneOggi = log.find((s) => s.data === oggi)
   const ultimaSessione = [...log].sort((a, b) => b.data.localeCompare(a.data))[0]
@@ -65,7 +67,7 @@ export default function Home() {
     return {
       nome,
       data: d,
-      previsto: imp?.calendario?.[nome],
+      previsto: attiva(d) ? imp?.calendario?.[nome] : null,
       fatto: log.find((s) => s.data === d),
     }
   })
@@ -134,6 +136,12 @@ export default function Home() {
                 </button>
               </div>
             </div>
+          ) : settimanaScheda?.prima ? (
+            <Empty>
+              Settimana di <strong>pausa</strong>. La scheda riparte{' '}
+              {parseDate(scheda.inizio).toLocaleDateString('it-IT', { weekday: 'long', day: 'numeric', month: 'long' })}.
+              Continua a pesarti qualche mattina: il trend del peso serve anche adesso.
+            </Empty>
           ) : giorno ? (
             <>
               <h3 className="day-title">{giorno.nome}</h3>
@@ -210,12 +218,17 @@ export default function Home() {
               {pastiOggi.map((p, i) => (
                 <li key={i}>
                   <span className="meal-type">{p.tipo}</span>
-                  <span>{p.piatto}</span>
+                  <span className={p.fatto ? 'muted' : ''}>{p.piatto}</span>
+                  {p.fatto && (
+                    <span className="done-mini" aria-label="mangiato">
+                      <Icon name="check" size={14} />
+                    </span>
+                  )}
                 </li>
               ))}
             </ul>
           ) : (
-            <Empty>Nessun pasto pianificato per oggi. Chiedi a Claude il piano pasti della settimana.</Empty>
+            <Empty>Nessun pasto pianificato per oggi: aggiungilo in Cibo → Piano pasti o chiedi a Claude.</Empty>
           )}
           {inScadenza.length > 0 && (
             <div className="warn-box">

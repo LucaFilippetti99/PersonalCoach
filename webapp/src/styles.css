@@ -1306,3 +1306,91 @@ textarea:focus {
   font-size: 1.15rem;
   padding-top: 4px;
 }
+
+/* ---------- Modifica pasti ---------- */
+
+.meal-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.meal-actions {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+}
+.meal-done {
+  opacity: 0.75;
+}
+.meal-done h3 {
+  text-decoration: line-through;
+  text-decoration-color: color-mix(in srgb, var(--text) 35%, transparent);
+}
+.btn-done {
+  background: var(--good-soft);
+  border-color: transparent;
+  color: var(--good);
+}
+.pill-done {
+  background: var(--good);
+}
+.meal-edit {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, var(--border));
+  background: var(--surface);
+}
+.ing-row {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 36px;
+  gap: 6px;
+  margin-top: 4px;
+}
+.add-ing,
+.add-meal {
+  align-self: flex-start;
+}
+.avviso {
+  background: var(--accent-soft);
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.92rem;
+}
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  border-radius: 99px;
+  padding: 4px 12px;
+  font: inherit;
+  font-size: 0.88rem;
+  cursor: pointer;
+}
+.chip.on {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+}
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.done-mini {
+  color: var(--good);
+  display: inline-flex;
+}

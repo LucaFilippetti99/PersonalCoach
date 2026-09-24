@@ -70,6 +70,7 @@ coach/
         ├── defaults.js              ← valori di default per file non ancora creati
         ├── utils.js                 ← date, medie peso, progressi, 1RM…
         ├── hevy.js                  ← parser del CSV di Hevy → sessioni
+        ├── piano.js                 ← logica del piano pasti (ricettario, ingredienti mancanti…)
         ├── prompts.js               ← modelli della pagina "Chiedi a Claude"
         ├── styles.css               ← tutto lo stile
         ├── components/
@@ -162,6 +163,12 @@ Funzioni senza React, testabili anche con Node (`node -e "import('./src/utils.js
    - `scheda` = nome della scheda attiva in quella data (o `"Storico Hevy"`).
 4. `mergeLog(log, importate)`: la chiave di una sessione è `data|giorno` (giorno = titolo dell'allenamento in Hevy). Le sessioni con la stessa chiave vengono **sostituite**, le altre (anche quelle inserite a mano) restano. Per questo reimportare tutto lo storico è sicuro.
 
+**`piano.js`**: piano pasti
+- `pianoVuoto(settimana)`, `conTuttiIGiorni(piano)` (aggiunge i giorni mancanti per poterci mettere pasti), `ordinaPasti` (colazione → pranzo → spuntino → cena);
+- `ricettario(piani)`: tutti i piatti con ingredienti presenti nei piani passati (l'ultima versione vince), usati nel menu "Scegli un piatto già fatto";
+- `ingredientiMancanti(pasto, frigo, spesa)` / `ingredientiInFrigo(pasto, frigo)`: confronto per nome, senza maiuscole;
+- `pulisciPasto`: normalizza un pasto uscito dal form (niente righe vuote, ricetta come array).
+
 **`prompts.js`**: modelli per "Chiedi a Claude". Ogni modello:
 
 ```js
@@ -196,6 +203,11 @@ Dettagli utili:
 - **Registra (a mano)**: il form si costruisce dalla scheda (`buildForm`), precompila i kg dall'ultima sessione (`emptySets`) e salva una **bozza in `localStorage`** (chiave `coach-bozza:<data>:<giorno>`) a ogni modifica. Al salvataggio vengono tenute solo le serie con le ripetizioni compilate.
 - **Spesa → Frigo**: spuntare un articolo lo toglie da `spesa.json` e lo aggiunge a `frigo.json`; "finito, rimetti in lista" fa il contrario.
 - **Piano pasti**: ogni ingrediente viene confrontato per nome (senza maiuscole) con frigo e spesa per mostrare le etichette *frigo* / *spesa*. Per questo la skill chiede a Claude di usare gli stessi nomi.
+  - Si può **modificare dalla webapp**: aggiungi / modifica / elimina un pasto (`PastoEditor`), scegli un piatto dal ricettario, segna "mangiato" (`fatto: true`).
+  - Dopo il salvataggio compare un `Avviso`: ingredienti che non sono né in frigo né in spesa → "Aggiungi alla spesa"; dopo "mangiato" → "Togli dal frigo" quello che hai finito.
+  - Se non esiste il piano della settimana corrente si può creare vuoto (`pianoVuoto`). Nel file si salvano solo i giorni con almeno un pasto.
+  - `useRicettario(files)` legge tutti i piani della cartella per costruire il ricettario.
+- **Home**: se la scheda non è ancora iniziata (`inizio` nel futuro) mostra la settimana di pausa e non segna allenamenti previsti.
 
 ### 4.6 Stile: `styles.css`
 
@@ -233,9 +245,11 @@ Campi opzionali di una serie: `secondi` (esercizi a tempo) e `km` (esercizi a di
 { "settimana": "2026-W39", "kcal_giorno_indicative": 2150,
   "giorni": [ { "giorno": "venerdì", "pasti": [ { "tipo": "pranzo", "piatto": "…",
       "ingredienti": [ { "nome": "Salmone", "porzione": "1 trancio" } ],
-      "ricetta": [ "passo 1", "passo 2" ], "note": "" } ] } ],
+      "ricetta": [ "passo 1", "passo 2" ], "note": "", "fatto": true } ] } ],
   "da_comprare_extra": [ { "nome": "…", "categoria": "proteine", "quantita": "2", "motivo": "…" } ] }
 ```
+
+`fatto` è opzionale: c'è solo sui pasti già mangiati.
 
 **`spesa.json`**: `{ "aggiornata", "articoli": [ { "nome", "categoria", "quantita" } ] }`
 **`frigo.json`**: `{ "aggiornato", "articoli": [ { "nome", "categoria", "quantita", "scadenza" } ] }`
@@ -280,6 +294,7 @@ npm run test:watch # test in modalità watch mentre modifichi il codice
 I test (Vitest) sono in `tests/` e coprono la logica pura:
 - `hevy.test.js`: parser CSV, date in italiano/inglese, conversione in sessioni (riscaldamento, failure/RPE, serie a tempo e distanza, alias, durata), merge idempotente;
 - `utils.test.js`: settimane ISO, media peso, 1RM, formattazione delle serie, tipo di esercizio, stato di progressione;
+- `piano.test.js`: piano vuoto, giorni mancanti, ordinamento, ricettario, ingredienti mancanti / in frigo, pulizia del form;
 - `prompts.test.js`: ogni modello di "Chiedi a Claude" genera un testo pulito (niente `undefined`, niente righe vuote doppie).
 
 Quando cambi una di queste funzioni, lancia `npm test`. Per un nuovo caso aggiungi un `it(...)` nel file giusto.

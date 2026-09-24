@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { listDir, useJson } from './api.js'
 import { FRIGO_DEFAULT, IMPOSTAZIONI_DEFAULT, SPESA_DEFAULT } from './defaults.js'
 import { isoWeek } from './utils.js'
@@ -25,16 +25,20 @@ export function useImpostazioni() {
 /** Elenco dei piani pasti e file suggerito (settimana corrente, altrimenti il più recente) */
 export function usePianiList() {
   const [files, setFiles] = useState(null)
+  const key = (f) => (f.match(/\d{4}-W\d{2}/)?.[0] ?? '') + (/esempio/i.test(f) ? '0' : '1')
+  const load = useCallback(
+    () => listDir('piani-pasti').then((fs) => setFiles([...fs].sort((a, b) => key(a).localeCompare(key(b))))),
+    [],
+  )
   useEffect(() => {
-    const key = (f) => (f.match(/\d{4}-W\d{2}/)?.[0] ?? '') + (/esempio/i.test(f) ? '0' : '1')
-    const load = () =>
-      listDir('piani-pasti').then((fs) => setFiles([...fs].sort((a, b) => key(a).localeCompare(key(b)))))
     load()
     window.addEventListener('focus', load)
     return () => window.removeEventListener('focus', load)
-  }, [])
+  }, [load])
   const week = isoWeek()
-  const current = files?.find((f) => f.includes(week)) ?? null
-  const latest = files?.length ? files[files.length - 1] : null
-  return { files, current, suggested: current ?? latest }
+  // Il file di esempio non conta come piano della settimana
+  const current = files?.find((f) => f.includes(week) && !/esempio/i.test(f)) ?? null
+  const reali = files?.filter((f) => !/esempio/i.test(f)) ?? []
+  const latest = reali.length ? reali[reali.length - 1] : files?.length ? files[files.length - 1] : null
+  return { files, current, suggested: current ?? latest, reload: load }
 }

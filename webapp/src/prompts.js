@@ -191,7 +191,7 @@ export const MODELLI = [
         SEP,
         'Aggiorna frigo.json con quello che è rimasto e metti in spesa.json quello che manca.',
         v.piano &&
-          `Aggiorna piani-pasti/${isoWeek()}.json: segna nelle note i pasti già fatti ("✅ mangiato") e completa i giorni mancanti con la skill piano-pasti-settimanale, usando prima il frigo.`,
+          `Aggiorna piani-pasti/${isoWeek()}.json: segna i pasti già fatti con "fatto": true e completa i giorni mancanti con la skill piano-pasti-settimanale, usando prima il frigo.`,
       ),
   },
   {
