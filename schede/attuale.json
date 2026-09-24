@@ -1,0 +1,264 @@
+{
+  "nome": "Scheda 1 — PPL + corsa (definizione)",
+  "inizio": "2026-09-28",
+  "settimane": 5,
+  "giorni": [
+    {
+      "nome": "Giorno A — Push",
+      "esercizi": [
+        {
+          "nome": "Chest Press (Macchina)",
+          "serie": 2,
+          "reps": "12-15",
+          "rir": 4,
+          "recupero_s": 60,
+          "note": "Sett. 1: 35-40 kg. Riscaldamento: carico leggero, lontano dal cedimento"
+        },
+        {
+          "nome": "Panca Piana (Bilanciere)",
+          "serie": 3,
+          "reps": "6-8",
+          "rir": 2,
+          "recupero_s": 150,
+          "note": "Sett. 1: 47,5 kg. Quando chiudi 3×8, passa a 50 kg. Doppia progressione: quando fai 8 reps in tutte le serie, aumenta il carico"
+        },
+        {
+          "nome": "Panca Inclinata (Manubrio)",
+          "serie": 3,
+          "reps": "6-8",
+          "rir": 2,
+          "recupero_s": 120,
+          "note": "Sett. 1: 32 kg (come li segni in Hevy). A 36 kg eri a 4 reps: troppo pesante per il range 6-8. Doppia progressione: quando fai 8 reps in tutte le serie, aumenta il carico"
+        },
+        {
+          "nome": "Farfalla (Pec Deck)",
+          "serie": 3,
+          "reps": "10-12",
+          "rir": 1,
+          "recupero_s": 75,
+          "note": "Sett. 1: 40 kg. Controlla la fase negativa"
+        },
+        {
+          "nome": "Pushdown Tricipiti",
+          "serie": 3,
+          "reps": "10-12",
+          "rir": 1,
+          "recupero_s": 75,
+          "note": "Sett. 1: 40 kg."
+        },
+        {
+          "nome": "Dip Petto",
+          "serie": 2,
+          "reps": "max",
+          "rir": 2,
+          "recupero_s": 90,
+          "note": "Sett. 1: a corpo libero; se non arrivi a 6 reps usa la macchina assistita. Busto leggermente inclinato in avanti; se diventano facili aggiungi zavorra"
+        }
+      ]
+    },
+    {
+      "nome": "Giorno B — Pull",
+      "esercizi": [
+        {
+          "nome": "Lat Pulldown (Cavo)",
+          "serie": 3,
+          "reps": "6-8",
+          "rir": 2,
+          "recupero_s": 120,
+          "note": "Sett. 1: 55 kg (presa stretta nel giorno E: 50 kg). Quando chiudi 3×8, passa a 60 kg. Doppia progressione: quando fai 8 reps in tutte le serie, aumenta il carico"
+        },
+        {
+          "nome": "Rematore Convergente (Macchina)",
+          "serie": 3,
+          "reps": "8-10",
+          "rir": 2,
+          "recupero_s": 90,
+          "note": "Sett. 1: 30 kg. Un braccio alla volta, reps per lato; appoggio al petto per scaricare la schiena bassa"
+        },
+        {
+          "nome": "Rematore al cavo da seduto - Impugnatura a V (cavo)",
+          "serie": 3,
+          "reps": "8-10",
+          "rir": 2,
+          "recupero_s": 90,
+          "note": "Sett. 1: 45 kg. Busto fermo, niente slancio"
+        },
+        {
+          "nome": "Croci Inverse Deltoide Posteriore (Macchina)",
+          "serie": 3,
+          "reps": "12-15",
+          "rir": 1,
+          "recupero_s": 60,
+          "note": "Sett. 1: 25-30 kg: servono 12-15 reps puliti."
+        },
+        {
+          "nome": "Curl Bicipiti (Manubrio)",
+          "serie": 3,
+          "reps": "8-12",
+          "rir": 1,
+          "recupero_s": 75,
+          "note": "Sett. 1: circa 10 kg per manubrio. In Hevy hai segnato pesi diversi (10, 20, 28): scegli una convenzione (peso di un manubrio) e tienila."
+        },
+        {
+          "nome": "Iperestensione",
+          "serie": 2,
+          "reps": "12-15",
+          "rir": 3,
+          "recupero_s": 60,
+          "note": "Sett. 1: corpo libero. Rinforzo lombari: lento, a corpo libero; aggiungi un disco quando 15 reps sono facili"
+        }
+      ]
+    },
+    {
+      "nome": "Giorno C — Gambe + spalle",
+      "esercizi": [
+        {
+          "nome": "Squat (Bilanciere)",
+          "serie": 4,
+          "reps": "5-7",
+          "rir": 2,
+          "recupero_s": 180,
+          "note": "Sett. 1: 55 kg. Sali di 2,5-5 kg a settimana finché profondità e schiena restano ok (a giugno eri a 75×8). Addome contratto; se senti la schiena bassa fermati e resta con quel carico"
+        },
+        {
+          "nome": "Stacco da Terra Rumeno (Bilanciere)",
+          "serie": 3,
+          "reps": "8-10",
+          "rir": 3,
+          "recupero_s": 120,
+          "note": "Sett. 1: 60 kg (a luglio 80×8, ma non lo fai da allora e la schiena bassa va ricondizionata). +5 kg a settimana se la schiena è ok. Carico moderato, schiena neutra, scendi finché senti i femorali e non la schiena"
+        },
+        {
+          "nome": "Leg Extension (Macchina)",
+          "serie": 3,
+          "reps": "10-12",
+          "rir": 1,
+          "recupero_s": 75,
+          "note": "Sett. 1: trova il peso per 12 reps lasciandone 1-2 (indicativamente 35-40 kg)."
+        },
+        {
+          "nome": "Leg Curl Sdraiato (Macchina)",
+          "serie": 3,
+          "reps": "10-12",
+          "rir": 1,
+          "recupero_s": 75,
+          "note": "Sett. 1: 40 kg."
+        },
+        {
+          "nome": "Lento in Avanti in Piedi (Bilanciere)",
+          "serie": 3,
+          "reps": "6-8",
+          "rir": 2,
+          "recupero_s": 120,
+          "note": "Sett. 1: 27,5 kg (a 30 kg eri a 7-6-4 reps)."
+        },
+        {
+          "nome": "Aperture Laterali (Manubrio)",
+          "serie": 3,
+          "reps": "12-15",
+          "rir": 1,
+          "recupero_s": 60,
+          "note": "Sett. 1: 7-8 kg per manubrio."
+        }
+      ]
+    },
+    {
+      "nome": "Giorno D — Corsa + corpo libero",
+      "esercizi": [
+        {
+          "nome": "Corsa",
+          "serie": 1,
+          "reps": "5-6 km",
+          "rir": 3,
+          "recupero_s": 0,
+          "note": "Ritmo facile 5:30-5:50/km, devi riuscire a parlare"
+        },
+        {
+          "nome": "Trazione",
+          "serie": 3,
+          "reps": "max",
+          "rir": 2,
+          "recupero_s": 90,
+          "note": "Se fai meno di 5 reps, usa la macchina assistita o la presa supina. Circuito 3 giri: trazioni → piegamenti → squat → plank → bird dog"
+        },
+        {
+          "nome": "Piegamenti",
+          "serie": 3,
+          "reps": "max",
+          "rir": 2,
+          "recupero_s": 0,
+          "note": "Base attuale: 10-12 reps."
+        },
+        {
+          "nome": "Squat (Corpo Libero)",
+          "serie": 3,
+          "reps": "15-20",
+          "rir": 3,
+          "recupero_s": 0,
+          "note": ""
+        },
+        {
+          "nome": "Plank",
+          "serie": 3,
+          "reps": "30-45 s",
+          "rir": 2,
+          "recupero_s": 0,
+          "note": ""
+        },
+        {
+          "nome": "Bird Dog",
+          "serie": 3,
+          "reps": "8 per lato",
+          "rir": 3,
+          "recupero_s": 90,
+          "note": "Lento e controllato; recupero a fine giro"
+        }
+      ]
+    },
+    {
+      "nome": "Giorno E — Richiamo upper (opzionale)",
+      "esercizi": [
+        {
+          "nome": "Panca Piana (Manubrio)",
+          "serie": 3,
+          "reps": "8-10",
+          "rir": 2,
+          "recupero_s": 120,
+          "note": "Sett. 1: circa 30 kg (come li segni in Hevy). Solo nelle settimane in cui hai tempo ed energie; 35-40 min"
+        },
+        {
+          "nome": "Lat Pulldown (Cavo)",
+          "serie": 3,
+          "reps": "8-10",
+          "rir": 2,
+          "recupero_s": 90,
+          "note": "Sett. 1: 50 kg. Presa stretta"
+        },
+        {
+          "nome": "Aperture Laterali (Manubrio)",
+          "serie": 3,
+          "reps": "12-15",
+          "rir": 1,
+          "recupero_s": 60,
+          "note": "Sett. 1: 7-8 kg per manubrio."
+        },
+        {
+          "nome": "Curl Bicipiti (Manubrio)",
+          "serie": 2,
+          "reps": "10-12",
+          "rir": 1,
+          "recupero_s": 60,
+          "note": "Sett. 1: circa 10 kg per manubrio. Superserie con il pushdown"
+        },
+        {
+          "nome": "Pushdown Tricipiti",
+          "serie": 2,
+          "reps": "10-12",
+          "rir": 1,
+          "recupero_s": 60,
+          "note": "Sett. 1: 35-40 kg. Superserie con il curl"
+        }
+      ]
+    }
+  ]
+}

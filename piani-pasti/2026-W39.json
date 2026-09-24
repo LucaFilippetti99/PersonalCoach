@@ -1,0 +1,174 @@
+{
+  "settimana": "2026-W39",
+  "kcal_giorno_indicative": 2150,
+  "giorni": [
+    {
+      "giorno": "martedì",
+      "pasti": [
+        {
+          "tipo": "cena",
+          "piatto": "Insalata con feta e ceci + tarallo",
+          "ingredienti": [
+            {
+              "nome": "Insalata",
+              "porzione": "1 ciotola"
+            },
+            {
+              "nome": "Feta",
+              "porzione": "1/2 panetto"
+            },
+            {
+              "nome": "Ceci",
+              "porzione": "1/2 barattolo"
+            },
+            {
+              "nome": "Tarallo",
+              "porzione": "1"
+            }
+          ],
+          "ricetta": [],
+          "note": "✅ mangiato"
+        }
+      ]
+    },
+    {
+      "giorno": "mercoledì",
+      "pasti": [
+        {
+          "tipo": "pranzo",
+          "piatto": "Insalata con feta, ceci e tonno",
+          "ingredienti": [
+            {
+              "nome": "Insalata",
+              "porzione": "1 ciotola"
+            },
+            {
+              "nome": "Feta",
+              "porzione": "1/2 panetto"
+            },
+            {
+              "nome": "Ceci",
+              "porzione": "1/2 barattolo"
+            },
+            {
+              "nome": "Tonno",
+              "porzione": "1 scatoletta"
+            }
+          ],
+          "ricetta": [],
+          "note": "✅ mangiato"
+        },
+        {
+          "tipo": "cena",
+          "piatto": "Piadina",
+          "ingredienti": [
+            {
+              "nome": "Piadina",
+              "porzione": "1"
+            }
+          ],
+          "ricetta": [],
+          "note": "✅ mangiato"
+        }
+      ]
+    },
+    {
+      "giorno": "giovedì",
+      "pasti": [
+        {
+          "tipo": "pranzo",
+          "piatto": "Pranzo al webinar",
+          "ingredienti": [],
+          "ricetta": [],
+          "note": "✅ offerto dal lavoro"
+        },
+        {
+          "tipo": "cena",
+          "piatto": "Cena fuori al Coguaro con i colleghi",
+          "ingredienti": [],
+          "ricetta": [],
+          "note": "Fuori: scegli un secondo di carne o pesce con contorno, vai tranquillo con pane e alcol"
+        }
+      ]
+    },
+    {
+      "giorno": "venerdì",
+      "pasti": [
+        {
+          "tipo": "pranzo",
+          "piatto": "Riso con salmone e broccoli",
+          "ingredienti": [
+            {
+              "nome": "Riso basmati",
+              "porzione": "1 pugno abbondante (~80 g)"
+            },
+            {
+              "nome": "Salmone",
+              "porzione": "1 trancio"
+            },
+            {
+              "nome": "Broccoli",
+              "porzione": "1/2 broccolo"
+            }
+          ],
+          "ricetta": [
+            "Cuoci il riso in acqua salata (circa 12 min)",
+            "Cuoci i broccoli a cimette al vapore o in padella con un filo d'acqua, 8-10 min",
+            "Salmone in padella antiaderente, 3-4 min per lato partendo dalla pelle",
+            "Unisci tutto con un filo d'olio, limone se ce l'hai"
+          ],
+          "note": "Il salmone fresco va consumato presto: questo è il pasto giusto per finirlo"
+        },
+        {
+          "tipo": "cena",
+          "piatto": "Hamburger vegetali prima della festa",
+          "ingredienti": [
+            {
+              "nome": "Hamburger vegetali",
+              "porzione": "2"
+            },
+            {
+              "nome": "Pane per hamburger",
+              "porzione": "1"
+            },
+            {
+              "nome": "Insalata",
+              "porzione": "1 manciata"
+            }
+          ],
+          "ricetta": [
+            "Cuoci gli hamburger in padella 4-5 min per lato",
+            "Scalda il pane e componi con insalata"
+          ],
+          "note": "Da comprare. Gli hamburger vegetali hanno spesso poche proteine: scegline uno con almeno 15 g per 100 g (soia/seitan), oppure aggiungi uno yogurt greco dopo"
+        }
+      ]
+    },
+    {
+      "giorno": "sabato",
+      "pasti": [
+        {
+          "tipo": "cena",
+          "piatto": "Pizza da Zinagri",
+          "ingredienti": [],
+          "ricetta": [],
+          "note": "Fuori, goditela: pranzo leggero e proteico"
+        }
+      ]
+    }
+  ],
+  "da_comprare_extra": [
+    {
+      "nome": "Hamburger vegetali",
+      "categoria": "proteine",
+      "quantita": "2",
+      "motivo": "cena di venerdì prima della festa"
+    },
+    {
+      "nome": "Pane per hamburger",
+      "categoria": "carboidrati",
+      "quantita": "1-2",
+      "motivo": "cena di venerdì"
+    }
+  ]
+}

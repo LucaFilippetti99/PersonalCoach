@@ -1,0 +1,15 @@
+{
+  "aggiornata": "2026-09-24",
+  "articoli": [
+    {
+      "nome": "Hamburger vegetali",
+      "categoria": "proteine",
+      "quantita": "2"
+    },
+    {
+      "nome": "Pane per hamburger",
+      "categoria": "carboidrati",
+      "quantita": "1-2"
+    }
+  ]
+}

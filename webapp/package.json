@@ -1,0 +1,23 @@
+{
+  "name": "coach-webapp",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "dev:rete": "vite --host",
+    "build": "vite build",
+    "start": "vite build && vite preview"
+  },
+  "dependencies": {
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.1.1",
+    "vite": "^8.3.0"
+  },
+  "engines": {
+    "node": ">=20.19"
+  }
+}

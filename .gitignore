@@ -1,0 +1,8 @@
+# dipendenze e build della webapp
+webapp/node_modules/
+webapp/dist/
+
+# file temporanei
+_to_delete/
+*.tmp-*
+.DS_Store

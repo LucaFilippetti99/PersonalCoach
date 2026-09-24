@@ -1,0 +1,23 @@
+{
+  "aggiornato": "2026-09-24",
+  "articoli": [
+    {
+      "nome": "Riso basmati",
+      "categoria": "carboidrati",
+      "quantita": "",
+      "scadenza": null
+    },
+    {
+      "nome": "Salmone",
+      "categoria": "proteine",
+      "quantita": "1 trancio",
+      "scadenza": null
+    },
+    {
+      "nome": "Broccoli",
+      "categoria": "verdure",
+      "quantita": "",
+      "scadenza": null
+    }
+  ]
+}

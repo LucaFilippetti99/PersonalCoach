@@ -1,0 +1,43 @@
+{
+  "settimana": "2026-W40",
+  "kcal_giorno_indicative": null,
+  "giorni": [
+    {
+      "giorno": "lunedì",
+      "pasti": [
+        {
+          "tipo": "pranzo",
+          "piatto": "Riso con pollo e zucchine",
+          "ingredienti": [
+            {
+              "nome": "Riso basmati",
+              "porzione": "1 pugno abbondante (~80 g)"
+            },
+            {
+              "nome": "Petto di pollo",
+              "porzione": "1 petto medio"
+            },
+            {
+              "nome": "Zucchine",
+              "porzione": "1-2 zucchine"
+            }
+          ],
+          "ricetta": [
+            "Cuoci il riso in acqua salata (circa 12 min)",
+            "Taglia il pollo a strisce e cuocilo in padella con un filo d'olio, 6-7 min",
+            "Salta le zucchine a rondelle con aglio, poi unisci tutto"
+          ],
+          "note": "Cuoci doppio pollo, metà va nella cena di martedì"
+        }
+      ]
+    }
+  ],
+  "da_comprare_extra": [
+    {
+      "nome": "Limoni",
+      "categoria": "frutta",
+      "quantita": "2",
+      "motivo": "per condire il pesce"
+    }
+  ]
+}

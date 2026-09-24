@@ -1,0 +1,7338 @@
+[
+  {
+    "data": "2026-03-09",
+    "scheda": "Storico Hevy",
+    "giorno": "Giorno 1",
+    "esercizi": [
+      {
+        "nome": "Squat (Bilanciere)",
+        "serie": [
+          {
+            "kg": 80,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 80,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 80,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 80,
+            "reps": 4,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Panca Piana (Bilanciere)",
+        "serie": [
+          {
+            "kg": 40,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 50,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 50,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 50,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Leg Curl Sdraiato (Macchina)",
+        "serie": [
+          {
+            "kg": 45,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 45,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 45,
+            "reps": 10,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Rematore Convergente (Macchina)",
+        "serie": [
+          {
+            "kg": 30,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 30,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 30,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Lat Pulldown Braccia Dritte (Cavo)",
+        "serie": [
+          {
+            "kg": 45,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 45,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 45,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Farfalla (Pec Deck)",
+        "serie": [
+          {
+            "kg": 50,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 50,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 50,
+            "reps": 6,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Pushdown Tricipiti",
+        "serie": [
+          {
+            "kg": 55,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 55,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 55,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      }
+    ],
+    "durata_min": 68,
+    "note": "Rematore Convergente (Macchina): Braccio singolo"
+  },
+  {
+    "data": "2026-03-11",
+    "scheda": "Storico Hevy",
+    "giorno": "Giorno 2",
+    "esercizi": [
+      {
+        "nome": "Stacco da Terra Rumena (Manubrio)",
+        "serie": [
+          {
+            "kg": 28,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 28,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 28,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 28,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Trazione Presa Supina",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 6,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Abduzione Anche (Macchina)",
+        "serie": [
+          {
+            "kg": 75,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 75,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 75,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Panca Inclinata (Manubrio)",
+        "serie": [
+          {
+            "kg": 18,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 16,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 16,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 16,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Alzata laterale con cavo a braccio singolo",
+        "serie": [
+          {
+            "kg": 11.25,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 11.25,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 11.25,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Croci Inverse Deltoide Posteriore (Macchina)",
+        "serie": [
+          {
+            "kg": 35,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 35,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 35,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Curl Bicipiti Inclinato da Seduto (Manubrio)",
+        "serie": [
+          {
+            "kg": 12,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 10,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 10,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      }
+    ],
+    "durata_min": 72,
+    "note": ""
+  },
+  {
+    "data": "2026-03-18",
+    "scheda": "Storico Hevy",
+    "giorno": "Allenamento serale 🏋️",
+    "esercizi": [
+      {
+        "nome": "Trazione (Assistita)",
+        "serie": [
+          {
+            "kg": 18,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 18,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 18,
+            "reps": 6,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Squat (Bilanciere)",
+        "serie": [
+          {
+            "kg": 75,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 75,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Leg Curl Seduto (Macchina)",
+        "serie": [
+          {
+            "kg": 40,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 40,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 40,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Rematore Inclinato (Bilanciere)",
+        "serie": [
+          {
+            "kg": 35,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 35,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 35,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Chest Press (Macchina)",
+        "serie": [
+          {
+            "kg": 50,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 55,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 55,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Bicipiti Martello (Manubrio)",
+        "serie": [
+          {
+            "kg": 12.5,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 12.5,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 12.5,
+            "reps": 4,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Curl Bicipiti Inclinato da Seduto (Manubrio)",
+        "serie": [
+          {
+            "kg": 10,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 10,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 10,
+            "reps": 6,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Crunch",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 20,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 20,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 20,
+            "rir": null
+          }
+        ]
+      }
+    ],
+    "durata_min": 106,
+    "note": "Squat (Bilanciere): Isometria | Crunch: Super set Benny"
+  },
+  {
+    "data": "2026-03-24",
+    "scheda": "Storico Hevy",
+    "giorno": "Giorno 1 (modificato perché siamo stronzi e domani mattina torniamo in palestra)",
+    "esercizi": [
+      {
+        "nome": "Squat (Bilanciere)",
+        "serie": [
+          {
+            "kg": 80,
+            "reps": 7,
+            "rir": null
+          },
+          {
+            "kg": 80,
+            "reps": 7,
+            "rir": null
+          },
+          {
+            "kg": 80,
+            "reps": 7,
+            "rir": null
+          },
+          {
+            "kg": 80,
+            "reps": 7,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Panca Piana (Bilanciere)",
+        "serie": [
+          {
+            "kg": 40,
+            "reps": 7,
+            "rir": null
+          },
+          {
+            "kg": 50,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 55,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 55,
+            "reps": 5,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Panca Inclinata (Manubrio)",
+        "serie": [
+          {
+            "kg": 18,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 18,
+            "reps": 5,
+            "rir": null
+          },
+          {
+            "kg": 16,
+            "reps": 7,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Aperture Laterali (Manubrio)",
+        "serie": [
+          {
+            "kg": 6,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 6,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 6,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Leg Curl Sdraiato (Macchina)",
+        "serie": [
+          {
+            "kg": 45,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 45,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 45,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Pushdown Tricipiti",
+        "serie": [
+          {
+            "kg": 55,
+            "reps": 12,
+            "rir": null
+          },
+          {
+            "kg": 55,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 55,
+            "reps": 9,
+            "rir": null
+          }
+        ]
+      }
+    ],
+    "durata_min": 76,
+    "note": ""
+  },
+  {
+    "data": "2026-03-26",
+    "scheda": "Storico Hevy",
+    "giorno": "Giorno 2",
+    "esercizi": [
+      {
+        "nome": "Stacco da Terra (Bilanciere)",
+        "serie": [
+          {
+            "kg": 90,
+            "reps": 5,
+            "rir": null
+          },
+          {
+            "kg": 80,
+            "reps": 5,
+            "rir": null
+          },
+          {
+            "kg": 70,
+            "reps": 5,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Lat Pulldown (Cavo)",
+        "serie": [
+          {
+            "kg": 60,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 60,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 55,
+            "reps": 6,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Rematore Convergente (Macchina)",
+        "serie": [
+          {
+            "kg": 30,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 30,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 30,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Lat Pulldown Braccia Dritte (Cavo)",
+        "serie": [
+          {
+            "kg": 50,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 50,
+            "reps": 7,
+            "rir": null
+          },
+          {
+            "kg": 50,
+            "reps": 5,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Croci Inverse Deltoide Posteriore (Macchina)",
+        "serie": [
+          {
+            "kg": 35,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 40,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 40,
+            "reps": 4,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Abduzione Anche (Macchina)",
+        "serie": [
+          {
+            "kg": 75,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 75,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 75,
+            "reps": 6,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Curl Bicipiti Inclinato da Seduto (Manubrio)",
+        "serie": [
+          {
+            "kg": 10,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 10,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 10,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Bicipiti Martello (Manubrio)",
+        "serie": [
+          {
+            "kg": 14,
+            "reps": 4,
+            "rir": null
+          },
+          {
+            "kg": 14,
+            "reps": 4,
+            "rir": null
+          },
+          {
+            "kg": 14,
+            "reps": 3,
+            "rir": null
+          }
+        ]
+      }
+    ],
+    "durata_min": 67,
+    "note": ""
+  },
+  {
+    "data": "2026-03-31",
+    "scheda": "Storico Hevy",
+    "giorno": "Giorno 1",
+    "esercizi": [
+      {
+        "nome": "Squat (Bilanciere)",
+        "serie": [
+          {
+            "kg": 80,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 80,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 80,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 80,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Panca Piana (Bilanciere)",
+        "serie": [
+          {
+            "kg": 50,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 52.5,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 55,
+            "reps": 4,
+            "rir": 0
+          }
+        ]
+      },
+      {
+        "nome": "Chest Press (Macchina)",
+        "serie": [
+          {
+            "kg": 55,
+            "reps": 5,
+            "rir": null
+          },
+          {
+            "kg": 50,
+            "reps": 7,
+            "rir": 0
+          }
+        ]
+      },
+      {
+        "nome": "Leg Curl Sdraiato (Macchina)",
+        "serie": [
+          {
+            "kg": 45,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 50,
+            "reps": 9,
+            "rir": null
+          },
+          {
+            "kg": 50,
+            "reps": 6,
+            "rir": 0
+          }
+        ]
+      },
+      {
+        "nome": "Rematore Convergente (Macchina)",
+        "serie": [
+          {
+            "kg": 30,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 30,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 35,
+            "reps": 6,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Lat Pulldown Braccia Dritte (Cavo)",
+        "serie": [
+          {
+            "kg": 50,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 50,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 50,
+            "reps": 6,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Farfalla (Pec Deck)",
+        "serie": [
+          {
+            "kg": 50,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 50,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 50,
+            "reps": 5,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Pushdown Tricipiti",
+        "serie": [
+          {
+            "kg": 55,
+            "reps": 12,
+            "rir": null
+          },
+          {
+            "kg": 55,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 55,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      }
+    ],
+    "durata_min": 69,
+    "note": "Allenamento senza gymbro 😭 | Squat (Bilanciere): Boh ho il culo storto, sembra che scenda con il bacino girato mostrando di più la chiappa destra….maledetta coscia lunga | Panca Piana (Bilanciere): Senza il gymbro ho paura di rimanerci sotto (è già successo) | Rematore Convergente (Macchina): BRACCIO SINGOLO"
+  },
+  {
+    "data": "2026-04-02",
+    "scheda": "Storico Hevy",
+    "giorno": "Giorno 2",
+    "esercizi": [
+      {
+        "nome": "Stacco da Terra (Bilanciere)",
+        "serie": [
+          {
+            "kg": 70,
+            "reps": 7,
+            "rir": null
+          },
+          {
+            "kg": 70,
+            "reps": 7,
+            "rir": null
+          },
+          {
+            "kg": 70,
+            "reps": 7,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Lat Pulldown (Cavo)",
+        "serie": [
+          {
+            "kg": 55,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 60,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 60,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 60,
+            "reps": 6,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Abduzione Anche (Macchina)",
+        "serie": [
+          {
+            "kg": 75,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 75,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 75,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Panca Inclinata (Manubrio)",
+        "serie": [
+          {
+            "kg": 18,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 16,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 16,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 16,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Alzata laterale con cavo a braccio singolo",
+        "serie": [
+          {
+            "kg": 11.25,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 11.25,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 11.25,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Croci Inverse Deltoide Posteriore (Macchina)",
+        "serie": [
+          {
+            "kg": 35,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 35,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 35,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Curl Bicipiti Inclinato da Seduto (Manubrio)",
+        "serie": [
+          {
+            "kg": 12,
+            "reps": 7,
+            "rir": null
+          },
+          {
+            "kg": 12,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 12,
+            "reps": 4,
+            "rir": 0
+          }
+        ]
+      },
+      {
+        "nome": "Bicipiti Martello (Manubrio)",
+        "serie": [
+          {
+            "kg": 12,
+            "reps": 7,
+            "rir": null
+          },
+          {
+            "kg": 12,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 12,
+            "reps": 6,
+            "rir": null
+          }
+        ]
+      }
+    ],
+    "durata_min": 92,
+    "note": "Allenamento senza gymbro e senza caffè | Stacco da Terra (Bilanciere): Non giudicate peso sto imparando a scendere tanto senza sbilanciarmi o distruggermi la schiena (prossima volta si spinge sul serio) | Panca Inclinata (Manubrio): Mollo con il braccip destro | Croci Inverse Deltoide Posteriore (Macchina): Alzare prossima volta e più lento | Curl Bicipiti Inclinato da Seduto (Manubrio): Ho finito con due da 10kg non contate"
+  },
+  {
+    "data": "2026-04-03",
+    "scheda": "Storico Hevy",
+    "giorno": "Giorno 3",
+    "esercizi": [
+      {
+        "nome": "Hip Thrust (Bilanciere)",
+        "serie": [
+          {
+            "kg": 80,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 90,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 95,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 95,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Lento in Avanti in Piedi (Bilanciere)",
+        "serie": [
+          {
+            "kg": 35,
+            "reps": 5,
+            "rir": 0
+          },
+          {
+            "kg": 30,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 30,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 30,
+            "reps": 6,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Affondo Bulgaro",
+        "serie": [
+          {
+            "kg": 18,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 18,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 18,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Rematore Inclinato (Bilanciere)",
+        "serie": [
+          {
+            "kg": 50,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 50,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 50,
+            "reps": 6,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Dip Petto (Assistito)",
+        "serie": [
+          {
+            "kg": 10,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 10,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 10,
+            "reps": 6,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Piegamenti Diamante",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 12,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": 0
+          }
+        ]
+      },
+      {
+        "nome": "Rematore al cavo da seduto - Impugnatura a V (cavo)",
+        "serie": [
+          {
+            "kg": 35,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 45,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 45,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Addominali Forbice",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 20,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 20,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Tocco Talloni",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 20,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 20,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Crunch",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 20,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 20,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Russian Twist (Con Peso Aggiunto)",
+        "serie": [
+          {
+            "kg": 8,
+            "reps": 20,
+            "rir": null
+          },
+          {
+            "kg": 8,
+            "reps": 20,
+            "rir": null
+          }
+        ]
+      }
+    ],
+    "durata_min": 80,
+    "note": "Addominali per smaltire la birra di pasquetta | Hip Thrust (Bilanciere): Culo per il tanga estivo | Lento in Avanti in Piedi (Bilanciere): Sono ridicolo….. il 35 l’ho fatto con la schiena | Rematore Inclinato (Bilanciere): Alla macchina | Dip Petto (Assistito): Faccio cagare per distruggere questo petto farò anche piegamenti allora | Piegamenti Diamante: Il mio gomito fa rumore | Rematore al cavo da seduto - Impugnatura a V (cavo): Mai fatti boh gasano credo"
+  },
+  {
+    "data": "2026-04-07",
+    "scheda": "Storico Hevy",
+    "giorno": "Allenamento corpo libero con Davide il Karateka",
+    "esercizi": [
+      {
+        "nome": "Trazione Presa Supina",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 3,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 2,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 2,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 2,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 1,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 1,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Rematore Invertito",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 7,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 7,
+            "rir": 0
+          },
+          {
+            "kg": 0,
+            "reps": 6,
+            "rir": 0
+          }
+        ]
+      },
+      {
+        "nome": "Piegamenti",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Trazione (Assistita)",
+        "serie": [
+          {
+            "kg": 20,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 20,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 20,
+            "reps": 6,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "French Press",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 6,
+            "rir": null
+          }
+        ]
+      }
+    ],
+    "durata_min": 55,
+    "note": "E non ho messo l’ora e mezza di spinta passeggino come riscaldamento | Trazione (Assistita): In realtà era una roba diversa ma metto questa perché simile"
+  },
+  {
+    "data": "2026-04-10",
+    "scheda": "Storico Hevy",
+    "giorno": "Giorno 2",
+    "esercizi": [
+      {
+        "nome": "Stacco da Terra (Bilanciere)",
+        "serie": [
+          {
+            "kg": 80,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 80,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 80,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 80,
+            "reps": 5,
+            "rir": 0
+          }
+        ]
+      },
+      {
+        "nome": "Trazione Presa Supina",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 5,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 4,
+            "rir": 0
+          },
+          {
+            "kg": 0,
+            "reps": 5,
+            "rir": 0
+          },
+          {
+            "kg": 0,
+            "reps": 4,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Panca Inclinata (Manubrio)",
+        "serie": [
+          {
+            "kg": 18,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 18,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 18,
+            "reps": 8,
+            "rir": 0
+          }
+        ]
+      },
+      {
+        "nome": "Abduzione Anche (Macchina)",
+        "serie": [
+          {
+            "kg": 75,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 75,
+            "reps": 9,
+            "rir": null
+          },
+          {
+            "kg": 75,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Alzata laterale con cavo a braccio singolo",
+        "serie": [
+          {
+            "kg": 12.5,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 12.5,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 12.5,
+            "reps": 6,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Curl Bicipiti Inclinato da Seduto (Manubrio)",
+        "serie": [
+          {
+            "kg": 12,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 12,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 12,
+            "reps": 4,
+            "rir": null
+          }
+        ]
+      }
+    ],
+    "durata_min": 84,
+    "note": "Tornato il gymbro | Stacco da Terra (Bilanciere): Schiena sempre sforzata ma pesi non più da bimbo dai (l’ultima seria ero inguardabile) | Trazione Presa Supina: Dalla terza serie elastico più leggero | Curl Bicipiti Inclinato da Seduto (Manubrio): Ho finito con 2 da 9kg non contate"
+  },
+  {
+    "data": "2026-04-11",
+    "scheda": "Storico Hevy",
+    "giorno": "Giorno 3",
+    "esercizi": [
+      {
+        "nome": "Lento in Avanti in Piedi (Bilanciere)",
+        "serie": [
+          {
+            "kg": 40,
+            "reps": 4,
+            "rir": 0
+          },
+          {
+            "kg": 40,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 35,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 35,
+            "reps": 6,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Hip Thrust (Bilanciere)",
+        "serie": [
+          {
+            "kg": 100,
+            "reps": 7,
+            "rir": null
+          },
+          {
+            "kg": 100,
+            "reps": 7,
+            "rir": null
+          },
+          {
+            "kg": 110,
+            "reps": 5,
+            "rir": 0
+          },
+          {
+            "kg": 110,
+            "reps": 5,
+            "rir": 0
+          }
+        ]
+      },
+      {
+        "nome": "Affondo Bulgaro",
+        "serie": [
+          {
+            "kg": 20,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 20,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 20,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Rematore T Bar",
+        "serie": [
+          {
+            "kg": 45,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 40,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 40,
+            "reps": 7,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Dip Petto (Assistito)",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 5,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 5,
+            "rir": 0
+          }
+        ]
+      },
+      {
+        "nome": "Piegamenti Diamante",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Bicipiti Martello (Manubrio)",
+        "serie": [
+          {
+            "kg": 12,
+            "reps": 9,
+            "rir": null
+          },
+          {
+            "kg": 12,
+            "reps": 7,
+            "rir": null
+          },
+          {
+            "kg": 12,
+            "reps": 7,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Leg Raise Sdraiato",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 20,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Tocco Talloni",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 20,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Crunch",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 20,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Russian Twist (Con Peso Aggiunto)",
+        "serie": [
+          {
+            "kg": 8,
+            "reps": 20,
+            "rir": null
+          }
+        ]
+      }
+    ],
+    "durata_min": 134,
+    "note": "Doppio gymbro doppio sforzo | Rematore T Bar: Dolore alla schiena bassa sempre da rdl del giorno 2….. faccio schif"
+  },
+  {
+    "data": "2026-04-13",
+    "scheda": "Storico Hevy",
+    "giorno": "Giorno 1",
+    "esercizi": [
+      {
+        "nome": "Squat (Bilanciere)",
+        "serie": [
+          {
+            "kg": 80,
+            "reps": 7,
+            "rir": null
+          },
+          {
+            "kg": 80,
+            "reps": 7,
+            "rir": null
+          },
+          {
+            "kg": 80,
+            "reps": 7,
+            "rir": null
+          },
+          {
+            "kg": 80,
+            "reps": 7,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Panca Piana (Bilanciere)",
+        "serie": [
+          {
+            "kg": 55,
+            "reps": 7,
+            "rir": null
+          },
+          {
+            "kg": 55,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 55,
+            "reps": 6,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Leg Curl Sdraiato (Macchina)",
+        "serie": [
+          {
+            "kg": 50,
+            "reps": 9,
+            "rir": null
+          },
+          {
+            "kg": 50,
+            "reps": 7,
+            "rir": null
+          },
+          {
+            "kg": 50,
+            "reps": 6,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Rematore al cavo da seduto - Impugnatura a V (cavo)",
+        "serie": [
+          {
+            "kg": 55,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 50,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 50,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Lat Pulldown Braccia Dritte (Cavo)",
+        "serie": [
+          {
+            "kg": 53,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 61,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 61,
+            "reps": 6,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Farfalla (Pec Deck)",
+        "serie": [
+          {
+            "kg": 50,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 50,
+            "reps": 6,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Pushdown Tricipiti",
+        "serie": [
+          {
+            "kg": 60,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 60,
+            "reps": 6,
+            "rir": 0
+          }
+        ]
+      }
+    ],
+    "durata_min": 85,
+    "note": "EI ATTENTO… BECCATI STO TRICIPITE | Squat (Bilanciere): ."
+  },
+  {
+    "data": "2026-04-15",
+    "scheda": "Storico Hevy",
+    "giorno": "Giorno 2",
+    "esercizi": [
+      {
+        "nome": "Stacco da Terra (Bilanciere)",
+        "serie": [
+          {
+            "kg": 80,
+            "reps": 7,
+            "rir": null
+          },
+          {
+            "kg": 80,
+            "reps": 7,
+            "rir": null
+          },
+          {
+            "kg": 80,
+            "reps": 5,
+            "rir": null
+          },
+          {
+            "kg": 80,
+            "reps": 5,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Trazione Presa Supina",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 5,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 5,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 4,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Abduzione Anche (Macchina)",
+        "serie": [
+          {
+            "kg": 75,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 75,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 70,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Panca Inclinata (Manubrio)",
+        "serie": [
+          {
+            "kg": 18,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 18,
+            "reps": 7,
+            "rir": null
+          },
+          {
+            "kg": 18,
+            "reps": 7,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Aperture Laterali (Manubrio)",
+        "serie": [
+          {
+            "kg": 7,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 7,
+            "reps": 9,
+            "rir": null
+          },
+          {
+            "kg": 7,
+            "reps": 9,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Bicipiti Martello (Manubrio)",
+        "serie": [
+          {
+            "kg": 14,
+            "reps": 7,
+            "rir": null
+          },
+          {
+            "kg": 14,
+            "reps": 5,
+            "rir": null
+          },
+          {
+            "kg": 14,
+            "reps": 4,
+            "rir": null
+          }
+        ]
+      }
+    ],
+    "durata_min": 67,
+    "note": "Oggi stanchi | Trazione Presa Supina: Della prima serie ho fatto 3 trazioni e 2 trazioni a presa supina"
+  },
+  {
+    "data": "2026-04-19",
+    "scheda": "Storico Hevy",
+    "giorno": "Allenamento con Benny",
+    "esercizi": [
+      {
+        "nome": "Leg Press Orizzontale (Macchina)",
+        "serie": [
+          {
+            "kg": 80,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 87.5,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 95,
+            "reps": 10,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Trazione Presa Supina",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 5,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 5,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 4,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Chest Press (Macchina)",
+        "serie": [
+          {
+            "kg": 47.5,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 50,
+            "reps": 7,
+            "rir": null
+          },
+          {
+            "kg": 50,
+            "reps": 7,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Rematore T Bar",
+        "serie": [
+          {
+            "kg": 35,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 35,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 35,
+            "reps": 6,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Crunch",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Russian Twist (Con Peso Aggiunto)",
+        "serie": [
+          {
+            "kg": 8,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 8,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 8,
+            "reps": 15,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Aperture Laterali (Manubrio)",
+        "serie": [
+          {
+            "kg": 8,
+            "reps": 9,
+            "rir": null
+          },
+          {
+            "kg": 8,
+            "reps": 9,
+            "rir": null
+          },
+          {
+            "kg": 8,
+            "reps": 9,
+            "rir": null
+          }
+        ]
+      }
+    ],
+    "durata_min": 115,
+    "note": "Tutti grandi e grossi perché non fate il circuito degli addominali di Benny | Leg Press Orizzontale (Macchina): La macchina è strana io penso di avere almeno un 120 boh non lo faccio mai | Chest Press (Macchina): Queste macchine non hanno senso, mi sento uno schifo | Rematore T Bar: Che schiena bassa distrutta | Aperture Laterali (Manubrio): Da seduto"
+  },
+  {
+    "data": "2026-04-21",
+    "scheda": "Storico Hevy",
+    "giorno": "Giorno 1 Nuovo",
+    "esercizi": [
+      {
+        "nome": "Clamshell",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Downward Dog",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Shoulder Taps",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Leg Raise Sdraiato",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "From squat To DL",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 6,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Squat Laterale",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Affondo camminato",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Ball Slams",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Wall Ball",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Box Jump",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Pogo Jumps",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Squat (Bilanciere)",
+        "serie": [
+          {
+            "kg": 60,
+            "reps": 12,
+            "rir": null
+          },
+          {
+            "kg": 70,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 75,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 77.5,
+            "reps": 6,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Panca Piana (Bilanciere)",
+        "serie": [
+          {
+            "kg": 47.5,
+            "reps": 12,
+            "rir": null
+          },
+          {
+            "kg": 50,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 52.5,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 55,
+            "reps": 4,
+            "rir": 0
+          }
+        ]
+      },
+      {
+        "nome": "Rematore Manubrio",
+        "serie": [
+          {
+            "kg": 16,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 16,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 16,
+            "reps": 9,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Goblet Squat",
+        "serie": [
+          {
+            "kg": 16,
+            "reps": 16,
+            "rir": null
+          },
+          {
+            "kg": 16,
+            "reps": 16,
+            "rir": null
+          },
+          {
+            "kg": 16,
+            "reps": 16,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Lento in Avanti (Manubrio)",
+        "serie": [
+          {
+            "kg": 12,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 12,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 9,
+            "reps": 11,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Skullcrusher (Bilanciere)",
+        "serie": [
+          {
+            "kg": 10,
+            "reps": 12,
+            "rir": null
+          },
+          {
+            "kg": 10,
+            "reps": 12,
+            "rir": null
+          },
+          {
+            "kg": 10,
+            "reps": 12,
+            "rir": null
+          }
+        ]
+      }
+    ],
+    "durata_min": 100,
+    "note": "Morti"
+  },
+  {
+    "data": "2026-04-22",
+    "scheda": "Storico Hevy",
+    "giorno": "Giorno 2 Nuovo",
+    "esercizi": [
+      {
+        "nome": "Ponte Glutei",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 12,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 12,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Leg Raise Sdraiato",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Stacco Rumeno a Gamba Singola (Manubrio)",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 6,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "From squat To DL",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 6,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Affondo camminato",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 12,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 12,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Wall Ball",
+        "serie": [
+          {
+            "kg": 8,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 8,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Explosive Pulley TRX",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 6,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Box Jump",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Bound",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 16,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 16,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 16,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Stacco da Terra Rumeno (Bilanciere)",
+        "serie": [
+          {
+            "kg": 70,
+            "reps": 12,
+            "rir": null
+          },
+          {
+            "kg": 75,
+            "reps": 9,
+            "rir": null
+          },
+          {
+            "kg": 77.5,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 80,
+            "reps": 6,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Trazione Presa Supina",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 5,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Lento in Avanti in Piedi (Bilanciere)",
+        "serie": [
+          {
+            "kg": 30,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 30,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 30,
+            "reps": 7,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Panca Inclinata (Manubrio)",
+        "serie": [
+          {
+            "kg": 18,
+            "reps": 12,
+            "rir": null
+          },
+          {
+            "kg": 18,
+            "reps": 9,
+            "rir": 0
+          },
+          {
+            "kg": 0,
+            "reps": 12,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Step Down",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Curl Bicipiti (Manubrio)",
+        "serie": [
+          {
+            "kg": 10,
+            "reps": 12,
+            "rir": null
+          },
+          {
+            "kg": 10,
+            "reps": 12,
+            "rir": null
+          },
+          {
+            "kg": 10,
+            "reps": 12,
+            "rir": null
+          }
+        ]
+      }
+    ],
+    "durata_min": 109,
+    "note": "Sto allenamento mi distrugge BASTA"
+  },
+  {
+    "data": "2026-05-02",
+    "scheda": "Storico Hevy",
+    "giorno": "Giorno 3 Nuovo",
+    "esercizi": [
+      {
+        "nome": "Clamshell",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Downward Dog",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Shoulder Taps",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Leg Raise Sdraiato",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Squat Laterale",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Affondo camminato",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Box Jump",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Pogo Jumps",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Ball Slams",
+        "serie": [
+          {
+            "kg": 5,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 5,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Wall Ball",
+        "serie": [
+          {
+            "kg": 5,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 5,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Squat (Bilanciere)",
+        "serie": [
+          {
+            "kg": 65,
+            "reps": 12,
+            "rir": null
+          },
+          {
+            "kg": 70,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 75,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 80,
+            "reps": 6,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Panca Piana (Bilanciere)",
+        "serie": [
+          {
+            "kg": 50,
+            "reps": 12,
+            "rir": null
+          },
+          {
+            "kg": 52.5,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 55,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 57.5,
+            "reps": 2,
+            "rir": 0
+          }
+        ]
+      },
+      {
+        "nome": "Rematore al Cavo da Seduto - Presa Larga",
+        "serie": [
+          {
+            "kg": 45,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 45,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 40,
+            "reps": 10,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Lento in Avanti (Manubrio)",
+        "serie": [
+          {
+            "kg": 12,
+            "reps": 20,
+            "rir": null
+          },
+          {
+            "kg": 12,
+            "reps": 20,
+            "rir": null
+          },
+          {
+            "kg": 9,
+            "reps": 24,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Lat Pulldown Braccio Singolo",
+        "serie": [
+          {
+            "kg": 40,
+            "reps": 12,
+            "rir": null
+          },
+          {
+            "kg": 40,
+            "reps": 12,
+            "rir": null
+          },
+          {
+            "kg": 40,
+            "reps": 12,
+            "rir": null
+          },
+          {
+            "kg": 40,
+            "reps": 12,
+            "rir": null
+          },
+          {
+            "kg": 40,
+            "reps": 12,
+            "rir": null
+          },
+          {
+            "kg": 40,
+            "reps": 12,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Pushdown Tricipiti",
+        "serie": [
+          {
+            "kg": 55,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 55,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 50,
+            "reps": 10,
+            "rir": 0
+          }
+        ]
+      },
+      {
+        "nome": "Curl Bicipiti Inclinato da Seduto (Manubrio)",
+        "serie": [
+          {
+            "kg": 20,
+            "reps": 12,
+            "rir": null
+          },
+          {
+            "kg": 20,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 20,
+            "reps": 6,
+            "rir": null
+          }
+        ]
+      }
+    ],
+    "durata_min": 160,
+    "note": "Triplo sforzo | Panca Piana (Bilanciere): Aggiunto 2 serie con 55kg nell’ultima non contate"
+  },
+  {
+    "data": "2026-05-05",
+    "scheda": "Storico Hevy",
+    "giorno": "Giorno 1 Nuovo",
+    "esercizi": [
+      {
+        "nome": "Clamshell",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Downward Dog",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Shoulder Taps",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Leg Raise Sdraiato",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "From squat To DL",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 6,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Squat Laterale",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Affondo camminato",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Ball Slams",
+        "serie": [
+          {
+            "kg": 5,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 5,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Wall Ball",
+        "serie": [
+          {
+            "kg": 5,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 5,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Box Jump",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Pogo Jumps",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Squat (Bilanciere)",
+        "serie": [
+          {
+            "kg": 75,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 75,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 75,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Panca Piana (Bilanciere)",
+        "serie": [
+          {
+            "kg": 50,
+            "reps": 6,
+            "rir": 0
+          },
+          {
+            "kg": 47.5,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 47.5,
+            "reps": 6,
+            "rir": 0
+          }
+        ]
+      },
+      {
+        "nome": "Rematore Manubrio",
+        "serie": [
+          {
+            "kg": 18,
+            "reps": 12,
+            "rir": null
+          },
+          {
+            "kg": 18,
+            "reps": 10,
+            "rir": 0
+          },
+          {
+            "kg": 18,
+            "reps": 10,
+            "rir": 0
+          }
+        ]
+      },
+      {
+        "nome": "Goblet Squat",
+        "serie": [
+          {
+            "kg": 16,
+            "reps": 20,
+            "rir": null
+          },
+          {
+            "kg": 16,
+            "reps": 20,
+            "rir": null
+          },
+          {
+            "kg": 16,
+            "reps": 20,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Lento in Avanti (Manubrio)",
+        "serie": [
+          {
+            "kg": 24,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 24,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 24,
+            "reps": 10,
+            "rir": null
+          }
+        ]
+      }
+    ],
+    "durata_min": 86,
+    "note": "Boh morto | Panca Piana (Bilanciere): Eccentrica 1 secondo"
+  },
+  {
+    "data": "2026-05-07",
+    "scheda": "Storico Hevy",
+    "giorno": "Giorno 2 Nuovo",
+    "esercizi": [
+      {
+        "nome": "Ponte Glutei",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 12,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 12,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Leg Raise Sdraiato",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Stacco Rumeno a Gamba Singola (Manubrio)",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 6,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "From squat To DL",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 6,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Affondo camminato",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 12,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 12,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Wall Ball",
+        "serie": [
+          {
+            "kg": 5,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 5,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Explosive Pulley TRX",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 6,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Box Jump",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Bound",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 16,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 16,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 16,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Stacco da Terra Rumeno (Bilanciere)",
+        "serie": [
+          {
+            "kg": 75,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 77.5,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 77.5,
+            "reps": 10,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Trazione Presa Supina",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 6,
+            "rir": 0
+          }
+        ]
+      },
+      {
+        "nome": "Lento in Avanti in Piedi (Bilanciere)",
+        "serie": [
+          {
+            "kg": 30,
+            "reps": 12,
+            "rir": null
+          },
+          {
+            "kg": 30,
+            "reps": 11,
+            "rir": null
+          },
+          {
+            "kg": 30,
+            "reps": 12,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Panca Inclinata (Manubrio)",
+        "serie": [
+          {
+            "kg": 32,
+            "reps": 15,
+            "rir": 0
+          },
+          {
+            "kg": 32,
+            "reps": 13,
+            "rir": 0
+          },
+          {
+            "kg": 28,
+            "reps": 15,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Step Down",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Curl Bicipiti (Manubrio)",
+        "serie": [
+          {
+            "kg": 28,
+            "reps": 12,
+            "rir": null
+          },
+          {
+            "kg": 28,
+            "reps": 10,
+            "rir": 0
+          },
+          {
+            "kg": 28,
+            "reps": 8,
+            "rir": 0
+          }
+        ]
+      }
+    ],
+    "durata_min": 101,
+    "note": "Inizio a segnare i pesi come dice l’app (mi sento più grosso) | Trazione Presa Supina: Senza elastico | Lento in Avanti in Piedi (Bilanciere): Ultima fatta con ditino nel culo di Andre per aiutare | Panca Inclinata (Manubrio): Prima fatti 8 con 14 in realtà"
+  },
+  {
+    "data": "2026-05-18",
+    "scheda": "Storico Hevy",
+    "giorno": "Giorno 1 Nuovo",
+    "esercizi": [
+      {
+        "nome": "Ball Slams",
+        "serie": [
+          {
+            "kg": 5,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 5,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Wall Ball",
+        "serie": [
+          {
+            "kg": 5,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 5,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Box Jump",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Pogo Jumps",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Squat (Bilanciere)",
+        "serie": [
+          {
+            "kg": 75,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 75,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 75,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Panca Piana (Bilanciere)",
+        "serie": [
+          {
+            "kg": 50,
+            "reps": 8,
+            "rir": 0
+          },
+          {
+            "kg": 50,
+            "reps": 6,
+            "rir": 0
+          },
+          {
+            "kg": 50,
+            "reps": 4,
+            "rir": 0
+          }
+        ]
+      },
+      {
+        "nome": "Rematore Manubrio",
+        "serie": [
+          {
+            "kg": 16,
+            "reps": 24,
+            "rir": null
+          },
+          {
+            "kg": 16,
+            "reps": 24,
+            "rir": 0
+          },
+          {
+            "kg": 16,
+            "reps": 24,
+            "rir": 0
+          }
+        ]
+      },
+      {
+        "nome": "Goblet Squat",
+        "serie": [
+          {
+            "kg": 16,
+            "reps": 20,
+            "rir": null
+          },
+          {
+            "kg": 16,
+            "reps": 20,
+            "rir": null
+          },
+          {
+            "kg": 16,
+            "reps": 20,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Lento in Avanti (Manubrio)",
+        "serie": [
+          {
+            "kg": 24,
+            "reps": 12,
+            "rir": null
+          },
+          {
+            "kg": 24,
+            "reps": 10,
+            "rir": 0
+          },
+          {
+            "kg": 24,
+            "reps": 10,
+            "rir": 0
+          }
+        ]
+      }
+    ],
+    "durata_min": 84,
+    "note": "Una brutta e faticosa ripresa dopo lo stop | Rematore Manubrio: Con il sinistro sono scarso | Lento in Avanti (Manubrio): Sono rotto"
+  },
+  {
+    "data": "2026-05-20",
+    "scheda": "Storico Hevy",
+    "giorno": "Giorno 2 Nuovo",
+    "esercizi": [
+      {
+        "nome": "Wall Ball",
+        "serie": [
+          {
+            "kg": 5,
+            "reps": 16,
+            "rir": null
+          },
+          {
+            "kg": 5,
+            "reps": 16,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Bound",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 16,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 16,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 16,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Explosive Pulley TRX",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Box Jump",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Stacco da Terra Rumeno (Bilanciere)",
+        "serie": [
+          {
+            "kg": 80,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 80,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 80,
+            "reps": 10,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Trazione Presa Supina",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 4,
+            "rir": 0
+          },
+          {
+            "kg": 0,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 4,
+            "rir": 0
+          }
+        ]
+      },
+      {
+        "nome": "Lento in Avanti in Piedi (Bilanciere)",
+        "serie": [
+          {
+            "kg": 27.5,
+            "reps": 12,
+            "rir": null
+          },
+          {
+            "kg": 27.5,
+            "reps": 8,
+            "rir": 0
+          },
+          {
+            "kg": 25,
+            "reps": 12,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Panca Inclinata (Manubrio)",
+        "serie": [
+          {
+            "kg": 32,
+            "reps": 12,
+            "rir": 0
+          },
+          {
+            "kg": 32,
+            "reps": 10,
+            "rir": 0
+          },
+          {
+            "kg": 32,
+            "reps": 8,
+            "rir": 0
+          }
+        ]
+      },
+      {
+        "nome": "Step Down",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 16,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 16,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 16,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Curl Bicipiti (Manubrio)",
+        "serie": [
+          {
+            "kg": 20,
+            "reps": 12,
+            "rir": null
+          },
+          {
+            "kg": 20,
+            "reps": 12,
+            "rir": 0
+          },
+          {
+            "kg": 20,
+            "reps": 10,
+            "rir": 0
+          }
+        ]
+      }
+    ],
+    "durata_min": 86,
+    "note": "Foto dal basso come non insegnano, visto un allenamento non degno | Trazione Presa Supina: Prima senza elastico pulita secondo me | Lento in Avanti in Piedi (Bilanciere): Boh ho la spalla in fiamma | Curl Bicipiti (Manubrio): Eravamo di fretta e non c’erano pesi"
+  },
+  {
+    "data": "2026-05-28",
+    "scheda": "Storico Hevy",
+    "giorno": "Giorno 1 Nuovo",
+    "esercizi": [
+      {
+        "nome": "Clamshell",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Downward Dog",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Shoulder Taps",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Leg Raise Sdraiato",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "From squat To DL",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 6,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Squat Laterale",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Affondo camminato",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Squat (Bilanciere)",
+        "serie": [
+          {
+            "kg": 75,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 77.5,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 77.5,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Panca Piana (Bilanciere)",
+        "serie": [
+          {
+            "kg": 50,
+            "reps": 7,
+            "rir": 0
+          },
+          {
+            "kg": 47.5,
+            "reps": 9,
+            "rir": null
+          },
+          {
+            "kg": 47.5,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Rematore Manubrio",
+        "serie": [
+          {
+            "kg": 16,
+            "reps": 24,
+            "rir": null
+          },
+          {
+            "kg": 16,
+            "reps": 24,
+            "rir": null
+          },
+          {
+            "kg": 16,
+            "reps": 24,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Goblet Squat",
+        "serie": [
+          {
+            "kg": 16,
+            "reps": 20,
+            "rir": null
+          },
+          {
+            "kg": 16,
+            "reps": 20,
+            "rir": null
+          },
+          {
+            "kg": 16,
+            "reps": 20,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Aperture Laterali (Manubrio)",
+        "serie": [
+          {
+            "kg": 8,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 8,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 8,
+            "reps": 10,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Skullcrusher (Bilanciere)",
+        "serie": [
+          {
+            "kg": 10,
+            "reps": 12,
+            "rir": null
+          },
+          {
+            "kg": 12.5,
+            "reps": 12,
+            "rir": null
+          },
+          {
+            "kg": 12.5,
+            "reps": 12,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Farfalla (Pec Deck)",
+        "serie": [
+          {
+            "kg": 50,
+            "reps": 10,
+            "rir": 0
+          }
+        ]
+      }
+    ],
+    "durata_min": 88,
+    "note": "Allenarsi con questo caldo è quasi peggio di allenarsi senza gymbro | Rematore Manubrio: Devo tenere meglio i 90 gradi quando salgo | Aperture Laterali (Manubrio): Da seduto ho iniziato con 10 ho lasciato le braccia in palestra | Skullcrusher (Bilanciere): 10kg credo sia il bilanciere | Farfalla (Pec Deck): Per ridere"
+  },
+  {
+    "data": "2026-06-01",
+    "scheda": "Storico Hevy",
+    "giorno": "Giorno 1 Nuovo",
+    "esercizi": [
+      {
+        "nome": "Ball Slams",
+        "serie": [
+          {
+            "kg": 5,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 5,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Wall Ball",
+        "serie": [
+          {
+            "kg": 5,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 5,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Box Jump",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Pogo Jumps",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Squat (Bilanciere)",
+        "serie": [
+          {
+            "kg": 62.5,
+            "reps": 12,
+            "rir": null
+          },
+          {
+            "kg": 72.5,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 77.5,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 82.5,
+            "reps": 6,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Panca Piana (Bilanciere)",
+        "serie": [
+          {
+            "kg": 47.5,
+            "reps": 12,
+            "rir": null
+          },
+          {
+            "kg": 50,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 52.5,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 55,
+            "reps": 6,
+            "rir": 0
+          }
+        ]
+      },
+      {
+        "nome": "Rematore Manubrio",
+        "serie": [
+          {
+            "kg": 18,
+            "reps": 20,
+            "rir": null
+          },
+          {
+            "kg": 18,
+            "reps": 20,
+            "rir": null
+          },
+          {
+            "kg": 18,
+            "reps": 20,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Goblet Squat",
+        "serie": [
+          {
+            "kg": 16,
+            "reps": 20,
+            "rir": null
+          },
+          {
+            "kg": 16,
+            "reps": 20,
+            "rir": null
+          },
+          {
+            "kg": 16,
+            "reps": 20,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Alzata laterale con cavo a braccio singolo",
+        "serie": [
+          {
+            "kg": 12.5,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 12.5,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 10,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Skullcrusher (Bilanciere)",
+        "serie": [
+          {
+            "kg": 12.5,
+            "reps": 12,
+            "rir": null
+          },
+          {
+            "kg": 12.5,
+            "reps": 12,
+            "rir": null
+          },
+          {
+            "kg": 12.5,
+            "reps": 12,
+            "rir": null
+          }
+        ]
+      }
+    ],
+    "durata_min": 127,
+    "note": "#mcfitforever | Skullcrusher (Bilanciere): 7.5kg bilanciere"
+  },
+  {
+    "data": "2026-06-03",
+    "scheda": "Storico Hevy",
+    "giorno": "Giorno 2 Nuovo",
+    "esercizi": [
+      {
+        "nome": "Wall Ball",
+        "serie": [
+          {
+            "kg": 8,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 8,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Explosive Pulley TRX",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 6,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Box Jump",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Bound",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 16,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 16,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Stacco da Terra Rumeno (Bilanciere)",
+        "serie": [
+          {
+            "kg": 77.5,
+            "reps": 12,
+            "rir": null
+          },
+          {
+            "kg": 80,
+            "reps": 9,
+            "rir": 0
+          },
+          {
+            "kg": 85,
+            "reps": 7,
+            "rir": 0
+          }
+        ]
+      },
+      {
+        "nome": "Trazione Presa Supina",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 5,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 5,
+            "rir": 0
+          },
+          {
+            "kg": 0,
+            "reps": 4,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Lento in Avanti in Piedi (Bilanciere)",
+        "serie": [
+          {
+            "kg": 30,
+            "reps": 9,
+            "rir": null
+          },
+          {
+            "kg": 30,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 30,
+            "reps": 8,
+            "rir": 0
+          }
+        ]
+      },
+      {
+        "nome": "Panca Inclinata (Manubrio)",
+        "serie": [
+          {
+            "kg": 28,
+            "reps": 10,
+            "rir": 0
+          },
+          {
+            "kg": 28,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 28,
+            "reps": 12,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Bicipiti Martello Incrociato",
+        "serie": [
+          {
+            "kg": 24,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 24,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 24,
+            "reps": 8,
+            "rir": 0
+          }
+        ]
+      }
+    ],
+    "durata_min": 93,
+    "note": "Oggi energie zero, servono più prote | Stretching: -ponte glutei\\n-leg raise\\n-stacco rumeno a gamba singola\\n-from squat to dl\\n-affondo\\n-shoulder taps | Stacco da Terra Rumeno (Bilanciere): Mi scivola il bilanciere e mollo tutto | Trazione Presa Supina: Con elastico rosso | Lento in Avanti in Piedi (Bilanciere): Devo stringere le braccia e non allargare quei gomiti | Panca Inclinata (Manubrio): Inizio con manubri da 18, fatte 2 poi 8 con 14 | Bicipiti Martello Incrociato: Forse esagerato dopo arrampicata di ieri"
+  },
+  {
+    "data": "2026-06-05",
+    "scheda": "Storico Hevy",
+    "giorno": "Giorno 3 Nuovo",
+    "esercizi": [
+      {
+        "nome": "Ball Slams",
+        "serie": [
+          {
+            "kg": 8,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 8,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Wall Ball",
+        "serie": [
+          {
+            "kg": 8,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 8,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Box Jump",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Pogo Jumps",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Squat (Bilanciere)",
+        "serie": [
+          {
+            "kg": 67.5,
+            "reps": 12,
+            "rir": null
+          },
+          {
+            "kg": 72.5,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 77.5,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 82.5,
+            "reps": 6,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Panca Piana (Bilanciere)",
+        "serie": [
+          {
+            "kg": 47.5,
+            "reps": 12,
+            "rir": null
+          },
+          {
+            "kg": 50,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 52.5,
+            "reps": 5,
+            "rir": 0
+          }
+        ]
+      },
+      {
+        "nome": "Rematore al Cavo da Seduto - Presa Larga",
+        "serie": [
+          {
+            "kg": 45,
+            "reps": 10,
+            "rir": 0
+          },
+          {
+            "kg": 40,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 40,
+            "reps": 10,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Lento in Avanti (Manubrio)",
+        "serie": [
+          {
+            "kg": 8,
+            "reps": 20,
+            "rir": null
+          },
+          {
+            "kg": 10,
+            "reps": 16,
+            "rir": null
+          },
+          {
+            "kg": 10,
+            "reps": 16,
+            "rir": 0
+          }
+        ]
+      },
+      {
+        "nome": "Curl Bicipiti Inclinato da Seduto (Manubrio)",
+        "serie": [
+          {
+            "kg": 20,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 20,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 20,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Pushdown Tricipiti",
+        "serie": [
+          {
+            "kg": 50,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 50,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 45,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      }
+    ],
+    "durata_min": 99,
+    "note": "Settimana distruttiva | Rematore al Cavo da Seduto - Presa Larga: MAI FARE ARRAMPICATA E 3 ALLENAMENTI NELLA STESSA SETTIMANA"
+  },
+  {
+    "data": "2026-06-08",
+    "scheda": "Storico Hevy",
+    "giorno": "Giorno 1 homemade",
+    "esercizi": [
+      {
+        "nome": "Panca Piana (Bilanciere)",
+        "serie": [
+          {
+            "kg": 47,
+            "reps": 12,
+            "rir": null
+          },
+          {
+            "kg": 50,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 52.5,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 55,
+            "reps": 6,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Goblet Squat",
+        "serie": [
+          {
+            "kg": 15.5,
+            "reps": 20,
+            "rir": null
+          },
+          {
+            "kg": 15.5,
+            "reps": 20,
+            "rir": null
+          },
+          {
+            "kg": 15.5,
+            "reps": 20,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Aperture Laterali (Manubrio)",
+        "serie": [
+          {
+            "kg": 8,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 8.5,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 8.5,
+            "reps": 10,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Bicipiti Martello (Manubrio)",
+        "serie": [
+          {
+            "kg": 10.5,
+            "reps": 20,
+            "rir": null
+          },
+          {
+            "kg": 10.5,
+            "reps": 18,
+            "rir": null
+          },
+          {
+            "kg": 10.5,
+            "reps": 18,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Trazione Presa Supina",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 3,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 3,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 3,
+            "rir": null
+          }
+        ]
+      }
+    ],
+    "durata_min": 63,
+    "note": "Si muore di caldo tra i ragni e la polvere"
+  },
+  {
+    "data": "2026-06-09",
+    "scheda": "Storico Hevy",
+    "giorno": "Allenamento corpo libero con Davide il Karateka",
+    "esercizi": [
+      {
+        "nome": "Trazione Presa Supina",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 3,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 3,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 3,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 3,
+            "rir": 0
+          }
+        ]
+      },
+      {
+        "nome": "Rematore Invertito",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 7,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 7,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 6,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Piegamenti",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": 0
+          }
+        ]
+      },
+      {
+        "nome": "Trazione Scapolare",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 5,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 5,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 5,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Piegamenti Diamante",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 5,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 5,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Crunch",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 20,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          }
+        ]
+      }
+    ],
+    "durata_min": 58,
+    "note": "Si muore di caldo | Trazione Presa Supina: Con supervisione di davide il karateka sono più toste | Trazione Scapolare: Una cosa simile | Crunch: Circuito addominali, bassi e laterali 15x3"
+  },
+  {
+    "data": "2026-06-11",
+    "scheda": "Storico Hevy",
+    "giorno": "Giorno 3 molto homemade",
+    "esercizi": [
+      {
+        "nome": "Pogo Jumps",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Panca Piana (Bilanciere)",
+        "serie": [
+          {
+            "kg": 48,
+            "reps": 12,
+            "rir": null
+          },
+          {
+            "kg": 50,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 53,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 55,
+            "reps": 6,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Rematore Manubrio",
+        "serie": [
+          {
+            "kg": 16,
+            "reps": 18,
+            "rir": null
+          },
+          {
+            "kg": 16,
+            "reps": 18,
+            "rir": null
+          },
+          {
+            "kg": 16,
+            "reps": 18,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Lento in Avanti (Manubrio)",
+        "serie": [
+          {
+            "kg": 20,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 20,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 20,
+            "reps": 8,
+            "rir": 0
+          }
+        ]
+      },
+      {
+        "nome": "Bicipiti Martello Incrociato",
+        "serie": [
+          {
+            "kg": 20,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 20,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 20,
+            "reps": 6,
+            "rir": 0
+          }
+        ]
+      },
+      {
+        "nome": "Trazione Presa Supina",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 2,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 2,
+            "rir": null
+          }
+        ]
+      }
+    ],
+    "durata_min": 55,
+    "note": "Scarso ma ibrido | Panca Piana (Bilanciere): Il bilanciere qui è della chicco, ho stimato sia da 12kg ma sale comunque facile forse perchè è meno lungo ??? Allora la lunghezza conta | Rematore Manubrio: Sono una pippa in questo esercizio | Bicipiti Martello Incrociato: 6/ ripetizioni per braccio | Trazione Presa Supina: Con elastico leggero a morire LENTE E BEN FATTE"
+  },
+  {
+    "data": "2026-06-17",
+    "scheda": "Storico Hevy",
+    "giorno": "Giorno 1 homemade",
+    "esercizi": [
+      {
+        "nome": "Panca Piana (Bilanciere)",
+        "serie": [
+          {
+            "kg": 50,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 50,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 50,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 50,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Rematore Manubrio",
+        "serie": [
+          {
+            "kg": 15.5,
+            "reps": 20,
+            "rir": null
+          },
+          {
+            "kg": 15.5,
+            "reps": 20,
+            "rir": null
+          },
+          {
+            "kg": 15.5,
+            "reps": 20,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Aperture Laterali (Manubrio)",
+        "serie": [
+          {
+            "kg": 9,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 9,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 9,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Skullcrusher (Bilanciere)",
+        "serie": [
+          {
+            "kg": 13,
+            "reps": 12,
+            "rir": null
+          },
+          {
+            "kg": 13,
+            "reps": 12,
+            "rir": null
+          },
+          {
+            "kg": 13,
+            "reps": 12,
+            "rir": null
+          }
+        ]
+      }
+    ],
+    "durata_min": 53,
+    "note": "Sudato e pieno di zanzare al fondo | Panca Piana (Bilanciere): Allora il bilanciere forse è da 10kg quindi scorsa volta ho barato (attento al tricipite destro cazzo) | Skullcrusher (Bilanciere): 5kg di bilanciere credo vado ad occhio"
+  },
+  {
+    "data": "2026-06-19",
+    "scheda": "Storico Hevy",
+    "giorno": "Giorno 2 homemade",
+    "esercizi": [
+      {
+        "nome": "Trazione Presa Supina",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 4,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 4,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 4,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Lento in Avanti (Manubrio)",
+        "serie": [
+          {
+            "kg": 16,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 16,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 16,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Croci (Manubrio)",
+        "serie": [
+          {
+            "kg": 20,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 20,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 20,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Bicipiti Martello Incrociato",
+        "serie": [
+          {
+            "kg": 20,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 20,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 20,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      }
+    ],
+    "durata_min": 45,
+    "note": "Troppo caldo e sono una pippa al sugo ma si migliorerà con il tempo | Trazione Presa Supina: Elastico medio ma fatte di cristo(spero) | Lento in Avanti (Manubrio): 8 per manubrio"
+  },
+  {
+    "data": "2026-06-23",
+    "scheda": "Storico Hevy",
+    "giorno": "Giorno 1 Nuovo",
+    "esercizi": [
+      {
+        "nome": "Squat (Bilanciere)",
+        "serie": [
+          {
+            "kg": 75,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 75,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 75,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Panca Piana (Bilanciere)",
+        "serie": [
+          {
+            "kg": 45,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 50,
+            "reps": 6,
+            "rir": 0
+          },
+          {
+            "kg": 50,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 50,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Rematore Manubrio",
+        "serie": [
+          {
+            "kg": 16,
+            "reps": 20,
+            "rir": null
+          },
+          {
+            "kg": 16,
+            "reps": 20,
+            "rir": null
+          },
+          {
+            "kg": 16,
+            "reps": 20,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Goblet Squat",
+        "serie": [
+          {
+            "kg": 16,
+            "reps": 20,
+            "rir": null
+          },
+          {
+            "kg": 16,
+            "reps": 20,
+            "rir": null
+          },
+          {
+            "kg": 16,
+            "reps": 20,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Alzata laterale con cavo a braccio singolo",
+        "serie": [
+          {
+            "kg": 12.5,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 12.5,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 12.5,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Skullcrusher (Bilanciere)",
+        "serie": [
+          {
+            "kg": 12.5,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 12.5,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 12.5,
+            "reps": 10,
+            "rir": null
+          }
+        ]
+      }
+    ],
+    "durata_min": 66,
+    "note": "Un ritorno traumatico | Squat (Bilanciere): Riprendiamo con calma facendolo bene | Panca Piana (Bilanciere): Dolore al gomito destro, forse il tricipite boh che palle | Skullcrusher (Bilanciere): 7.5kg di bilanciere e attento al tricipite/gomito destro"
+  },
+  {
+    "data": "2026-06-25",
+    "scheda": "Storico Hevy",
+    "giorno": "Giorno 2 Nuovo",
+    "esercizi": [
+      {
+        "nome": "Lat Pulldown (Cavo)",
+        "serie": [
+          {
+            "kg": 55,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 55,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 55,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 55,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Stacco da Terra Rumeno (Bilanciere)",
+        "serie": [
+          {
+            "kg": 85,
+            "reps": 6,
+            "rir": 0
+          },
+          {
+            "kg": 80,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 80,
+            "reps": 6,
+            "rir": 0
+          }
+        ]
+      },
+      {
+        "nome": "Lento in Avanti in Piedi (Bilanciere)",
+        "serie": [
+          {
+            "kg": 30,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 30,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 30,
+            "reps": 7,
+            "rir": 0
+          }
+        ]
+      },
+      {
+        "nome": "Panca Inclinata (Manubrio)",
+        "serie": [
+          {
+            "kg": 32,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 32,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 32,
+            "reps": 10,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Curl Bicipiti Inclinato da Seduto (Manubrio)",
+        "serie": [
+          {
+            "kg": 24,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 24,
+            "reps": 7,
+            "rir": null
+          },
+          {
+            "kg": 24,
+            "reps": 7,
+            "rir": null
+          }
+        ]
+      }
+    ],
+    "durata_min": 75,
+    "note": "Oggi taglio i capelli | Lat Pulldown (Cavo): Non ho gli elastici per fare le trazioni | Stacco da Terra Rumeno (Bilanciere): Boia non ho più schiena, riduco peso e devo scendere di più…. Prossima volta partire fare sempre 80 ma BENE | Panca Inclinata (Manubrio): Potrei fare 18kg prossima volta dai"
+  },
+  {
+    "data": "2026-06-30",
+    "scheda": "Storico Hevy",
+    "giorno": "Giorno 1 (versione ridotta)",
+    "esercizi": [
+      {
+        "nome": "Panca Piana (Bilanciere)",
+        "serie": [
+          {
+            "kg": 50,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 50,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 52.5,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 55,
+            "reps": 6,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Croci (Macchina)",
+        "serie": [
+          {
+            "kg": 50,
+            "reps": 6,
+            "rir": 0
+          },
+          {
+            "kg": 45,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 45,
+            "reps": 5,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Rematore Manubrio",
+        "serie": [
+          {
+            "kg": 16,
+            "reps": 20,
+            "rir": null
+          },
+          {
+            "kg": 16,
+            "reps": 20,
+            "rir": null
+          },
+          {
+            "kg": 16,
+            "reps": 16,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Alzata laterale con cavo a braccio singolo",
+        "serie": [
+          {
+            "kg": 12.5,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 12.5,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 12.5,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Skullcrusher (Bilanciere)",
+        "serie": [
+          {
+            "kg": 12.5,
+            "reps": 12,
+            "rir": null
+          },
+          {
+            "kg": 12.5,
+            "reps": 12,
+            "rir": null
+          },
+          {
+            "kg": 12.5,
+            "reps": 12,
+            "rir": null
+          }
+        ]
+      }
+    ],
+    "durata_min": 48,
+    "note": "Non riesco più a salire di peso, non è servito perdere i capelli per aumentare la forza | Panca Piana (Bilanciere): Fare più riscaldamento e provare 55 kg da subito… CI SIAMO | Croci (Macchina): Distruggiamo il petto"
+  },
+  {
+    "data": "2026-07-02",
+    "scheda": "Storico Hevy",
+    "giorno": "Giorno 2 Nuovo",
+    "esercizi": [
+      {
+        "nome": "Wall Ball",
+        "serie": [
+          {
+            "kg": 5,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 5,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Bound",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 16,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 16,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Stacco da Terra Rumeno (Bilanciere)",
+        "serie": [
+          {
+            "kg": 80,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 80,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 80,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Trazione Presa Supina",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 4,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 4,
+            "rir": 0
+          },
+          {
+            "kg": 0,
+            "reps": 3,
+            "rir": 0
+          }
+        ]
+      },
+      {
+        "nome": "Lento in Avanti in Piedi (Bilanciere)",
+        "serie": [
+          {
+            "kg": 27.5,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 27.5,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 27.5,
+            "reps": 9,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Panca Inclinata (Manubrio)",
+        "serie": [
+          {
+            "kg": 36,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 36,
+            "reps": 5,
+            "rir": 0
+          },
+          {
+            "kg": 32,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Curl Bicipiti Inclinato da Seduto (Manubrio)",
+        "serie": [
+          {
+            "kg": 20,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 20,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 20,
+            "reps": 10,
+            "rir": null
+          }
+        ]
+      }
+    ],
+    "durata_min": 86,
+    "note": "Tornato ad allenarmi con gymbro (non ci siamo fatti la foto) | Trazione Presa Supina: Senza elastico ma arrivo alla fronte per non sporcare | Panca Inclinata (Manubrio): Scherzavo 18kg sono troppi"
+  },
+  {
+    "data": "2026-07-14",
+    "scheda": "Storico Hevy",
+    "giorno": "Allenamento corpo libero a casa",
+    "esercizi": [
+      {
+        "nome": "Piegamenti",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 12,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Piegamenti Inclinati",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Dip su Panca",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Crunch",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 20,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 20,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 20,
+            "rir": null
+          }
+        ]
+      }
+    ],
+    "durata_min": 48,
+    "note": "Si muore di caldo | Piegamenti: Posso e devo farne di più senza rovinare la tecnica | Plank: Normale e poi laterale"
+  },
+  {
+    "data": "2026-08-02",
+    "scheda": "Storico Hevy",
+    "giorno": "Allenamento corpo libero con Davide il Karateka",
+    "esercizi": [
+      {
+        "nome": "Trazione Presa Supina",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 2,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 2,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 2,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 3,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Piegamenti",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 12,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 14,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 12,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Crunch",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 20,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 20,
+            "rir": null
+          }
+        ]
+      }
+    ],
+    "durata_min": 37,
+    "note": "Un ritorno orribile"
+  },
+  {
+    "data": "2026-08-04",
+    "scheda": "Storico Hevy",
+    "giorno": "Allenamento corpo libero",
+    "esercizi": [
+      {
+        "nome": "Trazione Presa Supina",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 2,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 2,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 2,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Piegamenti",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Piegamenti Inclinati",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Crunch",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 20,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 20,
+            "rir": null
+          }
+        ]
+      }
+    ],
+    "durata_min": 44,
+    "note": "Con la supervisione del boss | Trazione Presa Supina: Mi bruciano ancora da ultima volta | Plank: Uno normale e poi laterali"
+  },
+  {
+    "data": "2026-08-06",
+    "scheda": "Storico Hevy",
+    "giorno": "Allenamento corpo libero",
+    "esercizi": [
+      {
+        "nome": "Trazione Presa Supina",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 2,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 3,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 2,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Piegamenti",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Piegamenti Inclinati",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Crunch",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 20,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 20,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 20,
+            "rir": null
+          }
+        ]
+      }
+    ],
+    "durata_min": 58,
+    "note": "Campana di fine allenamento come i navy seal"
+  },
+  {
+    "data": "2026-08-08",
+    "scheda": "Storico Hevy",
+    "giorno": "Allenamento corpo libero dopo 2 ore di tennis",
+    "esercizi": [
+      {
+        "nome": "Trazione Presa Supina",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 2,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 2,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 1,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Piegamenti",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          }
+        ]
+      }
+    ],
+    "durata_min": 24,
+    "note": ""
+  },
+  {
+    "data": "2026-08-11",
+    "scheda": "Storico Hevy",
+    "giorno": "Allenamento corpo libero",
+    "esercizi": [
+      {
+        "nome": "Trazione Presa Supina",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 3,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 3,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 3,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Piegamenti",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 12,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Piegamenti Inclinati",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Crunch",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 20,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 20,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 12,
+            "rir": null
+          }
+        ]
+      }
+    ],
+    "durata_min": 44,
+    "note": "Si muore di caldo ma comunque andrò a giocare a tennis"
+  },
+  {
+    "data": "2026-08-13",
+    "scheda": "Storico Hevy",
+    "giorno": "Allenamento corpo libero",
+    "esercizi": [
+      {
+        "nome": "Trazione Presa Supina",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 4,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 3,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 3,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Piegamenti",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 13,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 13,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Piegamenti Inclinati",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Crunch",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 20,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 20,
+            "rir": null
+          }
+        ]
+      }
+    ],
+    "durata_min": 47,
+    "note": "La cantina la mia nuova casa | Plank: Uno normale e due laterali"
+  },
+  {
+    "data": "2026-08-14",
+    "scheda": "Storico Hevy",
+    "giorno": "Allenamento corpo libero con Davide il Karateka",
+    "esercizi": [
+      {
+        "nome": "Trazione Presa Supina",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 5,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 3,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 3,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 3,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 2,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 2,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Piegamenti",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Squat (Corpo Libero)",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Crunch",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 20,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 20,
+            "rir": null
+          }
+        ]
+      }
+    ],
+    "durata_min": 34,
+    "note": "Il Cindy alla spiderman | Crunch: Bassi e normali in superset"
+  },
+  {
+    "data": "2026-08-17",
+    "scheda": "Storico Hevy",
+    "giorno": "Allenamento corpo libero",
+    "esercizi": [
+      {
+        "nome": "Trazione Presa Supina",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 4,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 4,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 3,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Piegamenti",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 12,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 12,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 12,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Crunch",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 20,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 20,
+            "rir": null
+          }
+        ]
+      }
+    ],
+    "durata_min": 43,
+    "note": "Un po’ addormentato ma l’allenamento non si salta"
+  },
+  {
+    "data": "2026-08-22",
+    "scheda": "Storico Hevy",
+    "giorno": "Allenamento corpo libero",
+    "esercizi": [
+      {
+        "nome": "Trazione Presa Supina",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 5,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 5,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 5,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 5,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 5,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 5,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 4,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Piegamenti",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Squat (Corpo Libero)",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Crunch",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 20,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 20,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 20,
+            "rir": null
+          }
+        ]
+      }
+    ],
+    "durata_min": 39,
+    "note": "Cindy dopo un’ora di tennis. (Quella del video è l’ultima…ridicola)"
+  },
+  {
+    "data": "2026-09-02",
+    "scheda": "Storico Hevy",
+    "giorno": "Allenamento corpo libero con Davide il Karateka",
+    "esercizi": [
+      {
+        "nome": "Trazione Presa Supina",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 5,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 4,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 4,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 3,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 3,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 3,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Piegamenti",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 10,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Squat (Corpo Libero)",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 15,
+            "rir": null
+          }
+        ]
+      }
+    ],
+    "durata_min": 31,
+    "note": "Cindy defaticante"
+  },
+  {
+    "data": "2026-09-09",
+    "scheda": "Storico Hevy",
+    "giorno": "Giorno 1 Nuovo",
+    "esercizi": [
+      {
+        "nome": "Panca Piana (Bilanciere)",
+        "serie": [
+          {
+            "kg": 42.5,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 50,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 50,
+            "reps": 7,
+            "rir": null
+          },
+          {
+            "kg": 50,
+            "reps": 5,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Trazione Presa Supina",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 4,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 3,
+            "rir": null
+          },
+          {
+            "kg": 0,
+            "reps": 2,
+            "rir": 0
+          }
+        ]
+      },
+      {
+        "nome": "Lento in Avanti in Piedi (Bilanciere)",
+        "serie": [
+          {
+            "kg": 30,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 30,
+            "reps": 7,
+            "rir": null
+          },
+          {
+            "kg": 30,
+            "reps": 4,
+            "rir": 0
+          }
+        ]
+      },
+      {
+        "nome": "Bicipiti Martello Incrociato",
+        "serie": [
+          {
+            "kg": 24,
+            "reps": 7,
+            "rir": null
+          },
+          {
+            "kg": 24,
+            "reps": 7,
+            "rir": null
+          },
+          {
+            "kg": 24,
+            "reps": 6,
+            "rir": null
+          }
+        ]
+      }
+    ],
+    "durata_min": 57,
+    "note": "Il ritorno"
+  },
+  {
+    "data": "2026-09-19",
+    "scheda": "Storico Hevy",
+    "giorno": "Giorno 1",
+    "esercizi": [
+      {
+        "nome": "Squat (Bilanciere)",
+        "serie": [
+          {
+            "kg": 70,
+            "reps": 7,
+            "rir": null
+          },
+          {
+            "kg": 65,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 65,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Panca Piana (Bilanciere)",
+        "serie": [
+          {
+            "kg": 45,
+            "reps": 7,
+            "rir": null
+          },
+          {
+            "kg": 45,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 47.5,
+            "reps": 7,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Rematore al cavo da seduto - Impugnatura a V (cavo)",
+        "serie": [
+          {
+            "kg": 45,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 45,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 45,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Leg Curl Sdraiato (Macchina)",
+        "serie": [
+          {
+            "kg": 45,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 45,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Croci (Macchina)",
+        "serie": [
+          {
+            "kg": 45,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 45,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 45,
+            "reps": 8,
+            "rir": 0
+          }
+        ]
+      },
+      {
+        "nome": "Pushdown Tricipiti",
+        "serie": [
+          {
+            "kg": 45,
+            "reps": 7,
+            "rir": 0
+          },
+          {
+            "kg": 45,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 45,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Croci Inverse Deltoide Posteriore (Macchina)",
+        "serie": [
+          {
+            "kg": 30,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 35,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      }
+    ],
+    "durata_min": 55,
+    "note": "Ritorno con nuovo full body duro (sento la mancanza della creatina) | Squat (Bilanciere): Riprendiamo con calma facendo bene | Panca Piana (Bilanciere): Mi sono fermato a 7 per dolore/stress sempre sul gomito destro(devo tenere spalle più basse) | Rematore al cavo da seduto - Impugnatura a V (cavo): Potrei alzare | Leg Curl Sdraiato (Macchina): Fatti due che ho il tempo stretto | Pushdown Tricipiti: Dolorino ora al gomito sinistro, prossima volta alzare però"
+  },
+  {
+    "data": "2026-09-21",
+    "scheda": "Storico Hevy",
+    "giorno": "Giorno 2",
+    "esercizi": [
+      {
+        "nome": "Lat Pulldown (Cavo)",
+        "serie": [
+          {
+            "kg": 50,
+            "reps": 9,
+            "rir": null
+          },
+          {
+            "kg": 55,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 55,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 55,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Rematore Seduto (Macchina)",
+        "serie": [
+          {
+            "kg": 25,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 25,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 25,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 25,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 25,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 25,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Panca Inclinata (Manubrio)",
+        "serie": [
+          {
+            "kg": 36,
+            "reps": 4,
+            "rir": null
+          },
+          {
+            "kg": 36,
+            "reps": 4,
+            "rir": null
+          },
+          {
+            "kg": 36,
+            "reps": 4,
+            "rir": null
+          },
+          {
+            "kg": 36,
+            "reps": 3,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Alzate Laterali (Manubrio)",
+        "serie": [
+          {
+            "kg": 16,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 16,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 16,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Bicipiti Martello (Manubrio)",
+        "serie": [
+          {
+            "kg": 20,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 20,
+            "reps": 7,
+            "rir": null
+          },
+          {
+            "kg": 28,
+            "reps": 4,
+            "rir": null
+          }
+        ]
+      }
+    ],
+    "durata_min": 53,
+    "note": "Odio la Mcfit di sera | Rematore Seduto (Macchina): Prima sinistro poi destro | Panca Inclinata (Manubrio): Ci sono solo da 18 kg… | Bicipiti Martello (Manubrio): Boh mi hanno rubato quelli da 10kg senza che vedessi…."
+  },
+  {
+    "data": "2026-09-23",
+    "scheda": "Storico Hevy",
+    "giorno": "Giorno 1",
+    "esercizi": [
+      {
+        "nome": "Leg Press (Macchina)",
+        "serie": [
+          {
+            "kg": 60,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 60,
+            "reps": 15,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Squat (Bilanciere)",
+        "serie": [
+          {
+            "kg": 50,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 50,
+            "reps": 8,
+            "rir": null
+          },
+          {
+            "kg": 50,
+            "reps": 8,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Panca Piana (Bilanciere)",
+        "serie": [
+          {
+            "kg": 50,
+            "reps": 7,
+            "rir": null
+          },
+          {
+            "kg": 50,
+            "reps": 7,
+            "rir": null
+          },
+          {
+            "kg": 50,
+            "reps": 5,
+            "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Croci (Macchina)",
+        "serie": [
+          {
+            "kg": 45,
+            "reps": 7,
+            "rir": null
+          },
+          {
+            "kg": 45,
+            "reps": 5,
+            "rir": null
+          },
+          {
+            "kg": 45,
+            "reps": 4,
+            "rir": 0
+          }
+        ]
+      },
+      {
+        "nome": "Pushdown Tricipiti a Braccio Singolo (Cavo)",
+        "serie": [
+          {
+            "kg": 15,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 15,
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "kg": 20,
+            "reps": 7,
+            "rir": null
+          },
+          {
+            "kg": 20,
+            "reps": 7,
+            "rir": null
+          },
+          {
+            "kg": 20,
+            "reps": 6,
+            "rir": null
+          },
+          {
+            "kg": 20,
+            "reps": 6,
+            "rir": null
+          }
+        ]
+      }
+    ],
+    "durata_min": 63,
+    "note": "Post elba si inizia nuovo allenamento per distruggere il petto veramente | Squat (Bilanciere): Abbassato peso che ho ancora i doms ma sono sceso molto di più | Pushdown Tricipiti a Braccio Singolo (Cavo): Uno con destro uno con sinistro"
+  }
+]
