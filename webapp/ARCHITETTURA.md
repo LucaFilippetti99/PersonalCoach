@@ -34,7 +34,7 @@ La webapp è una **Single Page Application React** servita da **Vite** in locale
 | Routing | hash (`#/sezione?param=…`) fatto a mano | 30 righe, nessuna dipendenza |
 | Stato | un hook per file JSON (`useJson`) con cache condivisa | i file *sono* lo stato: niente Redux/Context |
 | Grafici | SVG scritto a mano | due grafici semplici, nessuna libreria |
-| Stile | un solo `styles.css` con variabili CSS | tema chiaro/scuro automatico |
+| Stile | un solo `styles.css` con variabili CSS | tema automatico, chiaro o scuro (a scelta) |
 | Persistenza | file JSON su disco + `localStorage` solo per le bozze | |
 
 Dipendenze runtime: solo `react` e `react-dom`. Dev: `vite`, `@vitejs/plugin-react`, `vitest`. Requisito: **Node ≥ 20.19** (vedi `.nvmrc`).
@@ -66,11 +66,13 @@ coach/
         ├── App.jsx                  ← layout, barra di navigazione, routing
         ├── nav.js                   ← navigate(sezione, parametri)
         ├── api.js                   ← fetch verso l'API, cache condivisa + hook useJson
+        ├── tema.js                  ← tema Automatico / Chiaro / Scuro (localStorage + data-theme)
         ├── clipboard.js             ← copia negli appunti (anche senza HTTPS, dal telefono)
         ├── hooks.js                 ← un hook per ogni file di dati
         ├── defaults.js              ← valori di default per file non ancora creati
         ├── utils.js                 ← date, medie peso, progressi, 1RM…
         ├── hevy.js                  ← parser del CSV di Hevy → sessioni
+        ├── muscoli.js               ← esercizio → muscoli, serie per muscolo, livelli di colore
         ├── piano.js                 ← logica del piano pasti (ricettario, ingredienti mancanti…)
         ├── prompts.js               ← modelli della pagina "Chiedi a Claude"
         ├── styles.css               ← tutto lo stile
@@ -79,6 +81,8 @@ coach/
         │   ├── WeightChart.jsx      ← grafico peso + media 7 gg + fascia obiettivo
         │   ├── TrendChart.jsx       ← grafico generico a una serie (progressi)
         │   ├── RestTimer.jsx        ← timer di recupero (+ sbloccaAudio per iPhone)
+        │   ├── MappaMuscoli.jsx     ← figura fronte/retro con i muscoli colorati
+        │   ├── corpo.js             ← disegno SVG della figura (metà sinistra, specchiata)
         │   ├── useWidth.js          ← larghezza di un elemento per i grafici
         │   └── useWakeLock.js       ← schermo acceso durante la registrazione
         └── pages/
@@ -187,12 +191,20 @@ Funzioni senza React, testabili anche con Node (`node -e "import('./src/utils.js
 
 `ctx` contiene tutti i dati caricati (`scheda, log, misure, imp, frigo, spesa`), così il prompt può includere dati veri (es. le ultime 3 sessioni di un esercizio). `righe(...)` compone il testo scartando i campi vuoti; `SEP` è una riga vuota voluta. **Per aggiungere un modello basta aggiungere un oggetto a `MODELLI`**: la UI si genera da sola.
 
+**`muscoli.js`**: mappa dei muscoli
+- `MUSCOLI`: i 18 gruppi disegnati (petto, spalle anteriori/laterali/posteriori, trapezi, schiena alta, dorsali, lombari, bicipiti, tricipiti, avambracci, addominali, obliqui, glutei, quadricipiti, femorali, adduttori, polpacci).
+- `muscoliEsercizio(nome, override)` → `{ primari, secondari, riconosciuto }`. Usa `REGOLE`, regex sui nomi Hevy in italiano: **vince la prima che corrisponde**, quindi le più specifiche stanno in alto ("leg curl" prima di "curl", "croci inverse" prima di "croci"). Stretching e riscaldamento sono riconosciuti ma senza muscoli; la corsa ha solo secondari (gambe).
+- `overrideMuscoli(scheda, imp)`: correzioni manuali da `impostazioni.muscoli_esercizi` e dal campo facoltativo `muscoli` di un esercizio in scheda.
+- `caricoMuscoli(esercizi, override)`: serie "pesate", 1 per i primari e 0,5 per i secondari; restituisce anche gli esercizi `sconosciuti`.
+- `livelli(carico, modo)`: colore 0-4. `relativo` (una sessione, un giorno) = in proporzione al muscolo più lavorato; `settimana` = soglie fisse 1 / 3 / 6 / 10 serie (`SOGLIE_SETTIMANA`), dove 10+ è il volume settimanale di riferimento.
+
 ### 4.4 Componenti: `components/`
 
 - `ui.jsx`: `Icon` (SVG inline, set in `PATHS`), `Card`, `Tabs`, `Stat`, `Empty`, `PageHeader`, `ErrorBanner`, `useFlash()` (toast: `const [node, flash] = useFlash(); flash('Salvato')`).
 - `WeightChart.jsx`: peso giornaliero (punti grigi) + media mobile 7 gg (linea) + fascia obiettivo; `ResizeObserver` per la larghezza, crosshair con tooltip su mouse/touch.
 - `TrendChart.jsx`: versione generica a una serie (`punti: [{ data, valore, dettaglio }]`), usata nei Progressi. Il passo dell'asse Y si sceglie tra valori "tondi" (1, 2, 2.5, 5…).
 - `RestTimer.jsx`: countdown in basso a partire da un timestamp di fine (resta preciso anche se il tab va in background), `+30 s` / `Salta`, vibrazione (Android) e beep a fine recupero. Su iPhone l'audio parte solo se il contesto audio è stato creato durante un tocco: per questo chi avvia il timer chiama prima `sbloccaAudio()`.
+- `MappaMuscoli.jsx`: `<MappaMuscoli carico={…} modo="relativo|settimana" elenco compatta />`. Disegna fronte e retro da `corpo.js` (metà sinistra + copia specchiata con `matrix(-1 0 0 1 200 0)`), colora ogni muscolo con le classi `lv0`…`lv4` (variabili `--m0`…`--m4` e `--corpo` in `:root` e nei due blocchi scuri). Toccando un muscolo si vedono nome e serie; con `elenco` mostra anche la classifica, `compatta` nasconde legenda e didascalia. Per ritoccare il disegno modifica le forme in `corpo.js` (coordinate in un riquadro 200 × 440).
 - `useWidth(min)`: callback ref + `ResizeObserver`. Il grafico si disegna solo dopo aver misurato lo spazio disponibile e si ricollega anche se all'inizio mostrava un messaggio (es. "servono almeno 2 pesate"). Nelle griglie servono colonne `minmax(0, 1fr)`, altrimenti un SVG largo allarga la colonna.
 - `useWakeLock(attivo)`: Screen Wake Lock API, tiene lo schermo acceso nella tab "A mano" (solo HTTPS/localhost, altrimenti non fa nulla).
 
@@ -212,6 +224,7 @@ Dettagli utili:
   - kg precompilati (`emptySets`): alla prima sessione della scheda (o se l'esercizio non è mai stato fatto) vale il carico della scheda (`kgDaScheda`), poi quello dell'ultima sessione. I suggerimenti grigi delle reps usano solo sessioni della scheda in corso.
   - **✓ serie fatta**: compila le reps (dalla volta scorsa o dal minimo del range), avvia il recupero; ritoccato di nuovo, riapre la serie. Con "max" mette il cursore nel campo.
   - Una sessione importata da Hevy con un altro titolo viene riconosciuta come la stessa del giorno di scheda (`stessoGiorno`), così modificarla non crea un doppione.
+- **Mappa dei muscoli**: in Home (allenamento di oggi), in Scheda (ogni giorno), in "A mano" (esercizi della sessione), nello Storico (sessione aperta) e in cima a Progressi (`MuscoliPeriodo`: questa settimana / ultimi 7 giorni / media delle ultime 4 settimane, con elenco delle serie e degli esercizi non riconosciuti).
 - **Progressi**: con la scheda in corso, "fermo / in crescita" considera solo le sessioni da `scheda.inizio`. Su telefono il grafico sta sopra l'elenco degli esercizi.
 - **Spesa → Frigo**: spuntare un articolo lo toglie da `spesa.json` e lo aggiunge a `frigo.json`; "finito, rimetti in lista" fa il contrario.
 - **Piano pasti**: ogni ingrediente viene confrontato per nome (senza maiuscole) con frigo e spesa per mostrare le etichette *frigo* / *spesa*. Per questo la skill chiede a Claude di usare gli stessi nomi.
@@ -223,7 +236,8 @@ Dettagli utili:
 
 ### 4.6 Stile: `styles.css`
 
-- Tutti i colori sono **variabili CSS** in `:root`, ridefinite in `@media (prefers-color-scheme: dark)`. Per cambiare il colore principale modifica `--accent`.
+- Tutti i colori sono **variabili CSS** in `:root`. I valori scuri stanno in due blocchi identici: `@media (prefers-color-scheme: dark) { :root:not([data-theme='light']) }` (automatico) e `:root[data-theme='dark']` (scelto a mano). Se cambi un colore scuro, cambialo in entrambi. Per cambiare il colore principale modifica `--accent`.
+- **Tema**: `src/tema.js` salva la scelta in `localStorage` (`coach-tema`, preferenza del dispositivo, non un dato del coach) e la applica come `data-theme` su `<html>`; `index.html` la applica già prima del primo render per evitare il lampo di colore. Si cambia dal pulsante in alto (Automatico → Chiaro → Scuro) o da Salute → Impostazioni → Aspetto.
 - Layout: contenuto max 1080 px; sotto i 760 px la navigazione diventa una barra in basso (`.nav` fixed) e le griglie vanno a una colonna.
 - Il file è diviso per sezioni commentate (`/* ---------- Home ---------- */` ecc.).
 
@@ -272,8 +286,10 @@ Campi opzionali di una serie: `secondi` (esercizi a tempo) e `km` (esercizi a di
   "target": { "kcal": 2150, "proteine_g": 150 },
   "peso_obiettivo_kg": { "min": 70, "max": 75 },
   "hevy_alias": { "Nome in Hevy": "Nome in scheda" },
-  "hevy_giorni": { "Titolo allenamento in Hevy": "Giorno A — Push" } }
+  "hevy_giorni": { "Titolo allenamento in Hevy": "Giorno A — Push" },
+  "muscoli_esercizi": { "Nome esercizio": { "primari": ["petto"], "secondari": ["tricipiti"] } } }
 ```
+`muscoli_esercizi` (facoltativo) corregge o aggiunge i muscoli di un esercizio che le regole di `muscoli.js` non riconoscono; gli id sono quelli di `MUSCOLI`. Lo stesso oggetto si può mettere come campo `muscoli` di un esercizio in scheda.
 `hevy_giorni` serve solo per i titoli che `giornoScheda` non riconosce da solo.
 
 ---
@@ -308,6 +324,7 @@ npm run test:watch # test in modalità watch mentre modifichi il codice
 I test (Vitest) sono in `tests/` e coprono la logica pura:
 - `hevy.test.js`: parser CSV, date in italiano/inglese, conversione in sessioni (riscaldamento, failure/RPE, serie a tempo e distanza, alias, durata), merge idempotente;
 - `utils.test.js`: settimane ISO ed etichette leggibili, media peso, 1RM, formattazione delle serie, tipo di esercizio, stato di progressione (anche da inizio scheda), riconoscimento dei giorni di scheda, carico dalla scheda;
+- `muscoli.test.js`: muscoli di tutti gli esercizi della scheda e dei più usati nel log, override, serie pesate, livelli relativi e settimanali;
 - `api.test.js`: cache condivisa con un `fetch` finto: versione inviata, salvataggi in fila, conflitto 409 che non sovrascrive e ricarica;
 - `piano.test.js`: piano vuoto, giorni mancanti, ordinamento, ricettario, ingredienti mancanti / in frigo, pulizia del form;
 - `prompts.test.js`: ogni modello di "Chiedi a Claude" genera un testo pulito (niente `undefined`, niente righe vuote doppie).

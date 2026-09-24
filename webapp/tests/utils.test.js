@@ -175,3 +175,23 @@ describe('settimane leggibili', () => {
     ['boh', 'boh'],
   ])('%s → %s', (w, atteso) => expect(etichettaSettimana(w)).toBe(atteso))
 })
+
+import { formatRecupero } from '../src/utils.js'
+
+describe('formatRecupero', () => {
+  it.each([
+    [45, '45 s'],
+    [59, '59 s'],
+    [60, '1 min'],
+    [75, '1 min 15 s'],
+    [90, '1 min 30 s'],
+    [120, '2 min'],
+    [150, '2 min 30 s'],
+    [180, '3 min'],
+    [0, ''],
+    [null, ''],
+  ])('%s s → "%s"', (s, atteso) => expect(formatRecupero(s).replace(/\u00a0/g, ' ')).toBe(atteso))
+  it('non spezza mai numero e unità', () => {
+    expect(formatRecupero(150)).toBe('2\u00a0min 30\u00a0s')
+  })
+})

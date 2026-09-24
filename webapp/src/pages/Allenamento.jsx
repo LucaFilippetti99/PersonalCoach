@@ -6,11 +6,16 @@ import { useImpostazioni, useLog, useScheda } from '../hooks.js'
 import { navigate } from '../nav.js'
 import { ChiediClaude } from './Claude.jsx'
 import TrendChart from '../components/TrendChart.jsx'
+import MappaMuscoli from '../components/MappaMuscoli.jsx'
+import { caricoMuscoli, overrideMuscoli } from '../muscoli.js'
 import { hevyToSessions, mergeLog, parseCsv } from '../hevy.js'
 import {
   TIPO_INFO,
+  addDays,
+  startOfWeek,
   exerciseHistory,
   formatDate,
+  formatRecupero,
   giornoScheda,
   kgDaScheda,
   schedaAttiva,
@@ -303,6 +308,12 @@ function Registra({ params }) {
         {esistente && (
           <p className="info-box">Stai modificando la sessione già salvata del {formatDate(data)}.</p>
         )}
+        {form?.esercizi.length > 0 && (
+          <div className="muscoli-oggi">
+            <span className="muted small">Muscoli che alleni</span>
+            <MappaMuscoli carico={caricoMuscoli(form.esercizi, overrideMuscoli(scheda, imp)).carico} compatta />
+          </div>
+        )}
       </Card>
 
       {form?.esercizi.map((e, ei) => {
@@ -317,7 +328,7 @@ function Registra({ params }) {
                   <p className="muted small">
                     Obiettivo {e.target.serie}×{e.target.reps}
                     {e.target.rir != null && ` · RIR ${e.target.rir}`}
-                    {e.target.recupero_s ? ` · recupero ${e.target.recupero_s}s` : ''}
+                    {e.target.recupero_s ? ` · recupero ${formatRecupero(e.target.recupero_s)}` : ''}
                   </p>
                 )}
               </div>
@@ -327,7 +338,7 @@ function Registra({ params }) {
                     className="btn btn-ghost btn-sm"
                     onClick={() => avviaRecupero(e)}
                   >
-                    Recupero {e.target.recupero_s}s
+                    Recupero {formatRecupero(e.target.recupero_s)}
                   </button>
                 )}
                 {!e.target && (
@@ -462,6 +473,9 @@ function Registra({ params }) {
 
 function Storico() {
   const { data: logRaw, save, error } = useLog()
+  const { data: scheda } = useScheda()
+  const { data: imp } = useImpostazioni()
+  const override = useMemo(() => overrideMuscoli(scheda, imp), [scheda, imp])
   const [aperta, setAperta] = useState(null)
   const [daEliminare, setDaEliminare] = useState(null)
   const [flash, doFlash] = useFlash()
@@ -501,6 +515,7 @@ function Storico() {
               </button>
               {open && (
                 <div className="history-body">
+                  <div className="con-mappa">
                   <table className="table">
                     <tbody>
                       {s.esercizi.map((e) => (
@@ -511,6 +526,8 @@ function Storico() {
                       ))}
                     </tbody>
                   </table>
+                    <MappaMuscoli carico={caricoMuscoli(s.esercizi, override).carico} compatta />
+                  </div>
                   {s.note && <p className="note">{s.note}</p>}
                   <div className="row-gap">
                     <button className="btn" onClick={() => navigate('allenamento', { data: s.data, giorno: s.giorno })}>
@@ -546,7 +563,9 @@ function Storico() {
 
 function SchedaView() {
   const { data: scheda } = useScheda()
+  const { data: imp } = useImpostazioni()
   if (!scheda) return <Empty>Carico la scheda…</Empty>
+  const override = overrideMuscoli(scheda, imp)
   return (
     <>
       <Card>
@@ -558,6 +577,7 @@ function SchedaView() {
       </Card>
       {scheda.giorni.map((g) => (
         <Card key={g.nome} title={g.nome}>
+          <div className="con-mappa">
           <div className="table-wrap">
             <table className="table">
               <thead>
@@ -579,11 +599,13 @@ function SchedaView() {
                     <td className="num">{e.serie}</td>
                     <td className="num">{e.reps}</td>
                     <td className="num">{e.rir ?? '—'}</td>
-                    <td className="num">{e.recupero_s ? `${e.recupero_s}s` : '—'}</td>
+                    <td className="num rec">{e.recupero_s ? formatRecupero(e.recupero_s) : '—'}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
+          </div>
+            <MappaMuscoli carico={caricoMuscoli(g.esercizi, override).carico} compatta />
           </div>
         </Card>
       ))}
@@ -733,6 +755,7 @@ function Progressi({ params }) {
 
   return (
     <>
+      <MuscoliPeriodo log={log} scheda={scheda} />
       {fermi.length > 0 && (
         <div className="warn-box">
           Fermi nelle ultime 3 sessioni{dalScheda ? ' della scheda' : ''}: {fermi.map((f) => f.nome).join(', ')}. Chiedi a Claude un aggiustamento
@@ -847,5 +870,56 @@ function Progressi({ params }) {
         </div>
       </div>
     </>
+  )
+}
+
+/* ---------------- Muscoli allenati nel periodo ---------------- */
+
+const PERIODI = [
+  { id: 'settimana', label: 'Questa settimana' },
+  { id: '7', label: 'Ultimi 7 giorni' },
+  { id: '28', label: 'Media ultime 4 settimane' },
+]
+
+function MuscoliPeriodo({ log, scheda }) {
+  const { data: imp } = useImpostazioni()
+  const [periodo, setPeriodo] = useState('settimana')
+  const oggi = isoDate()
+  const dal =
+    periodo === 'settimana' ? isoDate(startOfWeek()) : isoDate(addDays(new Date(), -(Number(periodo) - 1)))
+  const sessioni = log.filter((s) => s.data >= dal && s.data <= oggi)
+  const { carico: totale, sconosciuti } = caricoMuscoli(
+    sessioni.flatMap((s) => s.esercizi),
+    overrideMuscoli(scheda, imp),
+  )
+  // Sulle 4 settimane si mostra la media settimanale, così le soglie (10+ serie = volume pieno) restano valide
+  const carico = periodo === '28' ? Object.fromEntries(Object.entries(totale).map(([k, v]) => [k, v / 4])) : totale
+
+  return (
+    <Card
+      title="Muscoli allenati"
+      action={
+        <select className="select-sm" value={periodo} onChange={(e) => setPeriodo(e.target.value)} aria-label="Periodo">
+          {PERIODI.map((p) => (
+            <option key={p.id} value={p.id}>
+              {p.label}
+            </option>
+          ))}
+        </select>
+      }
+    >
+      <p className="muted small">
+        {sessioni.length} {sessioni.length === 1 ? 'sessione' : 'sessioni'}
+        {periodo === '28' ? ' · valori medi a settimana' : ''}. Ogni serie conta 1 per i muscoli principali e ½ per
+        quelli che aiutano; 10-20 serie a settimana per muscolo è il volume che fa crescere.
+      </p>
+      <MappaMuscoli carico={carico} modo="settimana" elenco />
+      {sconosciuti.length > 0 && (
+        <p className="muted small">
+          Non so ancora che muscoli lavorano: {sconosciuti.join(', ')}. Chiedi a Claude di aggiungerli in{' '}
+          <code>impostazioni.json</code> → <code>muscoli_esercizi</code>.
+        </p>
+      )}
+    </Card>
   )
 }

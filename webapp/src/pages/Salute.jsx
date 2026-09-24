@@ -3,6 +3,7 @@ import { Card, Empty, ErrorBanner, Icon, PageHeader, Stat, Tabs, useFlash } from
 import WeightChart from '../components/WeightChart.jsx'
 import { useImpostazioni, useMisure, useScheda } from '../hooks.js'
 import { ChiediClaude } from './Claude.jsx'
+import { TEMI, useTema } from '../tema.js'
 import { GIORNI_SETTIMANA, addDays, formatDate, isoDate, round1, validWeights, weeklyAvg } from '../utils.js'
 
 export default function Salute({ params }) {
@@ -242,6 +243,8 @@ function Impostazioni() {
   return (
     <>
       <ErrorBanner error={error} />
+      <TemaCard />
+
       <Card title="Calendario allenamenti" action={<span className="muted small">Decide cosa vedi in Home</span>}>
         <div className="cal-grid">
           {GIORNI_SETTIMANA.map((g) => (
@@ -406,5 +409,21 @@ function AliasForm({
         <Icon name="plus" size={16} /> Collega
       </button>
     </div>
+  )
+}
+
+function TemaCard() {
+  const [tema, setTema] = useTema()
+  return (
+    <Card title="Aspetto" action={<span className="muted small">Solo su questo dispositivo</span>}>
+      <div className="seg" role="group" aria-label="Tema">
+        {TEMI.map((t) => (
+          <button key={t.id} aria-pressed={tema === t.id} onClick={() => setTema(t.id)}>
+            <Icon name={t.icon} size={16} /> {t.label}
+          </button>
+        ))}
+      </div>
+      <p className="muted small">Automatico segue l'impostazione chiaro/scuro del telefono o del Mac.</p>
+    </Card>
   )
 }

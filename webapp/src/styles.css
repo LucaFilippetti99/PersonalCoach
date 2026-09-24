@@ -21,11 +21,19 @@
   --shadow: 0 1px 2px rgba(16, 24, 20, 0.05), 0 2px 8px rgba(16, 24, 20, 0.04);
   --radius: 14px;
   --font: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --corpo: #dde3e0;
+  --m0: #c3cdc9;
+  --m1: #b3e2d9;
+  --m2: #62c2b1;
+  --m3: #1c9481;
+  --m4: #0b5a50;
   color-scheme: light;
 }
 
+/* Tema scuro: automatico (dal sistema) se non hai scelto 'Chiaro', oppure forzato con 'Scuro'.
+   data-theme su <html> lo imposta src/tema.js */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme='light']) {
     --bg: #0e1412;
     --surface: #161e1b;
     --surface-2: #1d2724;
@@ -46,8 +54,43 @@
     --chart-dot: #6b7772;
     --chart-band: rgba(45, 212, 191, 0.08);
     --shadow: none;
+    --corpo: #222c29;
+    --m0: #33413c;
+    --m1: #1b4d45;
+    --m2: #1f7a6b;
+    --m3: #27ab94;
+    --m4: #6ff0d9;
     color-scheme: dark;
   }
+}
+:root[data-theme='dark'] {
+  --bg: #0e1412;
+  --surface: #161e1b;
+  --surface-2: #1d2724;
+  --border: #2a3531;
+  --text: #e8eeeb;
+  --text-2: #b7c2bd;
+  --muted: #87938e;
+  --accent: #2dd4bf;
+  --accent-2: #5eead4;
+  --accent-soft: #123a35;
+  --accent-ink: #062320;
+  --good: #4ade80;
+  --good-soft: #13301f;
+  --warn: #fbbf24;
+  --warn-soft: #3a2c10;
+  --bad: #f87171;
+  --bad-soft: #3a1717;
+  --chart-dot: #6b7772;
+  --chart-band: rgba(45, 212, 191, 0.08);
+  --shadow: none;
+  --corpo: #222c29;
+  --m0: #33413c;
+  --m1: #1b4d45;
+  --m2: #1f7a6b;
+  --m3: #27ab94;
+  --m4: #6ff0d9;
+  color-scheme: dark;
 }
 
 * {
@@ -1486,4 +1529,253 @@ textarea:focus {
 .set-row .btn-icon {
   width: 30px;
   padding: 0;
+}
+
+/* ---------- Pulsante tema ---------- */
+
+.theme-btn {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-2);
+  font: inherit;
+  font-size: 0.85rem;
+  padding: 6px 10px;
+  border-radius: 99px;
+  cursor: pointer;
+}
+.theme-btn:hover {
+  color: var(--text);
+  border-color: var(--accent);
+}
+@media (max-width: 760px) {
+  .theme-btn .theme-label {
+    display: none;
+  }
+  .theme-btn {
+    padding: 7px;
+  }
+}
+.seg {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4px;
+  width: 100%;
+  max-width: 420px;
+  margin: 4px 0 6px;
+  padding: 4px;
+  background: var(--surface-2);
+  border-radius: 12px;
+}
+.seg button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 0;
+  background: transparent;
+  color: var(--text-2);
+  font: inherit;
+  justify-content: center;
+  white-space: nowrap;
+  padding: 7px 6px;
+  border-radius: 9px;
+  cursor: pointer;
+}
+.seg button[aria-pressed='true'] {
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: var(--shadow);
+}
+/* Recupero nella tabella della scheda: "2 min 30 s" può andare a capo invece di allargare la tabella */
+.table .num.rec {
+  white-space: normal;
+  min-width: 3.4em;
+}
+@media (max-width: 520px) {
+  .table th,
+  .table td {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+}
+
+/* ---------- Mappa dei muscoli ---------- */
+
+.mappa {
+  display: grid;
+  gap: 14px;
+}
+.mappa.con-elenco {
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  align-items: start;
+}
+@media (max-width: 640px) {
+  .mappa.con-elenco {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+.mappa-figura {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.corpo-viste {
+  display: flex;
+  justify-content: center;
+  gap: 4%;
+  width: 100%;
+}
+.corpo-vista {
+  margin: 0;
+  flex: 0 1 170px;
+  min-width: 0;
+  text-align: center;
+}
+.mappa-compatta .corpo-vista {
+  flex-basis: 92px;
+}
+.corpo-vista svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.corpo-vista figcaption {
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-top: 2px;
+}
+.corpo-sagoma {
+  fill: var(--corpo);
+}
+.muscolo {
+  stroke: var(--surface);
+  stroke-width: 1.3;
+  stroke-linejoin: round;
+  cursor: pointer;
+  transition: fill 0.25s ease, opacity 0.2s ease;
+}
+.muscolo.attivo {
+  stroke: var(--text);
+  stroke-width: 1.6;
+}
+.lv0 { fill: var(--m0); background: var(--m0); }
+.lv1 { fill: var(--m1); background: var(--m1); }
+.lv2 { fill: var(--m2); background: var(--m2); }
+.lv3 { fill: var(--m3); background: var(--m3); }
+.lv4 { fill: var(--m4); background: var(--m4); }
+.mappa-info {
+  min-height: 1.5em;
+  font-size: 0.88rem;
+  text-align: center;
+}
+.mappa-legenda {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  font-size: 0.78rem;
+}
+.mappa-legenda > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.swatch-m {
+  display: inline-block;
+  width: 14px;
+  height: 10px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+.mappa-elenco {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+.mappa-elenco li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 8px;
+  border-bottom: 1px dashed var(--border);
+  border-radius: 6px;
+  font-size: 0.92rem;
+}
+.mappa-elenco li.attivo {
+  background: var(--surface-2);
+}
+.mappa-elenco .num {
+  font-variant-numeric: tabular-nums;
+  color: var(--text-2);
+}
+
+/* Tabella + mappa affiancate (scheda, storico) */
+.con-mappa {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 190px;
+  gap: 16px;
+  align-items: start;
+}
+@media (max-width: 600px) {
+  .con-mappa {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .con-mappa > .mappa {
+    order: -1;
+  }
+}
+.muscoli-oggi {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.oggi-con-mappa {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 150px;
+  gap: 12px;
+  align-items: start;
+}
+@media (max-width: 420px) {
+  .oggi-con-mappa {
+    grid-template-columns: minmax(0, 1fr) 120px;
+  }
+}
+/* Accanto alla mappa la riga dell'esercizio va su due righe: nome sopra, serie sotto */
+.oggi-con-mappa .ex-list li {
+  flex-direction: column;
+  gap: 1px;
+}
+.oggi-con-mappa .ex-meta {
+  text-align: left;
+  white-space: normal;
+}
+/* Storico: le serie di un esercizio vanno a capo invece di uscire dalla card */
+.history-body .table .num {
+  white-space: normal;
+  word-break: keep-all;
+}
+
+/* Tablet: la barra in alto deve stare in una riga anche col pulsante del tema */
+@media (min-width: 761px) and (max-width: 960px) {
+  .topbar {
+    gap: 12px;
+  }
+  .theme-btn .theme-label {
+    display: none;
+  }
+  .theme-btn {
+    padding: 7px;
+  }
 }

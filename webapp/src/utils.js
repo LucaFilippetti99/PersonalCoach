@@ -267,3 +267,18 @@ export function etichettaSettimana(settimana) {
   if (lun.getMonth() === dom.getMonth()) return `${lun.getDate()}–${dom.getDate()} ${mese(dom)}`
   return `${lun.getDate()} ${mese(lun)} – ${dom.getDate()} ${mese(dom)}`
 }
+
+/**
+ * Tempo di recupero leggibile: sotto il minuto in secondi, poi in minuti.
+ * 45 → "45 s", 60 → "1 min", 90 → "1 min 30 s", 150 → "2 min 30 s", 180 → "3 min"
+ */
+export function formatRecupero(sec) {
+  // Spazio non divisibile tra numero e unità: se serve andare a capo, si va a capo solo tra "2 min" e "30 s"
+  const nb = '\u00a0'
+  const s = Math.round(Number(sec) || 0)
+  if (s <= 0) return ''
+  if (s < 60) return `${s}${nb}s`
+  const m = Math.floor(s / 60)
+  const r = s % 60
+  return r ? `${m}${nb}min ${r}${nb}s` : `${m}${nb}min`
+}

@@ -5,6 +5,7 @@ import Cibo from './pages/Cibo.jsx'
 import Salute from './pages/Salute.jsx'
 import Claude from './pages/Claude.jsx'
 import { Icon } from './components/ui.jsx'
+import { TEMI, prossimoTema, useTema } from './tema.js'
 
 const SEZIONI = [
   { id: 'home', label: 'Home', icon: 'home' },
@@ -23,6 +24,9 @@ function parseHash() {
 
 export default function App() {
   const [route, setRoute] = useState(parseHash)
+  const [tema, setTema] = useTema()
+  const infoTema = TEMI.find((t) => t.id === tema)
+  const infoProssimo = TEMI.find((t) => t.id === prossimoTema(tema))
 
   useEffect(() => {
     const on = () => {
@@ -55,6 +59,15 @@ export default function App() {
             </a>
           ))}
         </nav>
+        <button
+          className="theme-btn"
+          onClick={() => setTema(prossimoTema(tema))}
+          title={`Tema: ${infoTema.label.toLowerCase()}. Tocca per passare a ${infoProssimo.label.toLowerCase()}`}
+          aria-label={`Tema ${infoTema.label.toLowerCase()}, passa a ${infoProssimo.label.toLowerCase()}`}
+        >
+          <Icon name={infoTema.icon} size={18} />
+          <span className="theme-label">{infoTema.label}</span>
+        </button>
       </header>
       <main className="content" key={window.location.hash}>
         {route.id === 'home' && <Home />}
