@@ -29,6 +29,15 @@ function readBody(req) {
   })
 }
 
+/** Versione del file (data di modifica), 'none' se non esiste */
+async function mtimeOf(abs) {
+  try {
+    return String((await fs.stat(abs)).mtimeMs)
+  } catch {
+    return 'none'
+  }
+}
+
 function safePath(root, rel) {
   if (!rel || rel.includes('..') || !ALLOWED.some((r) => r.test(rel))) return null
   const abs = path.resolve(root, rel)
@@ -48,7 +57,10 @@ function handler(root) {
 
         if (req.method === 'GET') {
           try {
+            // mtime letto prima del contenuto: se il file cambia in mezzo, il prossimo PUT va in conflitto (sicuro)
+            const mtime = await mtimeOf(abs)
             const txt = await fs.readFile(abs, 'utf8')
+            res.setHeader('X-Mtime', mtime)
             return send(res, 200, JSON.parse(txt))
           } catch (e) {
             if (e.code === 'ENOENT') {
@@ -61,11 +73,17 @@ function handler(root) {
         if (req.method === 'PUT') {
           const body = await readBody(req)
           const parsed = JSON.parse(body) // rifiuta JSON non valido
+          // Controllo conflitti: se la webapp dice quale versione aveva letto e il file nel frattempo
+          // è cambiato (es. l'ha modificato Claude), rifiuta invece di sovrascrivere.
+          const atteso = req.headers['x-if-mtime']
+          if (atteso && atteso !== (await mtimeOf(abs))) {
+            return send(res, 409, { errore: `${rel} è stato modificato da un'altra parte` })
+          }
           await fs.mkdir(path.dirname(abs), { recursive: true })
           const tmp = `${abs}.tmp-${process.pid}`
           await fs.writeFile(tmp, JSON.stringify(parsed, null, 2) + '\n', 'utf8')
           await fs.rename(tmp, abs) // scrittura atomica
-          return send(res, 200, { ok: true })
+          return send(res, 200, { ok: true, mtime: await mtimeOf(abs) })
         }
         return send(res, 405, { errore: 'Metodo non supportato' })
       }

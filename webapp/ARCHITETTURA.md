@@ -32,7 +32,7 @@ La webapp è una **Single Page Application React** servita da **Vite** in locale
 | UI | React 19, componenti a funzione + hooks | standard, nessuna libreria extra |
 | Build / dev server | Vite 8 | veloce; il plugin ospita anche l'API |
 | Routing | hash (`#/sezione?param=…`) fatto a mano | 30 righe, nessuna dipendenza |
-| Stato | un hook per file JSON (`useJson`) | i file *sono* lo stato: niente Redux/Context |
+| Stato | un hook per file JSON (`useJson`) con cache condivisa | i file *sono* lo stato: niente Redux/Context |
 | Grafici | SVG scritto a mano | due grafici semplici, nessuna libreria |
 | Stile | un solo `styles.css` con variabili CSS | tema chiaro/scuro automatico |
 | Persistenza | file JSON su disco + `localStorage` solo per le bozze | |
@@ -65,7 +65,8 @@ coach/
         ├── main.jsx                 ← monta <App/>
         ├── App.jsx                  ← layout, barra di navigazione, routing
         ├── nav.js                   ← navigate(sezione, parametri)
-        ├── api.js                   ← fetch verso l'API + hook useJson
+        ├── api.js                   ← fetch verso l'API, cache condivisa + hook useJson
+        ├── clipboard.js             ← copia negli appunti (anche senza HTTPS, dal telefono)
         ├── hooks.js                 ← un hook per ogni file di dati
         ├── defaults.js              ← valori di default per file non ancora creati
         ├── utils.js                 ← date, medie peso, progressi, 1RM…
@@ -77,7 +78,9 @@ coach/
         │   ├── ui.jsx               ← Card, Tabs, Stat, Icon, Empty, toast…
         │   ├── WeightChart.jsx      ← grafico peso + media 7 gg + fascia obiettivo
         │   ├── TrendChart.jsx       ← grafico generico a una serie (progressi)
-        │   └── RestTimer.jsx        ← timer di recupero
+        │   ├── RestTimer.jsx        ← timer di recupero (+ sbloccaAudio per iPhone)
+        │   ├── useWidth.js          ← larghezza di un elemento per i grafici
+        │   └── useWakeLock.js       ← schermo acceso durante la registrazione
         └── pages/
             ├── Home.jsx
             ├── Allenamento.jsx      ← Scheda, Storico+Import, Progressi, A mano
@@ -94,8 +97,8 @@ Plugin Vite che aggiunge un middleware su `configureServer` (dev) e `configurePr
 
 | Metodo | Endpoint | Cosa fa |
 |---|---|---|
-| `GET` | `/api/file?path=<rel>` | restituisce il JSON; **204** se il file non esiste ancora |
-| `PUT` | `/api/file?path=<rel>` | valida il body come JSON e lo scrive (indentato a 2 spazi) |
+| `GET` | `/api/file?path=<rel>` | restituisce il JSON e la versione nell'header `X-Mtime`; **204** se il file non esiste ancora |
+| `PUT` | `/api/file?path=<rel>` | valida il body come JSON e lo scrive (indentato a 2 spazi); risponde `{ ok, mtime }`. Con l'header `X-If-Mtime` risponde **409** se il file è cambiato dopo la lettura |
 | `GET` | `/api/list?dir=<dir>` | elenco dei `.json` in `piani-pasti`, `schede` o `log` |
 | `GET` | `/api/profilo` | `{ testo }` con il contenuto di `profilo.md` (sola lettura) |
 
@@ -103,6 +106,7 @@ Plugin Vite che aggiunge un middleware su `configureServer` (dev) e `configurePr
 - `ALLOWED` è una whitelist di regex: solo `log/*.json`, `schede/*.json`, `piani-pasti/*.json`, `spesa.json`, `frigo.json`, `impostazioni.json`. Tutto il resto → 403.
 - `safePath` rifiuta `..` e verifica che il percorso risolto resti dentro `root`.
 - Scrittura **atomica**: scrive `file.tmp-<pid>` e poi `rename`, così un crash non lascia file a metà.
+- **Niente modifiche perse**: la versione di un file è la sua data di modifica (`mtimeMs`). La webapp manda in `X-If-Mtime` la versione che aveva letto; se nel frattempo Claude ha riscritto il file, il `PUT` viene rifiutato (409) invece di sovrascrivere il lavoro di Claude. `'none'` indica un file che non esisteva.
 
 > Con `npm run dev:rete` (`vite --host`) l'API è raggiungibile da tutta la rete Wi-Fi, **senza autenticazione**. Usalo solo su reti di cui ti fidi.
 
@@ -118,6 +122,7 @@ Per aggiungere un nuovo file di dati: aggiungi la regex in `ALLOWED`, un default
 - `App.jsx` definisce `SEZIONI` (id, etichetta, icona) e legge l'hash: `#/cibo?tab=frigo` → `{ id: 'cibo', params: { tab: 'frigo' } }`.
 - `<main key={window.location.hash}>`: cambiando hash la pagina **si rimonta**, quindi ogni pagina può leggere `params` solo nello stato iniziale (es. la tab da aprire).
 - `navigate(id, params)` (in `nav.js`) cambia l'hash. Esempio: `navigate('claude', { t: 'fermo' })`.
+- `ricordaTab(tab)` (chiamata da `Tabs`) scrive la tab aperta nell'hash con `history.replaceState`, senza rimontare la pagina: ricaricando riapri la stessa tab.
 
 **Aggiungere una sezione:** crea `pages/Nuova.jsx`, aggiungila a `SEZIONI` e al blocco di render in `App.jsx`, eventualmente un'icona in `components/ui.jsx` (`PATHS`).
 
@@ -129,13 +134,14 @@ Per aggiungere un nuovo file di dati: aggiungi la regex in `ALLOWED`, un default
 const { data, save, reload, loading, error } = useJson('log/misure.json', [])
 ```
 
-- al mount fa `GET`; se il file non esiste usa una copia di `fallback`;
-- si ricarica su `window.focus` (così vedi le modifiche fatte da Claude);
-- `save(next)` aggiorna subito lo stato locale (UI ottimistica) e poi fa `PUT`; in caso di errore imposta `error` e rilancia l'eccezione.
+- **una sola copia dei dati per file**, condivisa da tutti i componenti (cache in `api.js`): se l'import da Hevy salva il log, lo storico sotto si aggiorna subito;
+- al primo uso fa `GET`; se il file non esiste usa una copia di `fallback`;
+- quando la finestra torna in primo piano (`focus` o `visibilitychange`) si rileggono tutti i file in uso, così vedi le modifiche fatte da Claude;
+- `save(next)` aggiorna subito la cache (UI ottimistica) e poi fa `PUT` con la versione letta. I salvataggi dello stesso file sono **in fila**: ognuno usa la versione restituita dal precedente;
+- se il server risponde 409 (file cambiato da Claude), i dati vengono ricaricati, `error` spiega cosa è successo e `save` rilancia l'eccezione: l'ultima modifica va ripetuta sui dati aggiornati. Gli altri errori impostano `error` e rilanciano;
+- `saveFile(path, data)` fa lo stesso fuori dai componenti (es. creare il piano della settimana).
 
 `hooks.js` espone un hook per file (`useScheda`, `useLog`, `useMisure`, `useSpesa`, `useFrigo`, `useImpostazioni`) più `usePianiList()`, che elenca i piani e sceglie quello della settimana corrente (o il più recente). `useImpostazioni` unisce i valori salvati con `IMPOSTAZIONI_DEFAULT`, così le chiavi nuove hanno sempre un valore.
-
-> Ogni componente che chiama un hook fa la sua `fetch`: più componenti sulla stessa pagina possono leggere lo stesso file. Con file così piccoli è accettabile; se crescesse, si potrebbe introdurre un Context/cache condivisa.
 
 ### 4.3 Logica pura: `utils.js`, `hevy.js`, `prompts.js`
 
@@ -186,7 +192,9 @@ Funzioni senza React, testabili anche con Node (`node -e "import('./src/utils.js
 - `ui.jsx`: `Icon` (SVG inline, set in `PATHS`), `Card`, `Tabs`, `Stat`, `Empty`, `PageHeader`, `ErrorBanner`, `useFlash()` (toast: `const [node, flash] = useFlash(); flash('Salvato')`).
 - `WeightChart.jsx`: peso giornaliero (punti grigi) + media mobile 7 gg (linea) + fascia obiettivo; `ResizeObserver` per la larghezza, crosshair con tooltip su mouse/touch.
 - `TrendChart.jsx`: versione generica a una serie (`punti: [{ data, valore, dettaglio }]`), usata nei Progressi. Il passo dell'asse Y si sceglie tra valori "tondi" (1, 2, 2.5, 5…).
-- `RestTimer.jsx`: countdown in basso a partire da un timestamp di fine (resta preciso anche se il tab va in background), vibrazione e beep a fine recupero.
+- `RestTimer.jsx`: countdown in basso a partire da un timestamp di fine (resta preciso anche se il tab va in background), `+30 s` / `Salta`, vibrazione (Android) e beep a fine recupero. Su iPhone l'audio parte solo se il contesto audio è stato creato durante un tocco: per questo chi avvia il timer chiama prima `sbloccaAudio()`.
+- `useWidth(min)`: callback ref + `ResizeObserver`. Il grafico si disegna solo dopo aver misurato lo spazio disponibile e si ricollega anche se all'inizio mostrava un messaggio (es. "servono almeno 2 pesate"). Nelle griglie servono colonne `minmax(0, 1fr)`, altrimenti un SVG largo allarga la colonna.
+- `useWakeLock(attivo)`: Screen Wake Lock API, tiene lo schermo acceso nella tab "A mano" (solo HTTPS/localhost, altrimenti non fa nulla).
 
 ### 4.5 Pagine: `pages/`
 
@@ -196,11 +204,15 @@ Funzioni senza React, testabili anche con Node (`node -e "import('./src/utils.js
 | `Allenamento.jsx` | `SchedaView`, `Storico`, `ImportHevy`, `Progressi`, `Registra` | scheda, log, impostazioni | log |
 | `Cibo.jsx` | `Piano`, `Spesa`, `Frigo` | piani, spesa, frigo | spesa, frigo |
 | `Salute.jsx` | `Peso`, `Impostazioni`, `AliasForm` | misure, impostazioni, scheda, profilo.md | misure, impostazioni |
-| `Claude.jsx` | `Form`, `ChiediClaude` (pulsanti rapidi usati nelle altre pagine) | tutto | nessuno (copia negli appunti) |
+| `Claude.jsx` | `Form`, `ChiediClaude` (menu compatto nell'intestazione delle altre pagine) | tutto | nessuno (copia negli appunti o Condividi) |
 
 Dettagli utili:
-- **Home**: l'allenamento del giorno arriva da `impostazioni.calendario[giorno della settimana]`; i progressi dei fondamentali (`ESERCIZI_CHIAVE`) confrontano solo le ultime 6 settimane.
-- **Registra (a mano)**: il form si costruisce dalla scheda (`buildForm`), precompila i kg dall'ultima sessione (`emptySets`) e salva una **bozza in `localStorage`** (chiave `coach-bozza:<data>:<giorno>`) a ogni modifica. Al salvataggio vengono tenute solo le serie con le ripetizioni compilate.
+- **Home**: l'allenamento del giorno arriva da `impostazioni.calendario[giorno della settimana]`. La striscia della settimana conta le sessioni **previste e fatte** più quelle extra, e mostra la sigla del giorno di scheda (anche per le sessioni Hevy, tramite `giornoScheda`); la legenda A/B/C… viene dalla scheda. I fondamentali (`ESERCIZI_CHIAVE`) mostrano la serie migliore e la variazione del **1RM stimato** nelle ultime 6 settimane (o da inizio scheda, se più recente).
+- **Registra (a mano)**: il form si costruisce dalla scheda (`buildForm`) e salva una **bozza in `localStorage`** (chiave `coach-bozza:<data>:<giorno>`) a ogni modifica. Al salvataggio vengono tenute solo le serie con le ripetizioni compilate.
+  - kg precompilati (`emptySets`): alla prima sessione della scheda (o se l'esercizio non è mai stato fatto) vale il carico della scheda (`kgDaScheda`), poi quello dell'ultima sessione. I suggerimenti grigi delle reps usano solo sessioni della scheda in corso.
+  - **✓ serie fatta**: compila le reps (dalla volta scorsa o dal minimo del range), avvia il recupero; ritoccato di nuovo, riapre la serie. Con "max" mette il cursore nel campo.
+  - Una sessione importata da Hevy con un altro titolo viene riconosciuta come la stessa del giorno di scheda (`stessoGiorno`), così modificarla non crea un doppione.
+- **Progressi**: con la scheda in corso, "fermo / in crescita" considera solo le sessioni da `scheda.inizio`. Su telefono il grafico sta sopra l'elenco degli esercizi.
 - **Spesa → Frigo**: spuntare un articolo lo toglie da `spesa.json` e lo aggiunge a `frigo.json`; "finito, rimetti in lista" fa il contrario.
 - **Piano pasti**: ogni ingrediente viene confrontato per nome (senza maiuscole) con frigo e spesa per mostrare le etichette *frigo* / *spesa*. Per questo la skill chiede a Claude di usare gli stessi nomi.
   - Si può **modificare dalla webapp**: aggiungi / modifica / elimina un pasto (`PastoEditor`), scegli un piatto dal ricettario, segna "mangiato" (`fatto: true`).
@@ -225,9 +237,9 @@ Tutte le date sono `AAAA-MM-GG`. Non aggiungere campi senza aggiornare anche la 
 ```json
 { "nome": "Scheda 1 — …", "inizio": "2026-09-28", "settimane": 5,
   "giorni": [ { "nome": "Giorno A — Push",
-    "esercizi": [ { "nome": "Panca Piana (Bilanciere)", "serie": 3, "reps": "6-8", "rir": 2, "recupero_s": 150, "note": "" } ] } ] }
+    "esercizi": [ { "nome": "Panca Piana (Bilanciere)", "serie": 3, "reps": "6-8", "rir": 2, "recupero_s": 150, "note": "Sett. 1: 47,5 kg. …" } ] } ] }
 ```
-I nomi degli esercizi sono quelli della **libreria di Hevy**, così l'import li riconosce.
+I nomi degli esercizi sono quelli della **libreria di Hevy**, così l'import li riconosce. I giorni si chiamano `Giorno <sigla> — <descrizione>`: la sigla finisce in Home e la descrizione serve a riconoscere i titoli Hevy ("Push" → Giorno A). Il carico di partenza si legge dalle note nel formato `Sett. N: X kg` (anche `35-40 kg`, vale il minimo); in alternativa un campo opzionale `"kg"` numerico.
 
 **`log/allenamenti.json`**: array di sessioni
 ```json
@@ -259,21 +271,23 @@ Campi opzionali di una serie: `secondi` (esercizi a tempo) e `km` (esercizi a di
 { "calendario": { "lunedì": "Giorno A — Push", "martedì": null, … },
   "target": { "kcal": 2150, "proteine_g": 150 },
   "peso_obiettivo_kg": { "min": 70, "max": 75 },
-  "hevy_alias": { "Nome in Hevy": "Nome in scheda" } }
+  "hevy_alias": { "Nome in Hevy": "Nome in scheda" },
+  "hevy_giorni": { "Titolo allenamento in Hevy": "Giorno A — Push" } }
 ```
+`hevy_giorni` serve solo per i titoli che `giornoScheda` non riconosce da solo.
 
 ---
 
 ## 6. Flussi principali
 
 **Import da Hevy**
-`ImportHevy` → `file.text()` → `parseCsv` → `hevyToSessions` (con alias e nome scheda) → anteprima (`mergeLog` per contare nuove/aggiornate) → conferma → `save(log)` → `PUT /api/file?path=log/allenamenti.json`.
+`ImportHevy` → `file.text()` → `parseCsv` → `hevyToSessions` (con alias, nome scheda e — dall'inizio della scheda — titolo → giorno di scheda) → anteprima (con i titoli non collegati) (`mergeLog` per contare nuove/aggiornate) → conferma → `save(log)` → `PUT /api/file?path=log/allenamenti.json`.
 
 **Chiedi a Claude**
-`Claude.jsx` carica tutti i dati → `valoriIniziali(modello, ctx)` → a ogni modifica `modello.build(valori, ctx)` rigenera il testo (a meno che tu non l'abbia ritoccato a mano) → `navigator.clipboard.writeText`.
+`Claude.jsx` carica tutti i dati → `valoriIniziali(modello, ctx)` → a ogni modifica `modello.build(valori, ctx)` rigenera il testo (a meno che tu non l'abbia ritoccato a mano) → `copiaTesto` (in `clipboard.js`: `navigator.clipboard` in HTTPS/localhost, altrimenti textarea nascosta + `execCommand('copy')`, che funziona anche dal telefono in HTTP).
 
 **Claude aggiorna un file**
-Claude scrive su disco → torni sulla finestra della webapp → evento `focus` → `useJson` rifà la `GET` → la UI si aggiorna.
+Claude scrive su disco → torni sulla finestra della webapp → evento `focus` / `visibilitychange` → la cache rilegge i file in uso → la UI si aggiorna. Se salvi dalla webapp prima di rileggere, il server risponde 409 e i dati si ricaricano (niente sovrascritture).
 
 ---
 
@@ -293,7 +307,8 @@ npm run test:watch # test in modalità watch mentre modifichi il codice
 
 I test (Vitest) sono in `tests/` e coprono la logica pura:
 - `hevy.test.js`: parser CSV, date in italiano/inglese, conversione in sessioni (riscaldamento, failure/RPE, serie a tempo e distanza, alias, durata), merge idempotente;
-- `utils.test.js`: settimane ISO, media peso, 1RM, formattazione delle serie, tipo di esercizio, stato di progressione;
+- `utils.test.js`: settimane ISO ed etichette leggibili, media peso, 1RM, formattazione delle serie, tipo di esercizio, stato di progressione (anche da inizio scheda), riconoscimento dei giorni di scheda, carico dalla scheda;
+- `api.test.js`: cache condivisa con un `fetch` finto: versione inviata, salvataggi in fila, conflitto 409 che non sovrascrive e ricarica;
 - `piano.test.js`: piano vuoto, giorni mancanti, ordinamento, ricettario, ingredienti mancanti / in frigo, pulizia del form;
 - `prompts.test.js`: ogni modello di "Chiedi a Claude" genera un testo pulito (niente `undefined`, niente righe vuote doppie).
 
@@ -326,8 +341,9 @@ Con `npm run dev` ogni modifica ai file in `src/` si vede subito nel browser (HM
 ## 9. Limiti noti e idee
 
 - I test coprono la logica pura, non i componenti React (si potrebbe aggiungere Testing Library).
-- Ogni hook fa la sua richiesta: nessuna cache condivisa tra componenti.
-- La sessione è identificata da `data + titolo`: due allenamenti con lo stesso titolo nello stesso giorno collidono.
+- La sessione è identificata da `data + giorno`: due allenamenti dello stesso giorno di scheda nella stessa data collidono.
+- Dopo un conflitto (409) l'ultima modifica va ripetuta a mano: non c'è un merge automatico.
+- Wake Lock e il pulsante Condividi funzionano solo in HTTPS/localhost: dal telefono via `dev:rete` (HTTP) non sono disponibili.
 - L'API non ha autenticazione: va bene su `localhost`, meno con `dev:rete`.
 - Nel form "A mano" non si inseriscono serie a tempo/distanza (quelle importate vengono comunque conservate).
 - Possibili evoluzioni: sincronizzazione automatica con l'API di Hevy (serve Hevy PRO), un modello AI locale per il piano pasti.

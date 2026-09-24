@@ -111,3 +111,17 @@ describe('mergeLog', () => {
     expect(due).toEqual(una)
   })
 })
+
+describe('hevyToSessions con giorni di scheda', () => {
+  it('rinomina il titolo col giorno di scheda, così coincide con le sessioni inserite a mano', () => {
+    const { sessioni } = hevyToSessions(parseCsv(CSV), {
+      giorno: (titolo, data) => (data === '2026-09-23' ? 'Giorno A — Push' : null),
+    })
+    expect(sessioni[0].giorno).toBe('Giorno A — Push')
+    expect(sessioni[1].giorno).not.toBe('Giorno A — Push') // null → resta il titolo originale
+    const manuale = { data: '2026-09-23', giorno: 'Giorno A — Push', esercizi: [] }
+    const { log, aggiornate } = mergeLog([manuale], sessioni)
+    expect(aggiornate).toBe(1)
+    expect(log.filter((s) => s.data === '2026-09-23')).toHaveLength(1)
+  })
+})

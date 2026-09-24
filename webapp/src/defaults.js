@@ -13,6 +13,7 @@ export const IMPOSTAZIONI_DEFAULT = {
   target: { kcal: 2150, proteine_g: 150 },
   peso_obiettivo_kg: { min: 70, max: 75 },
   hevy_alias: {},
+  hevy_giorni: {},
 }
 
 export const FRIGO_DEFAULT = { aggiornato: null, articoli: [] }

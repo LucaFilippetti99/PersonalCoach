@@ -3,6 +3,7 @@ import { Card, Empty, Icon, PageHeader, useFlash } from '../components/ui.jsx'
 import { useFrigo, useImpostazioni, useLog, useMisure, useScheda, useSpesa } from '../hooks.js'
 import { navigate } from '../nav.js'
 import { MODELLI, SEZIONI_PROMPT, valoriIniziali } from '../prompts.js'
+import { copiaTesto, puoCondividere } from '../clipboard.js'
 
 /** Pagina "Chiedi a Claude": scegli un modello, compila il form, copia il prompt. */
 export default function Claude({ params }) {
@@ -67,10 +68,18 @@ function Form({ modello, ctx }) {
 
   async function copia() {
     try {
-      await navigator.clipboard.writeText(testo)
+      await copiaTesto(testo)
       doFlash('Copiato: incollalo in Cowork')
     } catch {
       doFlash('Copia non riuscita: seleziona il testo e copialo a mano', true)
+    }
+  }
+
+  async function condividi() {
+    try {
+      await navigator.share({ text: testo })
+    } catch {
+      /* annullato */
     }
   }
 
@@ -136,28 +145,54 @@ function Form({ modello, ctx }) {
       />
       <div className="row-between">
         <span className="muted small">Puoi ritoccare il testo prima di copiarlo.</span>
-        <button className="btn btn-primary" onClick={copia}>
-          <Icon name="copy" size={16} /> Copia
-        </button>
+        <div className="row-gap">
+          {puoCondividere() && (
+            <button className="btn" onClick={condividi}>
+              Condividi
+            </button>
+          )}
+          <button className="btn btn-primary" onClick={copia}>
+            <Icon name="copy" size={16} /> Copia
+          </button>
+        </div>
       </div>
       {flash}
     </Card>
   )
 }
 
-/** Pulsanti rapidi da mettere nelle altre sezioni */
+/** Menu compatto "Chiedi a Claude" da mettere nell'intestazione delle altre sezioni */
 export function ChiediClaude({ ids }) {
+  const [aperto, setAperto] = useState(false)
+  useEffect(() => {
+    if (!aperto) return
+    const chiudi = (e) => !e.target.closest?.('.ask') && setAperto(false)
+    const esc = (e) => e.key === 'Escape' && setAperto(false)
+    document.addEventListener('pointerdown', chiudi)
+    document.addEventListener('keydown', esc)
+    return () => {
+      document.removeEventListener('pointerdown', chiudi)
+      document.removeEventListener('keydown', esc)
+    }
+  }, [aperto])
   return (
-    <div className="ask-row">
-      <span className="muted small">Chiedi a Claude:</span>
-      {ids.map((id) => {
-        const m = MODELLI.find((x) => x.id === id)
-        return (
-          <button key={id} className="btn btn-sm" onClick={() => navigate('claude', { t: id })}>
-            {m.titolo}
-          </button>
-        )
-      })}
+    <div className="ask">
+      <button className="btn btn-sm ask-toggle" aria-expanded={aperto} aria-haspopup="menu" onClick={() => setAperto(!aperto)}>
+        <Icon name="chat" size={16} /> Chiedi a Claude
+      </button>
+      {aperto && (
+        <div className="ask-menu" role="menu">
+          {ids.map((id) => {
+            const m = MODELLI.find((x) => x.id === id)
+            return (
+              <button key={id} role="menuitem" className="ask-item" onClick={() => navigate('claude', { t: id })}>
+                <strong>{m.titolo}</strong>
+                <span className="muted small">{m.descrizione}</span>
+              </button>
+            )
+          })}
+        </div>
+      )}
     </div>
   )
 }

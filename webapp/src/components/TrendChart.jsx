@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
+import { useWidth } from './useWidth.js'
 import { formatDate, parseDate } from '../utils.js'
 
 /**
@@ -6,16 +7,8 @@ import { formatDate, parseDate } from '../utils.js'
  * Linea + punti, crosshair con tooltip. Il titolo della card nomina la serie (niente legenda).
  */
 export default function TrendChart({ punti, unita = 'kg', height = 220 }) {
-  const wrap = useRef(null)
-  const [width, setWidth] = useState(600)
+  const [wrap, width] = useWidth(240)
   const [hover, setHover] = useState(null)
-
-  useEffect(() => {
-    if (!wrap.current) return
-    const ro = new ResizeObserver(([e]) => setWidth(Math.max(260, e.contentRect.width)))
-    ro.observe(wrap.current)
-    return () => ro.disconnect()
-  }, [])
 
   if (punti.length < 2) {
     return (
@@ -24,6 +17,9 @@ export default function TrendChart({ punti, unita = 'kg', height = 220 }) {
       </div>
     )
   }
+
+  // Prima misura la larghezza disponibile, poi disegna
+  if (width == null) return <div className="chart" ref={wrap} style={{ height }} />
 
   const pts = punti.map((p) => ({ ...p, t: parseDate(p.data).getTime() }))
   const pad = { l: 40, r: 14, t: 12, b: 28 }

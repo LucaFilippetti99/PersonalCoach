@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { ricordaTab } from '../nav.js'
 
 const PATHS = {
   home: 'M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z',
@@ -62,7 +63,10 @@ export function Tabs({ tabs, value, onChange }) {
           role="tab"
           aria-selected={value === t.id}
           className={`tab ${value === t.id ? 'active' : ''}`}
-          onClick={() => onChange(t.id)}
+          onClick={() => {
+            onChange(t.id)
+            ricordaTab(t.id)
+          }}
         >
           {t.icon && <Icon name={t.icon} size={16} />}
           {t.label}

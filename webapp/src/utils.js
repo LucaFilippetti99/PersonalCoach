@@ -168,13 +168,15 @@ export function exerciseHistory(log = [], nome) {
 }
 
 /**
- * Stato di progressione sulle ultime 3 sessioni:
+ * Stato di progressione sulle ultime 3 sessioni (`oggi` e `dal` opzionali):
  * 'su' se l'ultima supera le precedenti, 'fermo' se non migliora da 3 sessioni, altrimenti 'ok'.
  */
-export function progressStatus(storia, oggi = new Date()) {
+export function progressStatus(storia, oggi = new Date(), dal = null) {
   if (!storia.length) return 'nessuno'
-  // Conta solo le sessioni delle ultime 6 settimane: dopo una pausa lunga lo storico vecchio non fa testo
-  const limite = isoDate(addDays(oggi, -42))
+  // Conta solo le sessioni delle ultime 6 settimane: dopo una pausa lunga lo storico vecchio non fa testo.
+  // Con `dal` (inizio della scheda in corso) si ignorano anche le sessioni del programma precedente.
+  const seiSett = isoDate(addDays(oggi, -42))
+  const limite = dal && dal > seiSett ? dal : seiSett
   const recenti = storia.filter((h) => h.data >= limite)
   if (!recenti.length) return 'vecchio'
   if (recenti.length < 3) return 'pochi'
@@ -183,4 +185,85 @@ export function progressStatus(storia, oggi = new Date()) {
   if (ult[2].e1rm > primaMax) return 'su'
   if (ult[2].e1rm <= ult[0].e1rm && ult[1].e1rm <= ult[0].e1rm) return 'fermo'
   return 'ok'
+}
+
+/* ---------------- Scheda ---------------- */
+
+const normTesto = (s) => String(s || '').toLowerCase().trim().replace(/\s+/g, ' ')
+
+/** "Giorno A — Push" → { sigla: 'A', descrizione: 'Push' } */
+export function parseGiorno(nome) {
+  const m = String(nome || '').match(/^giorno\s+(\S+)\s*[—–-]\s*(.+)$/i)
+  return m ? { sigla: m[1], descrizione: m[2].trim() } : { sigla: null, descrizione: String(nome || '') }
+}
+
+/** Sigla breve di un giorno di scheda ("A"), o null */
+export const siglaGiorno = (nome) => parseGiorno(nome).sigla
+
+/**
+ * Collega il titolo di un allenamento (es. da Hevy) al giorno della scheda.
+ * Ordine: alias impostato a mano → nome identico → "Push" / "Giorno A" / "A" → prima parola
+ * della descrizione ("Gambe" → "Giorno C — Gambe + spalle") se non è ambigua. Altrimenti null.
+ */
+export function giornoScheda(titolo, scheda, alias = {}) {
+  const giorni = scheda?.giorni?.map((g) => g.nome) || []
+  if (alias[titolo] && giorni.includes(alias[titolo])) return alias[titolo]
+  const t = normTesto(titolo)
+  if (!t) return null
+  const esatto = giorni.find((g) => normTesto(g) === t)
+  if (esatto) return esatto
+  const info = giorni.map((g) => ({ nome: g, ...parseGiorno(g) }))
+  const perNome = info.filter(
+    (g) =>
+      g.sigla &&
+      (t === normTesto(g.descrizione) || t === `giorno ${normTesto(g.sigla)}` || t === normTesto(g.sigla)),
+  )
+  if (perNome.length === 1) return perNome[0].nome
+  const primaParola = t.split(/[\s+/,]+/)[0]
+  const perParola = info.filter((g) => g.sigla && normTesto(g.descrizione).split(/[\s+/,]+/)[0] === primaParola)
+  return perParola.length === 1 ? perParola[0].nome : null
+}
+
+/** Settimana della scheda (1, 2, …) in una data; 0 prima dell'inizio, null se la scheda non ha inizio */
+export function settimanaScheda(scheda, data = isoDate()) {
+  if (!scheda?.inizio) return null
+  const diff = Math.round((parseDate(data) - parseDate(scheda.inizio)) / 86400000)
+  return diff < 0 ? 0 : Math.floor(diff / 7) + 1
+}
+
+/** La scheda è in corso in quella data (iniziata) */
+export const schedaAttiva = (scheda, data = isoDate()) => !!scheda?.inizio && data >= scheda.inizio
+
+/**
+ * Carico di partenza indicato dalla scheda per un esercizio in una certa settimana.
+ * Usa il campo `kg` se c'è, altrimenti legge le note tipo "Sett. 1: 47,5 kg" o "Sett. 1: 35-40 kg"
+ * (in un intervallo prende il valore più basso). Vale l'indicazione della settimana più recente ≤ quella corrente.
+ */
+export function kgDaScheda(target, settimana = 1) {
+  if (typeof target?.kg === 'number') return target.kg
+  const re = /sett\.?\s*(\d+)\s*:\s*(\d+(?:[.,]\d+)?)(?:\s*[-–]\s*\d+(?:[.,]\d+)?)?\s*kg/gi
+  let best = null
+  for (const m of String(target?.note || '').matchAll(re)) {
+    const w = Number(m[1])
+    if (w <= Math.max(1, settimana) && (!best || w >= best.w)) best = { w, kg: Number(m[2].replace(',', '.')) }
+  }
+  return best?.kg ?? null
+}
+
+/** Lunedì della settimana ISO "AAAA-Www" (null se il formato non torna) */
+export function lunediSettimana(settimana) {
+  const m = String(settimana || '').match(/(\d{4})-W(\d{2})/)
+  if (!m) return null
+  const gen4 = new Date(Number(m[1]), 0, 4) // il 4 gennaio è sempre nella settimana 1
+  return addDays(startOfWeek(gen4), (Number(m[2]) - 1) * 7)
+}
+
+/** "2026-W39" → "21–27 set", "2026-W40" → "28 set – 4 ott" */
+export function etichettaSettimana(settimana) {
+  const lun = lunediSettimana(settimana)
+  if (!lun) return settimana
+  const dom = addDays(lun, 6)
+  const mese = (d) => d.toLocaleDateString('it-IT', { month: 'short' }).replace('.', '')
+  if (lun.getMonth() === dom.getMonth()) return `${lun.getDate()}–${dom.getDate()} ${mese(dom)}`
+  return `${lun.getDate()} ${mese(lun)} – ${dom.getDate()} ${mese(dom)}`
 }

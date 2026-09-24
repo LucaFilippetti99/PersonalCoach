@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Card, Empty, ErrorBanner, Icon, PageHeader, Stat, Tabs, useFlash } from '../components/ui.jsx'
 import WeightChart from '../components/WeightChart.jsx'
 import { useImpostazioni, useMisure, useScheda } from '../hooks.js'
@@ -9,7 +9,7 @@ export default function Salute({ params }) {
   const [tab, setTab] = useState(params.tab || 'peso')
   return (
     <div className="page">
-      <PageHeader title="Salute" subtitle="Peso, misure e impostazioni" />
+      <PageHeader title="Salute" subtitle="Peso, misure e impostazioni" action={<ChiediClaude ids={['progressi', 'profilo']} />} />
       <Tabs
         value={tab}
         onChange={setTab}
@@ -18,7 +18,6 @@ export default function Salute({ params }) {
           { id: 'impostazioni', label: 'Impostazioni', icon: 'gear' },
         ]}
       />
-      <ChiediClaude ids={['progressi', 'profilo']} />
       {tab === 'peso' ? <Peso /> : <Impostazioni />}
     </div>
   )
@@ -35,14 +34,19 @@ function Peso() {
   const [tutte, setTutte] = useState(false)
 
   const esistente = misure?.find((m) => m.data === form.data && m.peso_kg != null)
+
+  // Quando cambi data (o arrivano i dati la prima volta) il form mostra la misura di quel giorno,
+  // oppure si svuota. Non si tocca mentre scrivi, anche se i dati vengono ricaricati.
+  const dataCaricata = useRef(null)
   useEffect(() => {
-    if (esistente)
-      setForm((f) => ({
-        ...f,
-        peso_kg: String(esistente.peso_kg ?? ''),
-        vita_cm: String(esistente.vita_cm ?? ''),
-        note: esistente.note ?? '',
-      }))
+    if (!misure || dataCaricata.current === form.data) return
+    dataCaricata.current = form.data
+    setForm((f) => ({
+      ...f,
+      peso_kg: esistente ? String(esistente.peso_kg ?? '') : '',
+      vita_cm: esistente?.vita_cm != null ? String(esistente.vita_cm) : '',
+      note: esistente?.note ?? '',
+    }))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [form.data, misure])
 
@@ -321,6 +325,38 @@ function Impostazioni() {
         />
       </Card>
 
+      <Card title="Giorni Hevy" action={<span className="muted small">Per l'import</span>}>
+        <p className="muted small">
+          I titoli come «Push» o «Giorno B» vengono riconosciuti da soli. Se in Hevy chiami un allenamento in modo
+          diverso, collegalo qui al giorno della scheda: così non ti ritrovi la stessa sessione due volte.
+        </p>
+        {Object.entries(bozza.hevy_giorni || {}).map(([hevy, nome]) => (
+          <div className="form-row alias-row" key={hevy}>
+            <span className="grow">{hevy}</span>
+            <span className="muted">→</span>
+            <span className="grow">{nome}</span>
+            <button
+              className="btn btn-icon"
+              aria-label={`Rimuovi ${hevy}`}
+              onClick={() => {
+                const a = { ...bozza.hevy_giorni }
+                delete a[hevy]
+                set(['hevy_giorni'], a)
+              }}
+            >
+              <Icon name="trash" size={15} />
+            </button>
+          </div>
+        ))}
+        <AliasForm
+          nomiScheda={scheda.giorni.map((g) => g.nome)}
+          etichetta="Titolo dell'allenamento in Hevy"
+          etichettaScheda="Giorno della scheda"
+          placeholder="Es. Petto e tricipiti"
+          onAdd={(hevy, nome) => set(['hevy_giorni'], { ...(bozza.hevy_giorni || {}), [hevy]: nome })}
+        />
+      </Card>
+
       <div className="save-bar">
         <span className="muted small">Salvate in impostazioni.json</span>
         <button className="btn btn-primary" onClick={salva}>
@@ -336,17 +372,23 @@ function Impostazioni() {
   )
 }
 
-function AliasForm({ nomiScheda, onAdd }) {
+function AliasForm({
+  nomiScheda,
+  onAdd,
+  etichetta = 'Nome in Hevy',
+  etichettaScheda = 'Esercizio in scheda',
+  placeholder = 'Es. Lat Pulldown - Presa Stretta (Cavo)',
+}) {
   const [hevy, setHevy] = useState('')
   const [nome, setNome] = useState(nomiScheda[0] || '')
   return (
     <div className="form-row">
       <label className="field grow">
-        <span>Nome in Hevy</span>
-        <input value={hevy} placeholder="Es. Lat Pulldown - Presa Stretta (Cavo)" onChange={(e) => setHevy(e.target.value)} />
+        <span>{etichetta}</span>
+        <input value={hevy} placeholder={placeholder} onChange={(e) => setHevy(e.target.value)} />
       </label>
       <label className="field grow">
-        <span>Esercizio in scheda</span>
+        <span>{etichettaScheda}</span>
         <select value={nome} onChange={(e) => setNome(e.target.value)}>
           {nomiScheda.map((n) => (
             <option key={n}>{n}</option>

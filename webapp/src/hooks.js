@@ -32,8 +32,13 @@ export function usePianiList() {
   )
   useEffect(() => {
     load()
+    const onVisible = () => document.visibilityState === 'visible' && load()
     window.addEventListener('focus', load)
-    return () => window.removeEventListener('focus', load)
+    document.addEventListener('visibilitychange', onVisible)
+    return () => {
+      window.removeEventListener('focus', load)
+      document.removeEventListener('visibilitychange', onVisible)
+    }
   }, [load])
   const week = isoWeek()
   // Il file di esempio non conta come piano della settimana

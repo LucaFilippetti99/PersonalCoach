@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { readJson, useJson, writeJson } from '../api.js'
+import { readJson, saveFile, useJson } from '../api.js'
 import { Card, Empty, ErrorBanner, Icon, PageHeader, Tabs, useFlash } from '../components/ui.jsx'
 import { CATEGORIE_SPESA } from '../defaults.js'
 import { useFrigo, useImpostazioni, usePianiList, useSpesa } from '../hooks.js'
@@ -17,7 +17,7 @@ import {
   pulisciPasto,
   ricettario,
 } from '../piano.js'
-import { isoDate, isoWeek, parseDate, weekdayName } from '../utils.js'
+import { etichettaSettimana, isoDate, isoWeek, parseDate, weekdayName } from '../utils.js'
 
 export default function Cibo({ params }) {
   const [tab, setTab] = useState(params.tab || 'piano')
@@ -28,7 +28,7 @@ export default function Cibo({ params }) {
   const ctx = { spesa, frigo, doFlash }
   return (
     <div className="page">
-      <PageHeader title="Cibo" subtitle="Piano della settimana, lista della spesa e frigo" />
+      <PageHeader title="Cibo" subtitle="Piano della settimana, lista della spesa e frigo" action={<ChiediClaude ids={['settimana-cibo', 'piano-pasti', 'spesa']} />} />
       <Tabs
         value={tab}
         onChange={setTab}
@@ -38,7 +38,6 @@ export default function Cibo({ params }) {
           { id: 'frigo', label: 'Frigo', icon: 'fridge', badge: frigo.data?.articoli.length || null },
         ]}
       />
-      <ChiediClaude ids={['settimana-cibo', 'piano-pasti', 'spesa']} />
       <ErrorBanner error={spesa.error || frigo.error} />
       {tab === 'piano' && <Piano {...ctx} />}
       {tab === 'spesa' && <Spesa {...ctx} />}
@@ -69,10 +68,10 @@ function Piano({ spesa, frigo, doFlash }) {
 
   async function creaSettimana() {
     const settimana = isoWeek()
-    await writeJson(`piani-pasti/${settimana}.json`, pianoVuoto(settimana, imp?.target?.kcal ?? null))
+    await saveFile(`piani-pasti/${settimana}.json`, pianoVuoto(settimana, imp?.target?.kcal ?? null))
     await reloadList()
     setScelto(`${settimana}.json`)
-    doFlash(`Piano ${settimana} creato`)
+    doFlash(`Piano ${etichettaSettimana(settimana)} creato`)
   }
 
   async function salvaPiano(next) {
@@ -157,7 +156,7 @@ function Piano({ spesa, frigo, doFlash }) {
         <Card className="card-accent">
           <div className="plan-head">
             <div>
-              <h2>Nessun piano per la settimana {isoWeek()}</h2>
+              <h2>Nessun piano per questa settimana ({etichettaSettimana(isoWeek())})</h2>
               <p className="muted small">
                 Crealo vuoto e riempilo tu (anche scegliendo piatti già fatti), oppure fattelo proporre da Claude.
               </p>
@@ -180,7 +179,8 @@ function Piano({ spesa, frigo, doFlash }) {
           <select value={file || ''} onChange={(e) => setScelto(e.target.value)}>
             {files.map((f) => (
               <option key={f} value={f}>
-                {f.replace('.json', '')}
+                {etichettaSettimana(f)}
+                {/esempio/i.test(f) ? ' (esempio)' : f.includes(isoWeek()) ? ' (questa)' : ''}
               </option>
             ))}
           </select>
@@ -192,7 +192,7 @@ function Piano({ spesa, frigo, doFlash }) {
       ) : (
         <>
           <p className="muted small">
-            Settimana {dati.settimana}
+            Settimana {etichettaSettimana(dati.settimana)}
             {dati.kcal_giorno_indicative ? ` · ~${dati.kcal_giorno_indicative} kcal al giorno` : ''}
             {isEsempio && ' · file di esempio'} · tocca un giorno per vedere, modificare o aggiungere pasti
           </p>

@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useMemo, useState } from 'react'
+import { useWidth } from './useWidth.js'
 import { addDays, formatDate, parseDate, round1, validWeights, weeklyAvg } from '../utils.js'
 
 /**
@@ -6,16 +7,8 @@ import { addDays, formatDate, parseDate, round1, validWeights, weeklyAvg } from 
  * Hover/touch: linea verticale con tooltip sul giorno più vicino.
  */
 export default function WeightChart({ misure, target, height = 240 }) {
-  const wrap = useRef(null)
-  const [width, setWidth] = useState(600)
+  const [wrap, width] = useWidth(240)
   const [hover, setHover] = useState(null)
-
-  useEffect(() => {
-    if (!wrap.current) return
-    const ro = new ResizeObserver(([e]) => setWidth(Math.max(280, e.contentRect.width)))
-    ro.observe(wrap.current)
-    return () => ro.disconnect()
-  }, [])
 
   const pts = useMemo(() => {
     const w = validWeights(misure)
@@ -29,6 +22,9 @@ export default function WeightChart({ misure, target, height = 240 }) {
       </div>
     )
   }
+
+  // Prima misura la larghezza disponibile, poi disegna
+  if (width == null) return <div className="chart" ref={wrap} style={{ height }} />
 
   const pad = { l: 40, r: 12, t: 12, b: 28 }
   const iw = width - pad.l - pad.r

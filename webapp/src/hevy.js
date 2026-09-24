@@ -91,8 +91,9 @@ const num = (v) => {
  * - serie "failure" → RIR 0; RPE presente → RIR = 10 - RPE
  * - `alias`: { "Nome Hevy": "Nome in scheda" } per esercizi con nomi diversi
  * - `nomeScheda(data)`: restituisce il nome della scheda attiva in quella data
+ * - `giorno(titolo, data)`: collega il titolo dell'allenamento al giorno di scheda (default: il titolo stesso)
  */
-export function hevyToSessions(rows, { alias = {}, nomeScheda = () => 'Hevy' } = {}) {
+export function hevyToSessions(rows, { alias = {}, nomeScheda = () => 'Hevy', giorno = (titolo) => titolo } = {}) {
   const byWorkout = new Map()
   for (const r of rows) {
     const key = `${r.title}|${r.start_time}`
@@ -155,7 +156,7 @@ export function hevyToSessions(rows, { alias = {}, nomeScheda = () => 'Hevy' } =
     sessioni.push({
       data: start.data,
       scheda: nomeScheda(start.data),
-      giorno: r0.title.trim(),
+      giorno: giorno(r0.title.trim(), start.data) || r0.title.trim(),
       esercizi: pulite,
       durata_min: durata,
       note: [r0.description?.trim(), ...noteEs].filter(Boolean).join(' | '),

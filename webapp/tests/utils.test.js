@@ -89,3 +89,89 @@ describe('progressStatus', () => {
     expect(progressStatus([], oggi)).toBe('nessuno')
   })
 })
+
+import { giornoScheda, kgDaScheda, parseGiorno, schedaAttiva, settimanaScheda } from '../src/utils.js'
+
+const SCHEDA = {
+  inizio: '2026-10-05',
+  giorni: [
+    { nome: 'Giorno A — Push' },
+    { nome: 'Giorno B — Pull' },
+    { nome: 'Giorno C — Gambe + spalle' },
+    { nome: 'Giorno D — Corsa + corpo libero' },
+  ],
+}
+
+describe('giorni di scheda', () => {
+  it('parseGiorno separa sigla e descrizione', () => {
+    expect(parseGiorno('Giorno A — Push')).toEqual({ sigla: 'A', descrizione: 'Push' })
+    expect(parseGiorno('Allenamento libero').sigla).toBe(null)
+  })
+
+  it.each([
+    ['Giorno A — Push', 'Giorno A — Push'],
+    ['push', 'Giorno A — Push'],
+    ['Giorno B', 'Giorno B — Pull'],
+    ['C', 'Giorno C — Gambe + spalle'],
+    ['Gambe', 'Giorno C — Gambe + spalle'],
+    ['Corsa del sabato', 'Giorno D — Corsa + corpo libero'],
+    ['Giorno 1 homemade', null],
+    ['Allenamento con Benny', null],
+  ])('%s → %s', (titolo, atteso) => {
+    expect(giornoScheda(titolo, SCHEDA)).toBe(atteso)
+  })
+
+  it("l'alias impostato a mano vince", () => {
+    expect(giornoScheda('Giorno 1', SCHEDA, { 'Giorno 1': 'Giorno B — Pull' })).toBe('Giorno B — Pull')
+  })
+
+  it('settimana e stato della scheda', () => {
+    expect(settimanaScheda(SCHEDA, '2026-10-04')).toBe(0)
+    expect(settimanaScheda(SCHEDA, '2026-10-05')).toBe(1)
+    expect(settimanaScheda(SCHEDA, '2026-10-12')).toBe(2)
+    expect(schedaAttiva(SCHEDA, '2026-09-24')).toBe(false)
+    expect(schedaAttiva(SCHEDA, '2026-10-05')).toBe(true)
+  })
+})
+
+describe('kgDaScheda', () => {
+  it('usa il campo kg se presente', () => {
+    expect(kgDaScheda({ kg: 42.5, note: 'Sett. 1: 30 kg' })).toBe(42.5)
+  })
+  it('legge le note, anche con virgola e intervallo', () => {
+    expect(kgDaScheda({ note: 'Sett. 1: 47,5 kg. Quando chiudi 3×8, passa a 50 kg.' })).toBe(47.5)
+    expect(kgDaScheda({ note: 'Sett. 1: 35-40 kg. Riscaldamento' })).toBe(35)
+  })
+  it("prende l'indicazione della settimana più recente", () => {
+    const t = { note: 'Sett. 1: 40 kg. Sett. 3: 45 kg' }
+    expect(kgDaScheda(t, 2)).toBe(40)
+    expect(kgDaScheda(t, 4)).toBe(45)
+  })
+  it('null se non c\'è un carico', () => {
+    expect(kgDaScheda({ note: 'Sett. 1: a corpo libero' })).toBe(null)
+  })
+})
+
+describe('progressStatus con inizio scheda', () => {
+  const h = (data, v) => ({ data, e1rm: v, valore: v })
+  it('ignora le sessioni prima della scheda', () => {
+    const storia = [h('2026-09-01', 60), h('2026-09-08', 58), h('2026-09-15', 57), h('2026-10-06', 55)]
+    const oggi = new Date(2026, 9, 7)
+    expect(progressStatus(storia, oggi)).toBe('fermo')
+    expect(progressStatus(storia, oggi, '2026-10-05')).toBe('pochi')
+  })
+})
+
+import { etichettaSettimana, lunediSettimana } from '../src/utils.js'
+
+describe('settimane leggibili', () => {
+  it('lunediSettimana è coerente con isoWeek', () => {
+    for (const w of ['2026-W01', '2026-W39', '2026-W53', '2027-W10']) expect(isoWeek(lunediSettimana(w))).toBe(w)
+  })
+  it.each([
+    ['2026-W39', '21–27 set'],
+    ['2026-W40', '28 set – 4 ott'],
+    ['esempio-2026-W40.json', '28 set – 4 ott'],
+    ['boh', 'boh'],
+  ])('%s → %s', (w, atteso) => expect(etichettaSettimana(w)).toBe(atteso))
+})

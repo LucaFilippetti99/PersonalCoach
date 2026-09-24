@@ -5,8 +5,14 @@ import { navigate } from '../nav.js'
 import {
   GIORNI_SETTIMANA,
   addDays,
+  exerciseHistory,
   formatDate,
+  formatSet,
   formatSets,
+  giornoScheda,
+  parseGiorno,
+  schedaAttiva,
+  siglaGiorno,
   isExampleSession,
   isoDate,
   lastExercise,
@@ -72,7 +78,33 @@ export default function Home() {
     }
   })
   const previsti = settimana.filter((g) => g.previsto).length
-  const fatti = settimana.filter((g) => g.fatto).length
+  const fattiPrevisti = settimana.filter((g) => g.previsto && g.fatto).length
+  const extra = settimana.filter((g) => !g.previsto && g.fatto).length
+  let riepilogo
+  if (previsti) riepilogo = `${fattiPrevisti} di ${previsti} sessioni previste${extra ? ` · ${extra} extra` : ''}`
+  else riepilogo = `${extra} ${extra === 1 ? 'allenamento' : 'allenamenti'} questa settimana`
+  // Sigla da mostrare sotto il giorno: A, B, C… (anche per le sessioni importate da Hevy con un altro titolo)
+  const sigla = (g) =>
+    siglaGiorno(g.fatto ? giornoScheda(g.fatto.giorno, scheda, imp?.hevy_giorni) || '' : g.previsto) || ''
+  const legenda = (scheda?.giorni || [])
+    .map((g) => {
+      const { sigla: s, descrizione } = parseGiorno(g.nome)
+      return s ? `${s} ${descrizione}` : null
+    })
+    .filter(Boolean)
+    .join(' · ')
+
+  // Fondamentali: 1RM stimato (tiene conto di kg e ripetizioni) nelle ultime 6 settimane,
+  // o dall'inizio della scheda se è più recente
+  const seiSett = isoDate(addDays(new Date(), -42))
+  const dal = schedaAttiva(scheda) && scheda.inizio > seiSett ? scheda.inizio : seiSett
+  const fondamentali = ESERCIZI_CHIAVE.map((nome) => {
+    const storia = exerciseHistory(log, nome).filter((h) => h.data >= dal)
+    if (!storia.length) return null
+    const ultimo = storia.at(-1)
+    const diff = storia.length > 1 ? round1(ultimo.valore - storia[0].valore) : null
+    return { nome, ultimo, diff }
+  }).filter(Boolean)
 
   // Peso
   const pesi = validWeights(misure)
@@ -184,18 +216,15 @@ export default function Home() {
               >
                 <span className="wd-name">{g.nome.slice(0, 3)}</span>
                 <span className="wd-dot">{g.fatto ? <Icon name="check" size={14} /> : null}</span>
-                <span className="wd-label">
-                  {(g.fatto?.giorno || g.previsto || '').replace(/^Giorno (\w).*$/, '$1') || '–'}
-                </span>
+                <span className="wd-label">{sigla(g) || (g.fatto ? '' : '–')}</span>
               </div>
             ))}
           </div>
-          <p className="muted small">
-            {fatti} di {previsti} sessioni fatte · A Push, B Pull, C Gambe, D Corsa
-          </p>
+          <p className="week-summary">{riepilogo}</p>
+          {legenda && <p className="muted small">{legenda}</p>}
           {ultimaSessione && (
             <p className="muted small">
-              Ultima sessione importata: {formatDate(ultimaSessione.data)}.{' '}
+              Ultima sessione: {formatDate(ultimaSessione.data)}.{' '}
               <button className="btn btn-link" onClick={() => navigate('allenamento', { tab: 'storico' })}>
                 Importa da Hevy
               </button>
@@ -245,12 +274,13 @@ export default function Home() {
         <Card
           title="Progressi"
           action={
-            <button className="btn btn-ghost" onClick={() => navigate('salute')}>
-              Salute <Icon name="chevron" size={16} />
+            <button className="btn btn-ghost" onClick={() => navigate('allenamento', { tab: 'progressi' })}>
+              Dettagli <Icon name="chevron" size={16} />
             </button>
           }
         >
-          <div className="stats">
+          <div className="stats stats-link" role="link" tabIndex={0} title="Peso e misure"
+            onClick={() => navigate('salute')} onKeyDown={(e) => e.key === 'Enter' && navigate('salute')}>
             <Stat
               label="Media peso 7 gg"
               value={media != null ? round1(media) : null}
@@ -273,31 +303,23 @@ export default function Home() {
             />
           </div>
           <div className="lifts">
-            {ESERCIZI_CHIAVE.map((nome) => {
-              // Solo le ultime 6 settimane: il confronto con mesi fa (magari dopo una pausa) non è utile
-              const limite6 = isoDate(addDays(new Date(), -42))
-              const storico = log
-                .filter((s) => s.data >= limite6 && s.esercizi.some((e) => e.nome === nome))
-                .sort((a, b) => a.data.localeCompare(b.data))
-              if (!storico.length) return null
-              const primo = topSet(storico[0].esercizi.find((e) => e.nome === nome))
-              const ultimo = topSet(storico[storico.length - 1].esercizi.find((e) => e.nome === nome))
-              const diff = ultimo.kg - primo.kg
-              return (
-                <div className="lift" key={nome}>
-                  <span>{nome}</span>
-                  <span className="lift-val">
-                    {ultimo.kg} kg × {ultimo.reps}
-                    {storico.length > 1 && (
-                      <span className={`delta ${diff > 0 ? 'up' : ''}`}>
-                        {diff > 0 ? `+${diff}` : diff} kg
-                      </span>
-                    )}
-                  </span>
-                </div>
-              )
-            })}
-            <p className="muted small">Serie migliore e variazione nelle ultime 6 settimane.</p>
+            {fondamentali.map(({ nome, ultimo, diff }) => (
+              <div className="lift" key={nome}>
+                <span>{nome}</span>
+                <span className="lift-val">
+                  {formatSet(ultimo.top)}
+                  {diff != null && (
+                    <span className={`delta ${diff > 0 ? 'up' : diff < 0 ? 'down' : ''}`}>
+                      {diff > 0 ? `+${diff}` : diff} kg
+                    </span>
+                  )}
+                </span>
+              </div>
+            ))}
+            {!fondamentali.length && <p className="muted small">Nessuna sessione recente dei fondamentali.</p>}
+            <p className="muted small">
+              Serie migliore e variazione del 1RM stimato {dal === seiSett ? 'nelle ultime 6 settimane' : 'da inizio scheda'}.
+            </p>
           </div>
         </Card>
       </div>

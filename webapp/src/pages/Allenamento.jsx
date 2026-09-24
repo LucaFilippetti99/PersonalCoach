@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Card, Empty, ErrorBanner, Icon, PageHeader, Tabs, useFlash } from '../components/ui.jsx'
-import RestTimer from '../components/RestTimer.jsx'
+import RestTimer, { sbloccaAudio } from '../components/RestTimer.jsx'
+import { useWakeLock } from '../components/useWakeLock.js'
 import { useImpostazioni, useLog, useScheda } from '../hooks.js'
 import { navigate } from '../nav.js'
 import { ChiediClaude } from './Claude.jsx'
@@ -10,6 +11,10 @@ import {
   TIPO_INFO,
   exerciseHistory,
   formatDate,
+  giornoScheda,
+  kgDaScheda,
+  schedaAttiva,
+  settimanaScheda,
   formatSet,
   formatSets,
   isExampleSession,
@@ -24,7 +29,7 @@ export default function Allenamento({ params }) {
 
   return (
     <div className="page">
-      <PageHeader title="Allenamento" subtitle="Scheda, storico da Hevy e progressi" />
+      <PageHeader title="Allenamento" subtitle="Scheda, storico da Hevy e progressi" action={<ChiediClaude ids={['sessione', 'fermo', 'dolore', 'modifica-scheda']} />} />
       <Tabs
         value={tab}
         onChange={setTab}
@@ -35,7 +40,6 @@ export default function Allenamento({ params }) {
           { id: 'registra', label: 'A mano', icon: 'plus' },
         ]}
       />
-      <ChiediClaude ids={['sessione', 'fermo', 'dolore', 'modifica-scheda']} />
       {tab === 'scheda' && <SchedaView />}
       {tab === 'storico' && <Storico />}
       {tab === 'progressi' && <Progressi params={params} />}
@@ -105,26 +109,38 @@ function buildForm(scheda, log, giornoNome, data, esistente) {
             ...(s.km ? { km: s.km } : {}),
           })),
         })),
-        ...extra.map((t) => ({ nome: t.nome, target: t, serie: emptySets(t, log, data) })),
+        ...extra.map((t) => ({ nome: t.nome, target: t, serie: emptySets(t, log, data, scheda) })),
       ],
       durata_min: esistente.durata_min ?? '',
       note: esistente.note ?? '',
     }
   }
   return {
-    esercizi: (giorno?.esercizi || []).map((t) => ({ nome: t.nome, target: t, serie: emptySets(t, log, data) })),
+    esercizi: (giorno?.esercizi || []).map((t) => ({ nome: t.nome, target: t, serie: emptySets(t, log, data, scheda) })),
     durata_min: '',
     note: '',
   }
 }
 
-function emptySets(t, log, data) {
+/**
+ * Serie vuote per un esercizio di scheda, con i kg precompilati:
+ * - prima sessione della scheda (o esercizio mai fatto) → carico indicato dalla scheda, se c'è;
+ * - altrimenti → i kg dell'ultima sessione.
+ */
+function emptySets(t, log, data, scheda) {
   const last = lastExercise(log, t.nome, data)
+  const primaVoltaInScheda = scheda?.inizio && (!last || last.data < scheda.inizio)
+  const kgScheda = primaVoltaInScheda ? kgDaScheda(t, settimanaScheda(scheda, data)) : null
   return Array.from({ length: t.serie }, (_, i) => {
     const prev = last?.esercizio.serie[i] || last?.esercizio.serie.at(-1)
-    return { kg: prev ? String(prev.kg) : '', reps: '', rir: t.rir ?? '' }
+    const kg = kgScheda ?? prev?.kg
+    return { kg: kg != null ? String(kg) : '', reps: '', rir: t.rir ?? '' }
   })
 }
+
+/** La sessione `s` è quella del giorno di scheda `giornoNome`? (anche se importata da Hevy con un altro titolo) */
+const stessoGiorno = (s, giornoNome, scheda, aliasGiorni) =>
+  s.giorno === giornoNome || giornoScheda(s.giorno, scheda, aliasGiorni) === giornoNome
 
 function Registra({ params }) {
   const { data: scheda } = useScheda()
@@ -132,6 +148,7 @@ function Registra({ params }) {
   const { data: imp } = useImpostazioni()
   const [flash, doFlash] = useFlash()
   const [timer, setTimer] = useState(null)
+  useWakeLock(true) // in palestra lo schermo resta acceso mentre registri
 
   const [data, setData] = useState(params.data || isoDate())
   const [giornoNome, setGiornoNome] = useState(params.giorno || '')
@@ -152,7 +169,7 @@ function Registra({ params }) {
     if (params.data) setData(params.data)
   }, [params.giorno, params.data])
 
-  const esistente = log.find((s) => s.data === data && s.giorno === giornoNome)
+  const esistente = log.find((s) => s.data === data && stessoGiorno(s, giornoNome, scheda, imp?.hevy_giorni))
   const key = draftKey(data, giornoNome)
 
   // (Ri)costruisce il form quando cambiano data/giorno o arrivano i dati
@@ -183,6 +200,27 @@ function Registra({ params }) {
     next.esercizi[ei].serie.splice(si, 1)
     update(next)
   }
+  function avviaRecupero(e) {
+    if (!(e.target?.recupero_s > 0)) return
+    sbloccaAudio() // va fatto nel tocco, altrimenti su iPhone il beep finale non suona
+    setTimer({ secondi: e.target.recupero_s, nome: e.nome, id: Date.now() })
+  }
+
+  /**
+   * ✓ serie fatta: se le ripetizioni sono vuote le prende dalla volta scorsa (o dal minimo del range
+   * della scheda) e fa partire il recupero. Se la serie era già segnata, la riapre.
+   */
+  function serieFatta(ei, si, prev) {
+    const e = form.esercizi[ei]
+    const s = e.serie[si]
+    if (s.reps !== '') return setSerie(ei, si, 'reps', '')
+    const reps = prev?.reps || Number(String(e.target?.reps ?? '').match(/\d+/)?.[0]) || null
+    if (!reps) return document.getElementById(`reps-${ei}-${si}`)?.focus() // es. "max": scrivile tu
+    setSerie(ei, si, 'reps', String(reps))
+    const ultimaSerie = ei === form.esercizi.length - 1 && si === e.serie.length - 1
+    if (!ultimaSerie) avviaRecupero(e)
+  }
+
   function addEsercizio() {
     if (!nuovoEs.trim()) return
     const next = structuredClone(form)
@@ -223,7 +261,7 @@ function Registra({ params }) {
     }
     // Il primo salvataggio reale rimuove la sessione di esempio
     const altri = (logRaw || []).filter(
-      (s) => !isExampleSession(s) && !(s.data === data && s.giorno === giornoNome),
+      (s) => !isExampleSession(s) && !(s.data === data && stessoGiorno(s, giornoNome, scheda, imp?.hevy_giorni)),
     )
     const next = [...altri, sessione].sort((a, b) => a.data.localeCompare(b.data))
     try {
@@ -287,7 +325,7 @@ function Registra({ params }) {
                 {e.target?.recupero_s > 0 && (
                   <button
                     className="btn btn-ghost btn-sm"
-                    onClick={() => setTimer({ secondi: e.target.recupero_s, nome: e.nome, id: Date.now() })}
+                    onClick={() => avviaRecupero(e)}
                   >
                     Recupero {e.target.recupero_s}s
                   </button>
@@ -314,9 +352,12 @@ function Registra({ params }) {
                 <span>reps</span>
                 <span>RIR</span>
                 <span />
+                <span />
               </div>
               {e.serie.map((s, si) => {
-                const prev = last?.esercizio.serie[si]
+                // Le serie della volta scorsa servono da suggerimento solo se sono della scheda in corso
+                const prev = last && (!scheda.inizio || last.data >= scheda.inizio) ? last.esercizio.serie[si] : null
+                const fatta = s.reps !== ''
                 return (
                   <div className={`set-row ${s.reps !== '' ? 'filled' : ''}`} key={si}>
                     <span className="set-n">{si + 1}</span>
@@ -328,6 +369,7 @@ function Registra({ params }) {
                       onChange={(ev) => setSerie(ei, si, 'kg', ev.target.value)}
                     />
                     <input
+                      id={`reps-${ei}-${si}`}
                       inputMode="numeric"
                       value={s.reps}
                       placeholder={prev ? String(prev.reps) : String(e.target?.reps ?? 'reps')}
@@ -341,6 +383,15 @@ function Registra({ params }) {
                       aria-label={`Serie ${si + 1} RIR`}
                       onChange={(ev) => setSerie(ei, si, 'rir', ev.target.value)}
                     />
+                    <button
+                      className={`set-done ${fatta ? 'on' : ''}`}
+                      aria-pressed={fatta}
+                      aria-label={fatta ? `Riapri serie ${si + 1}` : `Serie ${si + 1} fatta`}
+                      title={fatta ? 'Riapri la serie' : 'Serie fatta: compila le reps e avvia il recupero'}
+                      onClick={() => serieFatta(ei, si, prev)}
+                    >
+                      <Icon name="check" size={18} />
+                    </button>
                     <button
                       className="btn btn-icon"
                       aria-label={`Rimuovi serie ${si + 1}`}
@@ -557,14 +608,18 @@ function ImportHevy() {
       const rows = parseCsv(await file.text())
       if (!rows.length || !('exercise_title' in rows[0])) throw new Error('Non sembra un export allenamenti di Hevy')
       const nomeScheda = (d) => (scheda?.inizio && d >= scheda.inizio ? scheda.nome : 'Storico Hevy')
-      const { sessioni, saltate } = hevyToSessions(rows, { alias: imp?.hevy_alias || {}, nomeScheda })
+      // Dall'inizio della scheda il titolo dell'allenamento diventa il giorno di scheda ("Push" → "Giorno A — Push")
+      const giorno = (titolo, d) => (schedaAttiva(scheda, d) ? giornoScheda(titolo, scheda, imp?.hevy_giorni) : null)
+      const { sessioni, saltate } = hevyToSessions(rows, { alias: imp?.hevy_alias || {}, nomeScheda, giorno })
       const { aggiunte, aggiornate } = mergeLog(logRaw || [], sessioni, isExampleSession)
       const nomiScheda = new Set((scheda?.giorni || []).flatMap((g) => g.esercizi.map((e) => e.nome)))
       const recenti = sessioni.filter((s) => !scheda?.inizio || s.data >= scheda.inizio)
       const nonInScheda = [...new Set(recenti.flatMap((s) => s.esercizi.map((e) => e.nome)))].filter(
         (n) => !nomiScheda.has(n),
       )
-      setAnteprima({ file: file.name, sessioni, saltate, aggiunte, aggiornate, nonInScheda })
+      const giorniScheda = new Set((scheda?.giorni || []).map((g) => g.nome))
+      const titoliNonCollegati = [...new Set(recenti.map((s) => s.giorno).filter((g) => !giorniScheda.has(g)))]
+      setAnteprima({ file: file.name, sessioni, saltate, aggiunte, aggiornate, nonInScheda, titoliNonCollegati })
     } catch (e) {
       setErrore(e.message)
     }
@@ -605,6 +660,12 @@ function ImportHevy() {
           <p className="muted small">
             Saltate {anteprima.saltate} serie di riscaldamento o vuote.
           </p>
+          {anteprima.titoliNonCollegati.length > 0 && (
+            <p className="muted small">
+              Allenamenti non collegati a un giorno di scheda: {anteprima.titoliNonCollegati.join(', ')}. Collegali in
+              Salute → Impostazioni → Giorni Hevy.
+            </p>
+          )}
           {anteprima.nonInScheda.length > 0 && (
             <p className="muted small">
               Esercizi recenti non presenti in scheda: {anteprima.nonInScheda.join(', ')}. Se sono gli stessi con un
@@ -658,11 +719,13 @@ function Progressi({ params }) {
   if (!logRaw || !scheda) return <Empty>Carico…</Empty>
   if (!log.length) return <Empty>Importa gli allenamenti da Hevy (scheda Storico) per vedere i progressi.</Empty>
 
+  // Scheda in corso: "fermo / in crescita" si valuta solo sulle sessioni di questa scheda
+  const dalScheda = schedaAttiva(scheda) ? scheda.inizio : null
   const elenco = soloScheda ? nomiScheda : tutti
   const righe = elenco
     .map((nome) => {
       const storia = exerciseHistory(log, nome)
-      return { nome, storia, stato: progressStatus(storia) }
+      return { nome, storia, stato: progressStatus(storia, new Date(), dalScheda) }
     })
   const attivo = scelto && (elenco.includes(scelto) || tutti.includes(scelto)) ? scelto : righe.find((r) => r.storia.length)?.nome
   const storia = attivo ? exerciseHistory(log, attivo) : []
@@ -672,7 +735,7 @@ function Progressi({ params }) {
     <>
       {fermi.length > 0 && (
         <div className="warn-box">
-          Fermi nelle ultime 3 sessioni: {fermi.map((f) => f.nome).join(', ')}. Chiedi a Claude un aggiustamento
+          Fermi nelle ultime 3 sessioni{dalScheda ? ' della scheda' : ''}: {fermi.map((f) => f.nome).join(', ')}. Chiedi a Claude un aggiustamento
           (variante, scarico o cambio di ripetizioni).
         </div>
       )}
@@ -696,7 +759,11 @@ function Progressi({ params }) {
                     className={`prog-item ${attivo === r.nome ? 'active' : ''}`}
                     onClick={() => {
                       setScelto(r.nome)
-                      if (window.innerWidth < 860) setTimeout(() => dettaglio.current?.scrollIntoView({ behavior: 'smooth' }), 50)
+                      if (window.innerWidth < 860)
+                        setTimeout(() => {
+                          const top = dettaglio.current.getBoundingClientRect().top + window.scrollY - 70
+                          window.scrollTo({ top, behavior: 'smooth' })
+                        }, 50)
                     }}
                     disabled={!r.storia.length}
                   >
@@ -714,7 +781,7 @@ function Progressi({ params }) {
           </ul>
         </Card>
 
-        <div ref={dettaglio}>
+        <div ref={dettaglio} className="prog-detail">
         <Card title={attivo ? `${attivo}: ${TIPO_INFO[storia.at(-1)?.tipo || 'carico'].label}` : 'Dettaglio'}>
           {attivo && storia.length ? (
             <>
