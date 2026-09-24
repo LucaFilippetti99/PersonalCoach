@@ -37,7 +37,7 @@ La webapp è una **Single Page Application React** servita da **Vite** in locale
 | Stile | un solo `styles.css` con variabili CSS | tema chiaro/scuro automatico |
 | Persistenza | file JSON su disco + `localStorage` solo per le bozze | |
 
-Dipendenze runtime: solo `react` e `react-dom`. Requisito: **Node ≥ 20.19** (vedi `.nvmrc`).
+Dipendenze runtime: solo `react` e `react-dom`. Dev: `vite`, `@vitejs/plugin-react`, `vitest`. Requisito: **Node ≥ 20.19** (vedi `.nvmrc`).
 
 ---
 
@@ -54,7 +54,9 @@ coach/
 ├── impostazioni.json                ← calendario, target, alias Hevy (lo crea la webapp)
 ├── skills/                          ← copia della skill piano-pasti-settimanale
 └── webapp/
-    ├── index.html                   ← punto di ingresso HTML
+    ├── index.html                   ← punto di ingresso HTML (+ meta per l'installazione come app)
+    ├── public/                      ← manifest.webmanifest e icone (servite così come sono)
+    ├── tests/                       ← test Vitest di hevy.js, utils.js, prompts.js
     ├── vite.config.js               ← config Vite + registrazione del plugin API
     ├── package.json, .nvmrc
     ├── server/
@@ -141,10 +143,11 @@ Funzioni senza React, testabili anche con Node (`node -e "import('./src/utils.js
 **`utils.js`**
 - Date: `isoDate`, `parseDate`, `addDays`, `weekdayName`, `startOfWeek`, `isoWeek` (settimana ISO `AAAA-Www`), `formatDate`. Le date sono sempre stringhe `AAAA-MM-GG` in ora **locale** (non UTC), per evitare slittamenti di giorno.
 - Peso: `validWeights` (scarta righe con peso `null`), `weeklyAvg(misure, data)` = media delle pesate dei 7 giorni che finiscono in `data`.
-- Allenamento: `topSet`, `lastExercise`, `formatSets`, `isExampleSession` (riconosce la sessione di esempio del template).
+- Allenamento: `topSet`, `lastExercise`, `formatSet`/`formatSets` ("50×8", "12 reps", "45 s", "5,2 km in 28:30"), `isExampleSession` (riconosce la sessione di esempio del template).
+  - `tipoEsercizio(serie)` → `carico` (kg×reps), `corpo` (solo reps), `tempo` (secondi), `distanza` (km). `TIPO_INFO` dà etichetta e unità per i grafici.
 - Progressi:
   - `e1rm(serie)` = 1RM stimato con la formula di **Epley**: `kg × (1 + reps/30)`.
-  - `exerciseHistory(log, nome)` → una voce per sessione con serie migliore, 1RM stimato e volume (`Σ kg×reps`). Negli esercizi a corpo libero (tutti i kg a 0) il valore è il **massimo di ripetizioni**.
+  - `exerciseHistory(log, nome)` → una voce per sessione con `tipo`, serie migliore (`top`), `valore` e volume (`Σ kg×reps`). Il valore dipende dal tipo: 1RM stimato (carico), ripetizioni massime (corpo libero), secondi massimi (tempo), km (distanza).
   - `progressStatus(storia)` considera solo le sessioni delle **ultime 6 settimane** e restituisce `su`, `ok`, `fermo` (ultime 3 senza miglioramento), `pochi`, `vecchio`, `nessuno`.
 
 **`hevy.js`**: import dell'export CSV di Hevy
@@ -153,7 +156,7 @@ Funzioni senza React, testabili anche con Node (`node -e "import('./src/utils.js
 3. `hevyToSessions(rows, { alias, nomeScheda })`:
    - raggruppa le righe (una per serie) per `title + start_time` = un allenamento;
    - rinomina gli esercizi con la mappa `alias` (Impostazioni → Nomi Hevy);
-   - **salta** le serie `warmup` e quelle senza ripetizioni (plank, stretching: lo schema non ha la durata);
+   - **salta** le serie `warmup` e quelle vuote; le serie a tempo o distanza (plank, corsa) diventano `reps: 0` con `secondi` / `km`;
    - `failure` → `rir: 0`; se c'è l'RPE → `rir = 10 − RPE`;
    - `durata_min` = fine − inizio; `note` = descrizione + note degli esercizi;
    - `scheda` = nome della scheda attiva in quella data (o `"Storico Hevy"`).
@@ -217,9 +220,11 @@ I nomi degli esercizi sono quelli della **libreria di Hevy**, così l'import li 
 **`log/allenamenti.json`**: array di sessioni
 ```json
 [ { "data": "2026-09-23", "scheda": "Storico Hevy", "giorno": "Giorno 1",
-    "esercizi": [ { "nome": "Squat (Bilanciere)", "serie": [ { "kg": 50, "reps": 8, "rir": null } ] } ],
+    "esercizi": [ { "nome": "Squat (Bilanciere)", "serie": [ { "kg": 50, "reps": 8, "rir": null } ] },
+                  { "nome": "Plank", "serie": [ { "kg": 0, "reps": 0, "rir": null, "secondi": 45 } ] } ],
     "durata_min": 63, "note": "" } ]
 ```
+Campi opzionali di una serie: `secondi` (esercizi a tempo) e `km` (esercizi a distanza). Negli esercizi a corpo libero `kg` è 0.
 
 **`log/misure.json`**: `[ { "data", "peso_kg", "vita_cm", "note" } ]`
 
@@ -262,11 +267,26 @@ Claude scrive su disco → torni sulla finestra della webapp → evento `focus` 
 
 ```bash
 nvm use            # Node 22 (da .nvmrc)
-npm install        # prima volta
+npm install        # prima volta (e dopo ogni modifica a package.json)
 npm run dev        # sviluppo con hot reload: http://localhost:5173
 npm run dev:rete   # come sopra, raggiungibile dal telefono sulla stessa rete
 npm start          # build di produzione + preview: http://localhost:4173
+npm test           # esegue i test una volta
+npm run test:watch # test in modalità watch mentre modifichi il codice
 ```
+
+### Test
+
+I test (Vitest) sono in `tests/` e coprono la logica pura:
+- `hevy.test.js`: parser CSV, date in italiano/inglese, conversione in sessioni (riscaldamento, failure/RPE, serie a tempo e distanza, alias, durata), merge idempotente;
+- `utils.test.js`: settimane ISO, media peso, 1RM, formattazione delle serie, tipo di esercizio, stato di progressione;
+- `prompts.test.js`: ogni modello di "Chiedi a Claude" genera un testo pulito (niente `undefined`, niente righe vuote doppie).
+
+Quando cambi una di queste funzioni, lancia `npm test`. Per un nuovo caso aggiungi un `it(...)` nel file giusto.
+
+### Installazione sul telefono (PWA)
+
+`public/manifest.webmanifest`, le icone e i meta in `index.html` permettono di aggiungere la webapp alla schermata Home e aprirla a schermo intero. Non c'è un service worker: funzionerebbe solo su `localhost` o HTTPS, non sull'indirizzo di rete in HTTP, e comunque senza il Mac acceso i dati non sarebbero raggiungibili. La webapp si ricarica i dati anche su `visibilitychange`, così quando la riapri dalla Home vedi i dati aggiornati.
 
 Con `npm run dev` ogni modifica ai file in `src/` si vede subito nel browser (HMR). Le modifiche a `server/coachApi.js` o `vite.config.js` richiedono il riavvio.
 
@@ -276,7 +296,8 @@ Con `npm run dev` ogni modifica ai file in `src/` si vede subito nel browser (HM
 
 | Voglio… | File |
 |---|---|
-| aggiungere una richiesta per Claude | `src/prompts.js` → `MODELLI` |
+| aggiungere una richiesta per Claude | `src/prompts.js` → `MODELLI` (+ il test la copre da solo) |
+| cambiare icona o nome dell'app sul telefono | `public/` + `public/manifest.webmanifest` |
 | cambiare le regole di "fermo / in crescita" | `src/utils.js` → `progressStatus` |
 | cambiare cosa si importa da Hevy (es. tenere il riscaldamento) | `src/hevy.js` → `hevyToSessions` |
 | cambiare i fondamentali mostrati in Home | `src/pages/Home.jsx` → `ESERCIZI_CHIAVE` |
@@ -289,9 +310,9 @@ Con `npm run dev` ogni modifica ai file in `src/` si vede subito nel browser (HM
 
 ## 9. Limiti noti e idee
 
-- Nessun test automatico: le funzioni in `utils.js`, `hevy.js` e `prompts.js` sono pure e si prestano bene a test con **Vitest**.
+- I test coprono la logica pura, non i componenti React (si potrebbe aggiungere Testing Library).
 - Ogni hook fa la sua richiesta: nessuna cache condivisa tra componenti.
-- Le serie a tempo di Hevy (plank, dead hang) non vengono importate perché lo schema del log non prevede la durata.
 - La sessione è identificata da `data + titolo`: due allenamenti con lo stesso titolo nello stesso giorno collidono.
 - L'API non ha autenticazione: va bene su `localhost`, meno con `dev:rete`.
-- Possibili evoluzioni: sincronizzazione automatica con l'API di Hevy (serve Hevy PRO), un modello AI locale per il piano pasti, PWA installabile sul telefono.
+- Nel form "A mano" non si inseriscono serie a tempo/distanza (quelle importate vengono comunque conservate).
+- Possibili evoluzioni: sincronizzazione automatica con l'API di Hevy (serve Hevy PRO), un modello AI locale per il piano pasti.

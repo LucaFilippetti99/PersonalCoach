@@ -86,7 +86,8 @@ const num = (v) => {
 
 /**
  * Trasforma le righe Hevy in sessioni.
- * - salta le serie di riscaldamento e quelle senza ripetizioni (es. plank a tempo, stretching)
+ * - salta le serie di riscaldamento e quelle vuote; le serie a tempo (plank) o a distanza (corsa)
+ *   vengono tenute con reps = 0 e i campi opzionali `secondi` / `km`
  * - serie "failure" → RIR 0; RPE presente → RIR = 10 - RPE
  * - `alias`: { "Nome Hevy": "Nome in scheda" } per esercizi con nomi diversi
  * - `nomeScheda(data)`: restituisce il nome della scheda attiva in quella data
@@ -118,16 +119,21 @@ export function hevyToSessions(rows, { alias = {}, nomeScheda = () => 'Hevy' } =
         if (r.exercise_notes?.trim()) noteEs.push(`${nome}: ${r.exercise_notes.trim()}`)
       }
       const reps = num(r.reps)
-      if (r.set_type === 'warmup' || !reps) {
+      const secondi = num(r.duration_seconds)
+      const km = num(r.distance_km)
+      if (r.set_type === 'warmup' || (!reps && !secondi && !km)) {
         saltate++
         continue
       }
       const rpe = num(r.rpe)
-      ex.serie.push({
+      const serie = {
         kg: num(r.weight_kg) ?? 0,
-        reps,
+        reps: reps ?? 0,
         rir: r.set_type === 'failure' ? 0 : rpe != null ? Math.max(0, Math.round(10 - rpe)) : null,
-      })
+      }
+      if (secondi) serie.secondi = secondi
+      if (km) serie.km = km
+      ex.serie.push(serie)
       ex._idx.push(num(r.set_index) ?? ex._idx.length)
     }
 

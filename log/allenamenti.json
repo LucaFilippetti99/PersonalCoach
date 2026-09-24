@@ -1137,6 +1137,17 @@
             "rir": null
           }
         ]
+      },
+      {
+        "nome": "Macchina Scale",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 600
+          }
+        ]
       }
     ],
     "durata_min": 92,
@@ -1351,6 +1362,17 @@
             "rir": null
           }
         ]
+      },
+      {
+        "nome": "Plank",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 60
+          }
+        ]
       }
     ],
     "durata_min": 80,
@@ -1361,6 +1383,17 @@
     "scheda": "Storico Hevy",
     "giorno": "Allenamento corpo libero con Davide il Karateka",
     "esercizi": [
+      {
+        "nome": "Riscaldamento",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 300
+          }
+        ]
+      },
       {
         "nome": "Trazione Presa Supina",
         "serie": [
@@ -1813,6 +1846,17 @@
             "rir": null
           }
         ]
+      },
+      {
+        "nome": "Plank",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 60
+          }
+        ]
       }
     ],
     "durata_min": 134,
@@ -2102,6 +2146,29 @@
     "giorno": "Allenamento con Benny",
     "esercizi": [
       {
+        "nome": "Affondo camminato (con manubri)",
+        "serie": [
+          {
+            "kg": 10,
+            "reps": 0,
+            "rir": null,
+            "km": 0.02
+          },
+          {
+            "kg": 10,
+            "reps": 0,
+            "rir": null,
+            "km": 0.02
+          },
+          {
+            "kg": 10,
+            "reps": 0,
+            "rir": null,
+            "km": 0.02
+          }
+        ]
+      },
+      {
         "nome": "Leg Press Orizzontale (Macchina)",
         "serie": [
           {
@@ -2222,6 +2289,29 @@
         ]
       },
       {
+        "nome": "Plank Laterale",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 20
+          },
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 20
+          },
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 20
+          }
+        ]
+      },
+      {
         "nome": "Aperture Laterali (Manubrio)",
         "serie": [
           {
@@ -2297,6 +2387,23 @@
             "kg": 0,
             "reps": 15,
             "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Stretching",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 40
+          },
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 40
           }
         ]
       },
@@ -2566,6 +2673,17 @@
             "kg": 0,
             "reps": 15,
             "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Stretching",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 40
           }
         ]
       },
@@ -2855,6 +2973,23 @@
             "kg": 0,
             "reps": 15,
             "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Stretching",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 40
+          },
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 40
           }
         ]
       },
@@ -3173,6 +3308,23 @@
         ]
       },
       {
+        "nome": "Stretching",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 40
+          },
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 40
+          }
+        ]
+      },
+      {
         "nome": "From squat To DL",
         "serie": [
           {
@@ -3408,6 +3560,17 @@
             "kg": 0,
             "reps": 15,
             "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Stretching",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 40
           }
         ]
       },
@@ -4059,6 +4222,23 @@
         ]
       },
       {
+        "nome": "Stretching",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 40
+          },
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 40
+          }
+        ]
+      },
+      {
         "nome": "From squat To DL",
         "serie": [
           {
@@ -4232,6 +4412,17 @@
     "scheda": "Storico Hevy",
     "giorno": "Giorno 1 Nuovo",
     "esercizi": [
+      {
+        "nome": "Stretching",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 900
+          }
+        ]
+      },
       {
         "nome": "Ball Slams",
         "serie": [
@@ -4437,6 +4628,17 @@
     "giorno": "Giorno 2 Nuovo",
     "esercizi": [
       {
+        "nome": "Stretching",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 600
+          }
+        ]
+      },
+      {
         "nome": "Wall Ball",
         "serie": [
           {
@@ -4605,6 +4807,17 @@
     "scheda": "Storico Hevy",
     "giorno": "Giorno 3 Nuovo",
     "esercizi": [
+      {
+        "nome": "Stretching",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 600
+          }
+        ]
+      },
       {
         "nome": "Ball Slams",
         "serie": [
@@ -4805,6 +5018,17 @@
     "giorno": "Giorno 1 homemade",
     "esercizi": [
       {
+        "nome": "Stretching",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 600
+          }
+        ]
+      },
+      {
         "nome": "Panca Piana (Bilanciere)",
         "serie": [
           {
@@ -4918,6 +5142,17 @@
     "scheda": "Storico Hevy",
     "giorno": "Allenamento corpo libero con Davide il Karateka",
     "esercizi": [
+      {
+        "nome": "Riscaldamento",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 300
+          }
+        ]
+      },
       {
         "nome": "Trazione Presa Supina",
         "serie": [
@@ -5058,6 +5293,17 @@
     "giorno": "Giorno 3 molto homemade",
     "esercizi": [
       {
+        "nome": "Stretching",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 600
+          }
+        ]
+      },
+      {
         "nome": "Pogo Jumps",
         "serie": [
           {
@@ -5187,6 +5433,17 @@
     "giorno": "Giorno 1 homemade",
     "esercizi": [
       {
+        "nome": "Stretching",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 300
+          }
+        ]
+      },
+      {
         "nome": "Panca Piana (Bilanciere)",
         "serie": [
           {
@@ -5281,6 +5538,17 @@
     "giorno": "Giorno 2 homemade",
     "esercizi": [
       {
+        "nome": "Stretching",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 420
+          }
+        ]
+      },
+      {
         "nome": "Trazione Presa Supina",
         "serie": [
           {
@@ -5359,6 +5627,23 @@
             "rir": null
           }
         ]
+      },
+      {
+        "nome": "Dead Hang",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 30
+          },
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 30
+          }
+        ]
       }
     ],
     "durata_min": 45,
@@ -5369,6 +5654,17 @@
     "scheda": "Storico Hevy",
     "giorno": "Giorno 1 Nuovo",
     "esercizi": [
+      {
+        "nome": "Stretching",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 300
+          }
+        ]
+      },
       {
         "nome": "Squat (Bilanciere)",
         "serie": [
@@ -5503,6 +5799,17 @@
     "scheda": "Storico Hevy",
     "giorno": "Giorno 2 Nuovo",
     "esercizi": [
+      {
+        "nome": "Stretching",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 420
+          }
+        ]
+      },
       {
         "nome": "Lat Pulldown (Cavo)",
         "serie": [
@@ -5732,6 +6039,17 @@
     "giorno": "Giorno 2 Nuovo",
     "esercizi": [
       {
+        "nome": "Stretching",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 600
+          }
+        ]
+      },
+      {
         "nome": "Wall Ball",
         "serie": [
           {
@@ -5871,6 +6189,17 @@
     "giorno": "Allenamento corpo libero a casa",
     "esercizi": [
       {
+        "nome": "Salto della Corda",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 120
+          }
+        ]
+      },
+      {
         "nome": "Piegamenti",
         "serie": [
           {
@@ -5939,6 +6268,40 @@
             "rir": null
           }
         ]
+      },
+      {
+        "nome": "Plank",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 60
+          },
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 35
+          },
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 35
+          }
+        ]
+      },
+      {
+        "nome": "Stretching",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 300
+          }
+        ]
       }
     ],
     "durata_min": 48,
@@ -5949,6 +6312,17 @@
     "scheda": "Storico Hevy",
     "giorno": "Allenamento corpo libero con Davide il Karateka",
     "esercizi": [
+      {
+        "nome": "Stretching",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 180
+          }
+        ]
+      },
       {
         "nome": "Trazione Presa Supina",
         "serie": [
@@ -6000,6 +6374,23 @@
         ]
       },
       {
+        "nome": "Dead Hang",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 30
+          },
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 30
+          }
+        ]
+      },
+      {
         "nome": "Crunch",
         "serie": [
           {
@@ -6013,6 +6404,29 @@
             "rir": null
           }
         ]
+      },
+      {
+        "nome": "Plank",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 60
+          },
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 35
+          },
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 35
+          }
+        ]
       }
     ],
     "durata_min": 37,
@@ -6023,6 +6437,17 @@
     "scheda": "Storico Hevy",
     "giorno": "Allenamento corpo libero",
     "esercizi": [
+      {
+        "nome": "Salto della Corda",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 120
+          }
+        ]
+      },
       {
         "nome": "Trazione Presa Supina",
         "serie": [
@@ -6079,6 +6504,23 @@
         ]
       },
       {
+        "nome": "Dead Hang",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 30
+          },
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 45
+          }
+        ]
+      },
+      {
         "nome": "Crunch",
         "serie": [
           {
@@ -6092,6 +6534,40 @@
             "rir": null
           }
         ]
+      },
+      {
+        "nome": "Plank",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 60
+          },
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 35
+          },
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 35
+          }
+        ]
+      },
+      {
+        "nome": "Stretching",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 180
+          }
+        ]
       }
     ],
     "durata_min": 44,
@@ -6102,6 +6578,17 @@
     "scheda": "Storico Hevy",
     "giorno": "Allenamento corpo libero",
     "esercizi": [
+      {
+        "nome": "Salto della Corda",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 120
+          }
+        ]
+      },
       {
         "nome": "Trazione Presa Supina",
         "serie": [
@@ -6176,6 +6663,57 @@
             "rir": null
           }
         ]
+      },
+      {
+        "nome": "Plank",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 60
+          },
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 35
+          },
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 35
+          }
+        ]
+      },
+      {
+        "nome": "Dead Hang",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 30
+          },
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 40
+          }
+        ]
+      },
+      {
+        "nome": "Stretching",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 300
+          }
+        ]
       }
     ],
     "durata_min": 58,
@@ -6186,6 +6724,17 @@
     "scheda": "Storico Hevy",
     "giorno": "Allenamento corpo libero dopo 2 ore di tennis",
     "esercizi": [
+      {
+        "nome": "Salto della Corda",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 120
+          }
+        ]
+      },
       {
         "nome": "Trazione Presa Supina",
         "serie": [
@@ -6225,6 +6774,23 @@
             "rir": null
           }
         ]
+      },
+      {
+        "nome": "Dead Hang",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 25
+          },
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 30
+          }
+        ]
       }
     ],
     "durata_min": 24,
@@ -6235,6 +6801,17 @@
     "scheda": "Storico Hevy",
     "giorno": "Allenamento corpo libero",
     "esercizi": [
+      {
+        "nome": "Salto della Corda",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 120
+          }
+        ]
+      },
       {
         "nome": "Trazione Presa Supina",
         "serie": [
@@ -6252,6 +6829,23 @@
             "kg": 0,
             "reps": 3,
             "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Dead Hang",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 30
+          },
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 30
           }
         ]
       },
@@ -6309,6 +6903,40 @@
             "rir": null
           }
         ]
+      },
+      {
+        "nome": "Plank",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 60
+          },
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 35
+          },
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 35
+          }
+        ]
+      },
+      {
+        "nome": "Stretching",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 180
+          }
+        ]
       }
     ],
     "durata_min": 44,
@@ -6319,6 +6947,17 @@
     "scheda": "Storico Hevy",
     "giorno": "Allenamento corpo libero",
     "esercizi": [
+      {
+        "nome": "Salto della Corda",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 120
+          }
+        ]
+      },
       {
         "nome": "Trazione Presa Supina",
         "serie": [
@@ -6340,6 +6979,23 @@
         ]
       },
       {
+        "nome": "Dead Hang",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 35
+          },
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 30
+          }
+        ]
+      },
+      {
         "nome": "Piegamenti",
         "serie": [
           {
@@ -6388,6 +7044,40 @@
             "rir": null
           }
         ]
+      },
+      {
+        "nome": "Plank",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 60
+          },
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 30
+          },
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 30
+          }
+        ]
+      },
+      {
+        "nome": "Stretching",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 180
+          }
+        ]
       }
     ],
     "durata_min": 47,
@@ -6398,6 +7088,17 @@
     "scheda": "Storico Hevy",
     "giorno": "Allenamento corpo libero con Davide il Karateka",
     "esercizi": [
+      {
+        "nome": "Stretching",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 600
+          }
+        ]
+      },
       {
         "nome": "Trazione Presa Supina",
         "serie": [
@@ -6528,6 +7229,17 @@
     "giorno": "Allenamento corpo libero",
     "esercizi": [
       {
+        "nome": "Salto della Corda",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 120
+          }
+        ]
+      },
+      {
         "nome": "Trazione Presa Supina",
         "serie": [
           {
@@ -6544,6 +7256,23 @@
             "kg": 0,
             "reps": 3,
             "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Dead Hang",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 30
+          },
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 30
           }
         ]
       },
@@ -6581,6 +7310,40 @@
             "rir": null
           }
         ]
+      },
+      {
+        "nome": "Plank",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 60
+          },
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 35
+          },
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 35
+          }
+        ]
+      },
+      {
+        "nome": "Stretching",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 300
+          }
+        ]
       }
     ],
     "durata_min": 43,
@@ -6591,6 +7354,17 @@
     "scheda": "Storico Hevy",
     "giorno": "Allenamento corpo libero",
     "esercizi": [
+      {
+        "nome": "Stretching",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 300
+          }
+        ]
+      },
       {
         "nome": "Trazione Presa Supina",
         "serie": [
@@ -6708,6 +7482,23 @@
             "kg": 0,
             "reps": 15,
             "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Dead Hang",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 20
+          },
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 20
           }
         ]
       },
@@ -6741,6 +7532,17 @@
     "giorno": "Allenamento corpo libero con Davide il Karateka",
     "esercizi": [
       {
+        "nome": "Stretching",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 300
+          }
+        ]
+      },
+      {
         "nome": "Trazione Presa Supina",
         "serie": [
           {
@@ -6842,6 +7644,17 @@
             "kg": 0,
             "reps": 15,
             "rir": null
+          }
+        ]
+      },
+      {
+        "nome": "Dead Hang",
+        "serie": [
+          {
+            "kg": 0,
+            "reps": 0,
+            "rir": null,
+            "secondi": 20
           }
         ]
       }

@@ -7,8 +7,10 @@ import { ChiediClaude } from './Claude.jsx'
 import TrendChart from '../components/TrendChart.jsx'
 import { hevyToSessions, mergeLog, parseCsv } from '../hevy.js'
 import {
+  TIPO_INFO,
   exerciseHistory,
   formatDate,
+  formatSet,
   formatSets,
   isExampleSession,
   isoDate,
@@ -94,7 +96,14 @@ function buildForm(scheda, log, giornoNome, data, esistente) {
         ...esistente.esercizi.map((e) => ({
           nome: e.nome,
           target: giorno?.esercizi.find((t) => t.nome === e.nome) || null,
-          serie: e.serie.map((s) => ({ kg: String(s.kg), reps: String(s.reps), rir: s.rir ?? '' })),
+          // secondi/km (plank, corsa importati da Hevy) non si modificano dal form ma vengono conservati
+          serie: e.serie.map((s) => ({
+            kg: String(s.kg),
+            reps: s.reps ? String(s.reps) : '',
+            rir: s.rir ?? '',
+            ...(s.secondi ? { secondi: s.secondi } : {}),
+            ...(s.km ? { km: s.km } : {}),
+          })),
         })),
         ...extra.map((t) => ({ nome: t.nome, target: t, serie: emptySets(t, log, data) })),
       ],
@@ -192,11 +201,13 @@ function Registra({ params }) {
       .map((e) => ({
         nome: e.nome,
         serie: e.serie
-          .filter((s) => s.reps !== '' && Number(s.reps) > 0)
+          .filter((s) => (s.reps !== '' && Number(s.reps) > 0) || s.secondi || s.km)
           .map((s) => ({
             kg: Number(String(s.kg).replace(',', '.')) || 0,
-            reps: Number(s.reps),
+            reps: Number(s.reps) || 0,
             rir: s.rir === '' ? null : Number(s.rir),
+            ...(s.secondi ? { secondi: s.secondi } : {}),
+            ...(s.km ? { km: s.km } : {}),
           })),
       }))
       .filter((e) => e.serie.length)
@@ -592,7 +603,7 @@ function ImportHevy() {
             {anteprima.aggiunte} nuove, {anteprima.aggiornate} già presenti (verranno aggiornate).
           </p>
           <p className="muted small">
-            Saltate {anteprima.saltate} serie di riscaldamento o a tempo (plank, stretching…).
+            Saltate {anteprima.saltate} serie di riscaldamento o vuote.
           </p>
           {anteprima.nonInScheda.length > 0 && (
             <p className="muted small">
@@ -692,7 +703,7 @@ function Progressi({ params }) {
                     <span className="grow">
                       <span className="prog-name">{r.nome}</span>
                       <span className="muted small">
-                        {last ? `${last.top.kg} kg × ${last.top.reps} · ${formatDate(last.data)}` : 'nessuna sessione'}
+                        {last ? `${formatSet(last.top)} · ${formatDate(last.data)}` : 'nessuna sessione'}
                       </span>
                     </span>
                     <span className={`tag tag-${st.tone}`}>{st.label}</span>
@@ -704,28 +715,25 @@ function Progressi({ params }) {
         </Card>
 
         <div ref={dettaglio}>
-        <Card title={attivo ? `${attivo}: ${storia.at(-1)?.corpoLibero ? 'ripetizioni massime' : '1RM stimato'}` : 'Dettaglio'}>
+        <Card title={attivo ? `${attivo}: ${TIPO_INFO[storia.at(-1)?.tipo || 'carico'].label}` : 'Dettaglio'}>
           {attivo && storia.length ? (
             <>
               <div className="stats">
                 <div className="stat">
                   <div className="stat-label">Serie migliore ultima volta</div>
-                  <div className="stat-value">
-                    {storia.at(-1).top.kg}
-                    <span className="stat-unit">kg × {storia.at(-1).top.reps}</span>
-                  </div>
+                  <div className="stat-value stat-value-sm">{formatSet(storia.at(-1).top)}</div>
                 </div>
                 <div className="stat">
-                  <div className="stat-label">{storia.at(-1).corpoLibero ? 'Ripetizioni massime' : '1RM stimato'}</div>
+                  <div className="stat-label cap">{TIPO_INFO[storia.at(-1).tipo].label}</div>
                   <div className="stat-value">
-                    {storia.at(-1).e1rm}
-                    <span className="stat-unit">{storia.at(-1).corpoLibero ? 'reps' : 'kg'}</span>
+                    {storia.at(-1).valore}
+                    <span className="stat-unit">{TIPO_INFO[storia.at(-1).tipo].unita}</span>
                   </div>
                   {storia.length > 1 && (
                     <div className="stat-hint">
                       {(() => {
-                        const d = Math.round((storia.at(-1).e1rm - storia[0].e1rm) * 10) / 10
-                        return `${d > 0 ? '+' : ''}${d} ${storia.at(-1).corpoLibero ? 'reps' : 'kg'} dal ${formatDate(storia[0].data)}`
+                        const d = Math.round((storia.at(-1).valore - storia[0].valore) * 10) / 10
+                        return `${d > 0 ? '+' : ''}${d} ${TIPO_INFO[storia.at(-1).tipo].unita} dal ${formatDate(storia[0].data)}`
                       })()}
                     </div>
                   )}
@@ -734,14 +742,16 @@ function Progressi({ params }) {
               <TrendChart
                 punti={storia.map((h) => ({
                   data: h.data,
-                  valore: h.e1rm,
-                  dettaglio: `migliore ${h.top.kg}×${h.top.reps}`,
+                  valore: h.valore,
+                  dettaglio: `migliore ${formatSet(h.top)}`,
                 }))}
-                unita={storia.at(-1).corpoLibero ? 'reps' : 'kg'}
+                unita={TIPO_INFO[storia.at(-1).tipo].unita}
               />
-              <p className="muted small">
-                Il 1RM stimato mette insieme carico e ripetizioni: sale sia se aumenti i kg sia se fai più reps.
-              </p>
+              {storia.at(-1).tipo === 'carico' && (
+                <p className="muted small">
+                  Il 1RM stimato mette insieme carico e ripetizioni: sale sia se aumenti i kg sia se fai più reps.
+                </p>
+              )}
               <div className="table-wrap">
                 <table className="table">
                   <thead>
@@ -756,7 +766,7 @@ function Progressi({ params }) {
                       <tr key={h.data}>
                         <td>{formatDate(h.data)}</td>
                         <td className="num-left">{formatSets(h.serie)}</td>
-                        <td className="num">{Math.round(h.volume)} kg</td>
+                        <td className="num">{h.tipo === 'carico' ? `${Math.round(h.volume)} kg` : '—'}</td>
                       </tr>
                     ))}
                   </tbody>

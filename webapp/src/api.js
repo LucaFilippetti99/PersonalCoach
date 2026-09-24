@@ -49,11 +49,17 @@ export function useJson(path, fallback) {
     reload()
   }, [reload])
 
-  // Ricarica quando la finestra torna in primo piano (es. Claude ha aggiornato i file)
+  // Ricarica quando la finestra torna in primo piano (es. Claude ha aggiornato i file).
+  // `visibilitychange` copre anche l'app aperta dalla schermata Home del telefono.
   useEffect(() => {
     const onFocus = () => reload()
+    const onVisible = () => document.visibilityState === 'visible' && reload()
     window.addEventListener('focus', onFocus)
-    return () => window.removeEventListener('focus', onFocus)
+    document.addEventListener('visibilitychange', onVisible)
+    return () => {
+      window.removeEventListener('focus', onFocus)
+      document.removeEventListener('visibilitychange', onVisible)
+    }
   }, [reload])
 
   const save = useCallback(

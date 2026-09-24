@@ -84,8 +84,24 @@ export function lastExercise(log = [], nome, beforeDate) {
   return null
 }
 
+/** Durata in secondi → "45 s" oppure "28:30" */
+export function formatDuration(sec) {
+  if (sec < 90) return `${sec} s`
+  const m = Math.floor(sec / 60)
+  const s = String(Math.round(sec % 60)).padStart(2, '0')
+  return `${m}:${s}`
+}
+
+/** Una serie in forma breve: "50×8", "45 s", "20 kg × 45 s", "5,2 km in 28:30" */
+export function formatSet(s) {
+  if (!s) return ''
+  if (s.km) return `${String(s.km).replace('.', ',')} km${s.secondi ? ` in ${formatDuration(s.secondi)}` : ''}`
+  if (s.secondi && !s.reps) return s.kg ? `${s.kg} kg × ${formatDuration(s.secondi)}` : formatDuration(s.secondi)
+  return s.kg ? `${s.kg}×${s.reps}` : `${s.reps} reps`
+}
+
 export function formatSets(serie = []) {
-  return serie.map((s) => `${s.kg}×${s.reps}`).join(' · ')
+  return serie.map(formatSet).join(' · ')
 }
 
 /** Il file di log contiene all'inizio un esempio: lo riconosciamo per non contarlo */
@@ -99,6 +115,33 @@ export function e1rm(s) {
   return s.kg * (1 + s.reps / 30)
 }
 
+/**
+ * Tipo di esercizio in base alle serie:
+ * 'distanza' (corsa: km), 'tempo' (plank: secondi), 'corpo' (corpo libero: reps), 'carico' (kg × reps)
+ */
+export function tipoEsercizio(serie = []) {
+  if (serie.length && serie.every((x) => x.km)) return 'distanza'
+  if (serie.length && serie.every((x) => x.secondi && !x.reps)) return 'tempo'
+  if (serie.every((x) => !x.kg)) return 'corpo'
+  return 'carico'
+}
+
+/** Cosa si misura per ogni tipo (valore da massimizzare) */
+const MISURA = {
+  carico: (s) => e1rm(s),
+  corpo: (s) => s.reps || 0,
+  tempo: (s) => s.secondi || 0,
+  distanza: (s) => s.km || 0,
+}
+
+/** Etichetta e unità per ogni tipo, usate nei grafici */
+export const TIPO_INFO = {
+  carico: { label: '1RM stimato', unita: 'kg' },
+  corpo: { label: 'ripetizioni massime', unita: 'reps' },
+  tempo: { label: 'tenuta massima', unita: 's' },
+  distanza: { label: 'distanza', unita: 'km' },
+}
+
 /** Storico di un esercizio: una voce per sessione, in ordine di data */
 export function exerciseHistory(log = [], nome) {
   return log
@@ -106,16 +149,19 @@ export function exerciseHistory(log = [], nome) {
     .sort((a, b) => a.data.localeCompare(b.data))
     .map((s) => {
       const ex = s.esercizi.find((e) => e.nome === nome)
-      const corpoLibero = ex.serie.every((x) => !x.kg)
-      // A corpo libero conta il numero massimo di ripetizioni
-      const best = [...ex.serie].sort((a, b) => e1rm(b) - e1rm(a) || b.kg - a.kg || b.reps - a.reps)[0]
+      const tipo = tipoEsercizio(ex.serie)
+      const misura = MISURA[tipo]
+      const best = [...ex.serie].sort((a, b) => misura(b) - misura(a) || b.kg - a.kg || b.reps - a.reps)[0]
+      const valore = round1(misura(best))
       return {
         data: s.data,
         giorno: s.giorno,
         serie: ex.serie,
         top: best,
-        corpoLibero,
-        e1rm: corpoLibero ? best.reps : round1(e1rm(best)),
+        tipo,
+        corpoLibero: tipo === 'corpo',
+        valore,
+        e1rm: valore,
         volume: ex.serie.reduce((v, x) => v + x.kg * x.reps, 0),
       }
     })

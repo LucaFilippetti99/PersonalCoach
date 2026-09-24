@@ -17,6 +17,8 @@ npm run dev      # apri http://localhost:5173
 
 - `npm run dev:rete` → raggiungibile anche dal telefono sulla stessa Wi-Fi (http://IP-del-Mac:5173)
 - `npm start` → build ottimizzata + server su http://localhost:4173
+- `npm test` → test automatici (Vitest)
+- Sul telefono: apri l'indirizzo di rete e usa "Aggiungi a schermata Home" per averla come app
 
 ## Sezioni
 
