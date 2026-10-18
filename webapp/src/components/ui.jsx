@@ -23,6 +23,7 @@ const PATHS = {
   moon: 'M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z',
   auto: 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 3v18M12 7h4M12 11h6M12 15h5',
   up: 'M6 15l6-6 6 6',
+  swap: 'M7 4 3 8l4 4M3 8h14M17 20l4-4-4-4M21 16H7',
   down: 'M6 9l6 6 6-6',
   close: 'M6 6l12 12M18 6 6 18',
   gear: 'M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM19.4 13a7.5 7.5 0 0 0 0-2l2-1.5-2-3.4-2.3 1a7.5 7.5 0 0 0-1.8-1L15 3.7h-4l-.3 2.4a7.5 7.5 0 0 0-1.8 1l-2.3-1-2 3.4 2 1.5a7.5 7.5 0 0 0 0 2l-2 1.5 2 3.4 2.3-1a7.5 7.5 0 0 0 1.8 1l.3 2.4h4l.3-2.4a7.5 7.5 0 0 0 1.8-1l2.3 1 2-3.4z',
@@ -113,20 +114,34 @@ export function PageHeader({ title, subtitle, action }) {
   )
 }
 
-/** Piccola notifica temporanea: const [msg, flash] = useFlash() */
+/**
+ * Piccola notifica temporanea: const [node, flash] = useFlash(); flash('Salvato')
+ * Con un'azione (es. { label: 'Annulla', fn }) resta visibile più a lungo e mostra il pulsante.
+ */
 export function useFlash() {
   const [msg, setMsg] = useState(null)
   useEffect(() => {
     if (!msg) return
-    const t = setTimeout(() => setMsg(null), 2200)
+    const t = setTimeout(() => setMsg(null), msg.azione ? 6000 : 2200)
     return () => clearTimeout(t)
   }, [msg])
   const node = msg ? (
-    <div className={`toast ${msg.error ? 'toast-error' : ''}`} role="status">
-      {msg.text}
+    <div className={`toast ${msg.error ? 'toast-error' : ''} ${msg.azione ? 'toast-azione' : ''}`} role="status">
+      <span>{msg.text}</span>
+      {msg.azione && (
+        <button
+          className="toast-btn"
+          onClick={() => {
+            setMsg(null)
+            msg.azione.fn()
+          }}
+        >
+          {msg.azione.label}
+        </button>
+      )}
     </div>
   ) : null
-  return [node, (text, error = false) => setMsg({ text, error })]
+  return [node, (text, error = false, azione = null) => setMsg({ text, error, azione, id: Date.now() })]
 }
 
 export function ErrorBanner({ error }) {

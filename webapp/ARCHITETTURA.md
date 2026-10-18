@@ -50,7 +50,7 @@ coach/
 ├── log/allenamenti.json             ← sessioni (import Hevy o inserite a mano)
 ├── log/misure.json                  ← peso e vita
 ├── piani-pasti/AAAA-Www.json        ← un piano per settimana ISO
-├── spesa.json, frigo.json           ← lista della spesa e dispensa
+├── spesa.json, frigo.json           ← lista della spesa; frigo + dispensa (campo `dove`)
 ├── impostazioni.json                ← calendario, target, alias Hevy (lo crea la webapp)
 ├── skills/                          ← copia della skill piano-pasti-settimanale
 └── webapp/
@@ -75,6 +75,7 @@ coach/
         ├── editor.js                ← logica dei pop-up di modifica (giorni di scheda, sessioni)
         ├── muscoli.js               ← esercizio → muscoli, serie per muscolo, livelli di colore
         ├── piano.js                 ← logica del piano pasti (ricettario, ingredienti mancanti…)
+        ├── cibo.js                  ← regole piano ↔ spesa ↔ frigo/dispensa
         ├── prompts.js               ← modelli della pagina "Chiedi a Claude"
         ├── styles.css               ← tutto lo stile
         ├── components/
@@ -92,7 +93,7 @@ coach/
         └── pages/
             ├── Home.jsx
             ├── Allenamento.jsx      ← Scheda, Storico+Import, Progressi, A mano
-            ├── Cibo.jsx             ← Piano pasti, Spesa, Frigo
+            ├── Cibo.jsx             ← piano, spesa, frigo e dispensa nella stessa pagina
             ├── Salute.jsx           ← Peso e misure, Impostazioni
             └── Claude.jsx           ← form → prompt da copiare
 ```
@@ -177,10 +178,21 @@ Funzioni senza React, testabili anche con Node (`node -e "import('./src/utils.js
    - `scheda` = nome della scheda attiva in quella data (o `"Storico Hevy"`).
 4. `mergeLog(log, importate)`: la chiave di una sessione è `data|giorno` (giorno = titolo dell'allenamento in Hevy). Le sessioni con la stessa chiave vengono **sostituite**, le altre (anche quelle inserite a mano) restano. Per questo reimportare tutto lo storico è sicuro.
 
+**`cibo.js`**: regole che tengono allineati piano, spesa, frigo e dispensa (volutamente semplici)
+1. Aggiungi o modifichi un pasto → gli ingredienti che non sono in frigo/dispensa, né "sempre in casa", né già in lista vanno in spesa con `auto: true` (`aggiornaSpesa` con `aggiungiDa: [pasto]`).
+2. Modifichi, elimini o mangi un pasto → gli articoli `auto` che non servono più a nessun pasto da mangiare escono dalla spesa. Gli articoli senza `auto` (scritti a mano) non si toccano.
+3. "Mangiato" → `consumaPasto`: escono dal frigo (non dalla dispensa) gli ingredienti del pasto e si ricordano in `consumati`; togliendo la spunta `ripristinaPasto` li rimette.
+4. "Comprato" → `compra`: fuori dalla spesa, dentro frigo o dispensa (`doveAuto`: carboidrati, grassi e scatolame in dispensa).
+- Pasti che contano (`giorniDaConsiderare`): per la settimana corrente da oggi in poi, per le future tutti, per le passate nessuno.
+- Nomi: `chiave()` = minuscolo, senza accenti, ogni parola senza vocale finale → singolare = plurale ("uovo" = "uova"); "pollo" ≠ "petto di pollo".
+- `categoriaAuto(nome)`: reparto indovinato da parole chiave, prima sulla parola principale ("Pane per hamburger" = carboidrati). `CATEGORIE` è nell'ordine dei reparti del supermercato.
+- `sempreInCasa(nome, lista)`: "Olio" copre anche "Olio extravergine"; lista in `impostazioni.sempre_in_casa`.
+- Altro: `statoIngrediente` (frigo / dispensa / sempre / spesa / manca), `giorniAllaScadenza`, `ingredientiNecessari` (con "per quali pasti"), `finito`, `raggruppaPerReparto`, `testoSpesa` (lista da copiare), `nomiIngredienti` (suggerimenti).
+
 **`piano.js`**: piano pasti
 - `pianoVuoto(settimana)`, `conTuttiIGiorni(piano)` (aggiunge i giorni mancanti per poterci mettere pasti), `ordinaPasti` (colazione → pranzo → spuntino → cena);
 - `ricettario(piani)`: tutti i piatti con ingredienti presenti nei piani passati (l'ultima versione vince), usati nel menu "Scegli un piatto già fatto";
-- `ingredientiMancanti(pasto, frigo, spesa)` / `ingredientiInFrigo(pasto, frigo)`: confronto per nome, senza maiuscole;
+- `ingredientiMancanti(pasto, frigo, spesa)` / `ingredientiInFrigo(pasto, frigo)`: confronto per nome con `chiave()` di `cibo.js`;
 - `pulisciPasto`: normalizza un pasto uscito dal form (niente righe vuote, ricetta come array).
 
 **`prompts.js`**: modelli per "Chiedi a Claude". Ogni modello:
@@ -224,7 +236,7 @@ Funzioni senza React, testabili anche con Node (`node -e "import('./src/utils.js
 |---|---|---|---|
 | `Home.jsx` | n/a | scheda, log, misure, impostazioni, frigo, piano corrente | n/a |
 | `Allenamento.jsx` | `SchedaView`, `Storico`, `ImportHevy`, `Progressi`, `Registra` | scheda, log, impostazioni | log |
-| `Cibo.jsx` | `Piano`, `Spesa`, `Frigo` | piani, spesa, frigo | spesa, frigo |
+| `Cibo.jsx` | `Piano`, `GiornoCard`, `PastoView`, `PastoEditor`, `Spesa`, `Casa`, `SempreInCasa` | piani, spesa, frigo, impostazioni | piano, spesa, frigo, impostazioni (`sempre_in_casa`) |
 | `Salute.jsx` | `Peso`, `Impostazioni`, `AliasForm` | misure, impostazioni, scheda, profilo.md | misure, impostazioni |
 | `Claude.jsx` | `Form`, `ChiediClaude` (menu compatto nell'intestazione delle altre pagine) | tutto | nessuno (copia negli appunti o Condividi) |
 
@@ -237,10 +249,12 @@ Dettagli utili:
 - **Modifiche a mano**: in Scheda ogni giorno ha «Modifica» (pop-up `EditorGiorno`), c'è «Aggiungi un giorno» e «Modifica» su nome/inizio/settimane della scheda; nello Storico «Modifica» apre `EditorSessione`. Il form «A mano» resta per registrare la sessione in palestra.
 - **Mappa dei muscoli**: in Home (allenamento di oggi), in Scheda (ogni giorno), in "A mano" (esercizi della sessione), nello Storico (sessione aperta) e in cima a Progressi (`MuscoliPeriodo`: questa settimana / ultimi 7 giorni / media delle ultime 4 settimane, con elenco delle serie e degli esercizi non riconosciuti).
 - **Progressi**: con la scheda in corso, "fermo / in crescita" considera solo le sessioni da `scheda.inizio`. Su telefono il grafico sta sopra l'elenco degli esercizi.
-- **Spesa → Frigo**: spuntare un articolo lo toglie da `spesa.json` e lo aggiunge a `frigo.json`; "finito, rimetti in lista" fa il contrario.
-- **Piano pasti**: ogni ingrediente viene confrontato per nome (senza maiuscole) con frigo e spesa per mostrare le etichette *frigo* / *spesa*. Per questo la skill chiede a Claude di usare gli stessi nomi.
-  - Si può **modificare dalla webapp**: aggiungi / modifica / elimina un pasto (`PastoEditor`), scegli un piatto dal ricettario, segna "mangiato" (`fatto: true`).
-  - Dopo il salvataggio compare un `Avviso`: ingredienti che non sono né in frigo né in spesa → "Aggiungi alla spesa"; dopo "mangiato" → "Togli dal frigo" quello che hai finito.
+- **Cibo** (una sola pagina, niente tab): su desktop il piano sta a sinistra e a destra, fisse mentre scorri, Spesa e «In casa» (frigo + dispensa + «Sempre in casa»); sotto i 900 px l'ordine è oggi → spesa → in casa → resto della settimana, con scorciatoie in alto e i conteggi. I link `#/cibo?tab=spesa|frigo` scorrono alla sezione.
+  - Ogni azione passa da `applica()`: salva piano, spesa e frigo (solo quelli cambiati) e mostra un avviso con **Annulla**, che rimette i tre file com'erano.
+  - Gli ingredienti del piano mostrano dove sono (frigo, dispensa, sempre, spesa, manca) e se scadono entro 2 giorni; mentre scrivi un pasto vedi già cosa finirà in spesa. I nomi si suggeriscono da casa, spesa, "sempre in casa" e ricettario (datalist `nomi-ingredienti`).
+  - In spesa: «Comprato» (casella), reparto automatico, "per ven · cena" sotto gli articoli che servono a un pasto, «Spesa della settimana» (aggiunge tutto quello che manca ai pasti da mangiare), «Copia lista» / «Condividi».
+  - In casa: frigo e dispensa separati, scadenza (icona calendario), sposta frigo ↔ dispensa, «finito» e «finito, ricompra».
+- **Piano pasti**: si può **modificare dalla webapp**: aggiungi / modifica / elimina un pasto (`PastoEditor`), scegli un piatto dal ricettario, segna "mangiato" (`fatto: true`).
   - Se non esiste il piano della settimana corrente si può creare vuoto (`pianoVuoto`). Nel file si salvano solo i giorni con almeno un pasto.
   - `useRicettario(files)` legge tutti i piani della cartella per costruire il ricettario.
 - **Home**: se la scheda non è ancora iniziata (`inizio` nel futuro) mostra la settimana di pausa e non segna allenamenti previsti.
@@ -286,10 +300,10 @@ Campi opzionali di una serie: `secondi` (esercizi a tempo) e `km` (esercizi a di
   "da_comprare_extra": [ { "nome": "…", "categoria": "proteine", "quantita": "2", "motivo": "…" } ] }
 ```
 
-`fatto` è opzionale: c'è solo sui pasti già mangiati.
+`fatto` è opzionale: c'è solo sui pasti già mangiati. `consumati` (opzionale, solo sui pasti mangiati) = articoli tolti dal frigo, da rimettere se si toglie la spunta.
 
-**`spesa.json`**: `{ "aggiornata", "articoli": [ { "nome", "categoria", "quantita" } ] }`
-**`frigo.json`**: `{ "aggiornato", "articoli": [ { "nome", "categoria", "quantita", "scadenza" } ] }`
+**`spesa.json`**: `{ "aggiornata", "articoli": [ { "nome", "categoria", "quantita", "auto"? } ] }` — `auto: true` = aggiunto per un pasto (esce da solo se il pasto cambia)
+**`frigo.json`**: `{ "aggiornato", "articoli": [ { "nome", "categoria", "quantita", "scadenza", "dove" } ] }` — `dove` = `"frigo"` o `"dispensa"`; se manca si deduce dalla categoria
 
 **`impostazioni.json`**
 ```json
@@ -298,7 +312,8 @@ Campi opzionali di una serie: `secondi` (esercizi a tempo) e `km` (esercizi a di
   "peso_obiettivo_kg": { "min": 70, "max": 75 },
   "hevy_alias": { "Nome in Hevy": "Nome in scheda" },
   "hevy_giorni": { "Titolo allenamento in Hevy": "Giorno A — Push" },
-  "muscoli_esercizi": { "Nome esercizio": { "primari": ["petto"], "secondari": ["tricipiti"] } } }
+  "muscoli_esercizi": { "Nome esercizio": { "primari": ["petto"], "secondari": ["tricipiti"] } },
+  "sempre_in_casa": ["Sale", "Pepe", "Olio", "Aceto", "Acqua"] }
 ```
 `muscoli_esercizi` (facoltativo) corregge o aggiunge i muscoli di un esercizio che le regole di `muscoli.js` non riconoscono; gli id sono quelli di `MUSCOLI`. Lo stesso oggetto si può mettere come campo `muscoli` di un esercizio in scheda.
 `hevy_giorni` serve solo per i titoli che `giornoScheda` non riconosce da solo.
@@ -338,6 +353,7 @@ I test (Vitest) sono in `tests/` e coprono la logica pura:
 - `editor.test.js`: pulizia dei form, controlli, rinomina giorni nel calendario, muscoli personalizzati, sessioni senza doppioni;
 - `muscoli.test.js`: muscoli di tutti gli esercizi della scheda e dei più usati nel log, override, serie pesate, livelli relativi e settimanali;
 - `api.test.js`: cache condivisa con un `fetch` finto: versione inviata, salvataggi in fila, conflitto 409 che non sovrascrive e ricarica;
+- `cibo.test.js`: nomi (singolare/plurale), reparto e posto automatici, sempre in casa, pasti che contano, spesa automatica (aggiungi, togli, settimana), mangiato / togli la spunta, comprato, finito, lista da condividere;
 - `piano.test.js`: piano vuoto, giorni mancanti, ordinamento, ricettario, ingredienti mancanti / in frigo, pulizia del form;
 - `prompts.test.js`: ogni modello di "Chiedi a Claude" genera un testo pulito (niente `undefined`, niente righe vuote doppie).
 

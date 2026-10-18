@@ -1,0 +1,29 @@
+{
+  "calendario": {
+    "lunedì": "Giorno A — Push",
+    "martedì": null,
+    "mercoledì": "Giorno B — Pull",
+    "giovedì": null,
+    "venerdì": "Giorno C — Gambe + spalle",
+    "sabato": "Giorno D — Corsa + corpo libero",
+    "domenica": null
+  },
+  "target": {
+    "kcal": 2150,
+    "proteine_g": 150
+  },
+  "peso_obiettivo_kg": {
+    "min": 70,
+    "max": 75
+  },
+  "hevy_alias": {},
+  "hevy_giorni": {},
+  "sempre_in_casa": [
+    "Sale",
+    "Pepe",
+    "Olio",
+    "Aceto",
+    "Acqua",
+    "curcuma"
+  ]
+}

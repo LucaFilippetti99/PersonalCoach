@@ -2121,3 +2121,222 @@ button.chip-m {
 .ed-scelta-muscoli .btn-link {
   font-size: 0.85rem;
 }
+
+/* ---------- Cibo: piano + spesa + frigo/dispensa insieme ---------- */
+
+.cibo-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 380px);
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    'oggi liste'
+    'settimana liste';
+  gap: 14px;
+  align-items: start;
+}
+.cibo-oggi {
+  grid-area: oggi;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.cibo-settimana {
+  grid-area: settimana;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.cibo-liste {
+  grid-area: liste;
+  position: sticky;
+  top: 72px;
+  max-height: calc(100vh - 90px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-bottom: 4px;
+  scrollbar-width: thin;
+}
+.cibo-salti {
+  display: none;
+}
+@media (max-width: 900px) {
+  .cibo-layout {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto;
+    grid-template-areas:
+      'oggi'
+      'liste'
+      'settimana';
+  }
+  .cibo-liste {
+    position: static;
+    max-height: none;
+    overflow: visible;
+  }
+  /* Sul telefono: scorciatoie alle sezioni con i conteggi */
+  .cibo-salti {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    margin: -4px 0 0;
+  }
+  .cibo-salti a {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+    padding: 6px 10px;
+    border-radius: 99px;
+    background: var(--surface-2);
+    color: var(--text-2);
+    text-decoration: none;
+    font-size: 0.85rem;
+  }
+  .cibo-salti strong {
+    color: var(--text);
+  }
+}
+.ancora {
+  scroll-margin-top: 130px;
+}
+.piano-testa {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.piano-testa h2 {
+  font-size: 1.1rem;
+}
+.day.is-past:not(.is-today) {
+  opacity: 0.75;
+}
+
+/* Liste (spesa, in casa) */
+.lista-card .group-title {
+  margin-top: 14px;
+}
+.lista-add {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 68px 40px;
+  gap: 6px;
+  margin-top: 8px;
+}
+.lista-add input {
+  min-width: 0;
+}
+.btn-icon-text {
+  padding: 0;
+  justify-content: center;
+}
+.lista-cat {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin-top: 6px;
+}
+.lista-vuota {
+  margin: 10px 0 2px;
+}
+.lista-card .check-list li,
+.lista-card .fridge-list li {
+  gap: 6px;
+  padding: 6px 0;
+}
+.lista-card .btn-icon {
+  padding: 4px;
+  min-height: 30px;
+}
+.per {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+.lista-azioni {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--border);
+}
+.exp-inline {
+  margin-left: 6px;
+  font-size: 0.68rem;
+  padding: 1px 6px;
+  vertical-align: 1px;
+}
+.stock.sempre {
+  background: var(--surface);
+  color: var(--text-2);
+  border: 1px solid var(--border);
+}
+.ing-row .ing-stato {
+  grid-column: 1 / -1;
+  justify-self: start;
+  padding: 0 8px;
+  margin-top: -2px;
+}
+.sempre {
+  margin-top: 12px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.sempre > .btn-link {
+  align-self: flex-start;
+  font-size: 0.88rem;
+}
+.sempre .chips {
+  margin: 6px 0;
+}
+.chip-x {
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 1rem;
+  line-height: 1;
+  padding: 0 0 0 4px;
+  cursor: pointer;
+}
+/* Scadenza: solo l'icona del calendario (la data si legge nel badge "3 gg", "domani"…) */
+.lista-card .fridge-list .date-sm {
+  width: 34px;
+  padding: 4px;
+  color: transparent;
+  cursor: pointer;
+}
+.lista-card .fridge-list .date-sm::-webkit-datetime-edit {
+  display: none;
+}
+
+/* Notifica con azione (Annulla) */
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: min(560px, calc(100vw - 24px));
+}
+.toast-btn {
+  border: 0;
+  background: transparent;
+  color: var(--bg);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font: inherit;
+  font-weight: 700;
+  padding: 2px 4px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.toast-error .toast-btn {
+  color: #fff;
+}

@@ -1,9 +1,11 @@
 // Logica pura del piano pasti (usata da pages/Cibo.jsx e dai test).
 import { GIORNI_SETTIMANA } from './utils.js'
+import { chiave } from './cibo.js'
 
 export const TIPI_PASTO = ['colazione', 'pranzo', 'spuntino', 'cena']
 
-export const norm = (s) => String(s || '').toLowerCase().trim()
+// Confronto dei nomi: senza maiuscole/accenti e con singolare = plurale (vedi chiave in cibo.js)
+export const norm = (s) => chiave(s)
 export const contiene = (lista = [], nome) => lista.some((a) => norm(a.nome) === norm(nome))
 
 /** Piano vuoto per una settimana ISO, con tutti i 7 giorni */

@@ -14,10 +14,13 @@ export const IMPOSTAZIONI_DEFAULT = {
   peso_obiettivo_kg: { min: 70, max: 75 },
   hevy_alias: {},
   hevy_giorni: {},
+  // Mai aggiunti in spesa da soli ("Olio" vale anche per "Olio extravergine")
+  sempre_in_casa: ['Sale', 'Pepe', 'Olio', 'Aceto', 'Acqua'],
 }
 
 export const FRIGO_DEFAULT = { aggiornato: null, articoli: [] }
 
 export const SPESA_DEFAULT = { aggiornata: null, articoli: [] }
 
-export const CATEGORIE_SPESA = ['proteine', 'carboidrati', 'verdure', 'frutta', 'latticini', 'grassi', 'dispensa', 'altro']
+// Nell'ordine dei reparti del supermercato (vedi CATEGORIE in cibo.js)
+export const CATEGORIE_SPESA = ['verdure', 'frutta', 'proteine', 'latticini', 'carboidrati', 'dispensa', 'grassi', 'altro']

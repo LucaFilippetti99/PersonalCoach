@@ -88,10 +88,11 @@
         },
         {
           "tipo": "cena",
-          "piatto": "Cena fuori al Coguaro con i colleghi",
+          "piatto": "Cena fuori al Coguaro con i colleghi -> Kebab",
           "ingredienti": [],
           "ricetta": [],
-          "note": "Fuori: scegli un secondo di carne o pesce con contorno, vai tranquillo con pane e alcol"
+          "note": "Fuori: scegli un secondo di carne o pesce con contorno, vai tranquillo con pane e alcol",
+          "fatto": true
         }
       ]
     },
@@ -100,6 +101,14 @@
       "pasti": [
         {
           "tipo": "pranzo",
+          "piatto": "Pollo e riso",
+          "ingredienti": [],
+          "ricetta": [],
+          "note": "Comprato da Morsy",
+          "fatto": true
+        },
+        {
+          "tipo": "cena",
           "piatto": "Riso con salmone e broccoli",
           "ingredienti": [
             {
@@ -121,30 +130,22 @@
             "Salmone in padella antiaderente, 3-4 min per lato partendo dalla pelle",
             "Unisci tutto con un filo d'olio, limone se ce l'hai"
           ],
-          "note": "Il salmone fresco va consumato presto: questo è il pasto giusto per finirlo"
-        },
-        {
-          "tipo": "cena",
-          "piatto": "Hamburger vegetali prima della festa",
-          "ingredienti": [
+          "note": "",
+          "fatto": true,
+          "consumati": [
             {
-              "nome": "Hamburger vegetali",
-              "porzione": "2"
+              "nome": "Salmone",
+              "categoria": "proteine",
+              "quantita": "1 trancio",
+              "scadenza": null
             },
             {
-              "nome": "Pane per hamburger",
-              "porzione": "1"
-            },
-            {
-              "nome": "Insalata",
-              "porzione": "1 manciata"
+              "nome": "Broccoli",
+              "categoria": "verdure",
+              "quantita": "",
+              "scadenza": null
             }
-          ],
-          "ricetta": [
-            "Cuoci gli hamburger in padella 4-5 min per lato",
-            "Scalda il pane e componi con insalata"
-          ],
-          "note": "Da comprare. Gli hamburger vegetali hanno spesso poche proteine: scegline uno con almeno 15 g per 100 g (soia/seitan), oppure aggiungi uno yogurt greco dopo"
+          ]
         }
       ]
     },
@@ -156,7 +157,8 @@
           "piatto": "Pizza da Zinagri",
           "ingredienti": [],
           "ricetta": [],
-          "note": "Fuori, goditela: pranzo leggero e proteico"
+          "note": "Fuori, goditela: pranzo leggero e proteico",
+          "fatto": true
         }
       ]
     }

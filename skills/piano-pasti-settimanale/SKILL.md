@@ -9,9 +9,9 @@ Il piano viene letto dalla webapp locale di Luca (sezione Cibo), quindi il file 
 
 ## Input da leggere
 1. `profilo.md` — obiettivo, cibi esclusi, preferenze, numero di pasti, integratori.
-2. `frigo.json` — cosa c'è già in casa (con eventuali scadenze): va usato per primo.
+2. `frigo.json` — cosa c'è già in casa (con eventuali scadenze): va usato per primo. Contiene sia il frigo sia la dispensa: il campo `dove` vale `"frigo"` o `"dispensa"` (se manca: carboidrati, grassi e scatolame sono in dispensa, il resto in frigo).
 3. `spesa.json` — la lista della spesa attuale: è la base del piano insieme al frigo.
-4. `impostazioni.json` — `target.kcal` e `target.proteine_g`; `calendario` per sapere quali sono i giorni di allenamento.
+4. `impostazioni.json` — `target.kcal` e `target.proteine_g`; `calendario` per sapere quali sono i giorni di allenamento; `sempre_in_casa` (es. sale, olio: ci sono sempre, non vanno mai in spesa).
 5. L'ultimo file in `piani-pasti/` — per non ripetere gli stessi piatti.
 6. `log/misure.json` — se il trend del peso suggerisce di aggiustare le porzioni.
 
@@ -28,6 +28,14 @@ Se `frigo.json` o `impostazioni.json` non esistono ancora, vai avanti senza.
 - **Varietà**: Luca cucina volentieri ogni giorno, quindi ricette semplici ma diverse, massimo 2 ripetizioni dello stesso piatto a settimana. Puoi riproporre piatti dei piani precedenti che gli sono piaciuti, usando lo stesso nome del piatto (la webapp li raccoglie in un ricettario).
 - **Weekend**: Luca mangia fuori nel weekend (almeno una pizza a settimana): non pianificare quei pasti, oppure indica "fuori" nelle note.
 - Rispetta sempre i cibi esclusi indicati in `profilo.md`.
+
+## Spesa, frigo e dispensa (stesse regole della webapp)
+La webapp tiene allineati piano, spesa e casa con regole semplici: seguile anche tu, così i file restano coerenti.
+- **Dopo aver scritto il piano**, aggiorna `spesa.json`: per ogni ingrediente dei pasti non ancora mangiati (da oggi in poi) che non è in `frigo.json` (frigo o dispensa), non è in `sempre_in_casa` e non è già in lista, aggiungi un articolo `{ "nome", "categoria", "quantita": "", "auto": true }`. `auto: true` vuol dire "aggiunto per il piano": la webapp lo toglie da sola se il pasto cambia. Non toccare gli articoli senza `auto` (li ha scritti Luca).
+- `da_comprare_extra` resta per i suggerimenti facoltativi (es. un limone per condire), non per gli ingredienti che servono ai pasti.
+- **Nomi**: la webapp confronta i nomi senza maiuscole e accenti e con singolare = plurale ("uovo" = "uova"), ma "pollo" e "petto di pollo" restano diversi: usa gli stessi nomi di `frigo.json` / `spesa.json`.
+- **Quando Luca ti dice che ha mangiato un pasto**: metti `"fatto": true`, togli da `frigo.json` gli ingredienti che sono in FRIGO (la dispensa resta) e salvali nel pasto in `"consumati"` (gli articoli tolti, così come erano), così se Luca toglie la spunta dalla webapp rientrano.
+- **Quando Luca ti dice che ha fatto la spesa**: togli gli articoli comprati da `spesa.json` e aggiungili a `frigo.json` con `dove` (`"dispensa"` per carboidrati, grassi e scatolame, `"frigo"` per il resto) e `scadenza` se la conosci.
 
 ## Mini ricetta
 Ogni pasto ha il campo `ricetta`: un array di 3-5 passaggi brevi (una riga ciascuno), con tempi di cottura indicativi. Niente passaggi ovvi ("impiatta"). Se un piatto usa avanzi di un giorno precedente, dillo nel primo passaggio.
@@ -58,8 +66,10 @@ Ogni pasto ha il campo `ricetta`: un array di 3-5 passaggi brevi (una riga ciasc
 - `giorno`: nome in minuscolo (lunedì … domenica). `tipo`: pranzo, cena, colazione o spuntino.
 - `categoria` in `da_comprare_extra`: una tra proteine, carboidrati, verdure, frutta, latticini, grassi, dispensa, altro.
 - `fatto` è opzionale: `true` solo per i pasti già mangiati (lo imposta Luca dalla webapp o tu quando ti dice cosa ha mangiato); nei pasti futuri omettilo.
+- `consumati` è opzionale: c'è solo nei pasti mangiati e contiene gli articoli tolti dal frigo (vedi sopra). Non modificarlo.
 - Non aggiungere altri campi.
 
 ## Output
 1. Salva il piano in `piani-pasti/AAAA-Www.json` (settimana ISO), rispettando **esattamente** lo schema sopra.
-2. In chat mostra un riepilogo breve: una riga per giorno con i piatti principali, poi la lista `da_comprare_extra` e 2-3 consigli di preparazione (cosa cucinare in anticipo). Ricorda a Luca che il piano è già visibile nella webapp, sezione Cibo.
+2. Aggiorna `spesa.json` con gli ingredienti mancanti (vedi "Spesa, frigo e dispensa").
+3. In chat mostra un riepilogo breve: una riga per giorno con i piatti principali, poi cosa hai aggiunto alla spesa, la lista `da_comprare_extra` e 2-3 consigli di preparazione (cosa cucinare in anticipo). Ricorda a Luca che il piano è già visibile nella webapp, sezione Cibo.
